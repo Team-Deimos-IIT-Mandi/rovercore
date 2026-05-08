@@ -1,0 +1,82 @@
+{
+  "configById": {
+    "RawMessages!gps": {
+      "diffEnabled": false,
+      "diffMethod": "custom",
+      "diffTopicPath": "",
+      "showFullMessageForDiff": false,
+      "topicPath": "/gps/fix"
+    },
+    "RawMessages!odom": {
+      "diffEnabled": false,
+      "diffMethod": "custom",
+      "diffTopicPath": "",
+      "showFullMessageForDiff": false,
+      "topicPath": "/odometry/global"
+    },
+    "Image!1": {
+      "imageTopic": "/rgbd_camera/image"
+    },
+    "Image!2": {
+      "imageTopic": "/camera_1/image_raw"
+    },
+    "Plot!gps_lat": {
+      "paths": [
+        {"value": "/gps/fix.latitude", "enabled": true, "timestampMethod": "receiveTime"}
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "title": "GPS Latitude"
+    },
+    "Plot!gps_lon": {
+      "paths": [
+        {"value": "/gps/fix.longitude", "enabled": true, "timestampMethod": "receiveTime"}
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "title": "GPS Longitude"
+    },
+    "StateTransitions!1": {
+      "paths": [
+        {"value": "/gps/fix.status.status", "label": "GPS Status"}
+      ]
+    }
+  },
+  "globalVariables": {},
+  "userNodes": {},
+  "playbackConfig": {
+    "speed": 1
+  },
+  "layout": {
+    "first": {
+      "first": {
+        "first": "Image!1",
+        "second": "Image!2",
+        "direction": "row",
+        "splitPercentage": 50
+      },
+      "second": {
+        "first": "RawMessages!gps",
+        "second": "RawMessages!odom",
+        "direction": "row",
+        "splitPercentage": 50
+      },
+      "direction": "column",
+      "splitPercentage": 60
+    },
+    "second": {
+      "first": "Plot!gps_lat",
+      "second": "Plot!gps_lon",
+      "direction": "column",
+      "splitPercentage": 50
+    },
+    "direction": "row",
+    "splitPercentage": 65
+  }
+}

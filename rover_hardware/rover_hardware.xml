@@ -1,0 +1,9 @@
+<library path="rover_hardware">
+  <class name="rover_hardware/RoverCANInterface"
+         type="rover_hardware::RoverCANInterface"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Differential Drive CAN Hardware Interface for ESP32.
+    </description>
+  </class>
+</library>

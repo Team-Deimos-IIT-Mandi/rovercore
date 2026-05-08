@@ -1,0 +1,85 @@
+{
+  "configById": {
+    "map": {
+      "center": {
+        "lat": 49.9,
+        "lon": 8.9
+      },
+      "customTileUrl": "",
+      "disabledTopics": [],
+      "followTopic": "/gps/fix",
+      "layer": "map",
+      "maxNativeZoom": 18,
+      "topicColors": {
+        "/gps/fix": "#00ff00"
+      },
+      "zoomLevel": 18
+    },
+    "Image!front": {
+      "imageTopic": "/rgbd_camera/image"
+    },
+    "Image!left": {
+      "imageTopic": "/camera_1/image_raw"
+    },
+    "Image!right": {
+      "imageTopic": "/camera_2/image_raw"
+    },
+    "RawMessages!gps": {
+      "diffEnabled": false,
+      "diffMethod": "custom",
+      "diffTopicPath": "",
+      "showFullMessageForDiff": false,
+      "topicPath": "/gps/fix"
+    },
+    "RawMessages!nav": {
+      "diffEnabled": false,
+      "diffMethod": "custom",
+      "diffTopicPath": "",
+      "showFullMessageForDiff": false,
+      "topicPath": "/navigate_to_pose/_action/status"
+    },
+    "Plot!coords": {
+      "paths": [
+        {"value": "/gps/fix.latitude", "enabled": true, "timestampMethod": "receiveTime", "label": "Latitude"},
+        {"value": "/gps/fix.longitude", "enabled": true, "timestampMethod": "receiveTime", "label": "Longitude"}
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "title": "GPS Coordinates"
+    }
+  },
+  "globalVariables": {},
+  "userNodes": {},
+  "playbackConfig": {
+    "speed": 1
+  },
+  "layout": {
+    "first": {
+      "first": "map",
+      "second": {
+        "first": "Image!front",
+        "second": {
+          "first": "Image!left",
+          "second": "Image!right",
+          "direction": "row",
+          "splitPercentage": 50
+        },
+        "direction": "column",
+        "splitPercentage": 50
+      },
+      "direction": "row",
+      "splitPercentage": 50
+    },
+    "second": {
+      "first": "RawMessages!gps",
+      "second": "Plot!coords",
+      "direction": "row",
+      "splitPercentage": 50
+    },
+    "direction": "column",
+    "splitPercentage": 70
+  }
+}

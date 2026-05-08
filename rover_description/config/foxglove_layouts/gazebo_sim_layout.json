@@ -1,0 +1,110 @@
+{
+  "configById": {
+    "RawMessages!1": {
+      "diffEnabled": false,
+      "diffMethod": "custom",
+      "diffTopicPath": "",
+      "showFullMessageForDiff": false,
+      "topicPath": "/gps/fix"
+    },
+    "RawMessages!2": {
+      "diffEnabled": false,
+      "diffMethod": "custom", 
+      "diffTopicPath": "",
+      "showFullMessageForDiff": false,
+      "topicPath": "/imu"
+    },
+    "Image!1": {
+      "cameraInfoTopic": "",
+      "transformMarkers": false,
+      "synchronize": false,
+      "imageTopic": "/rgbd_camera/image",
+      "minValue": null,
+      "maxValue": null
+    },
+    "Image!2": {
+      "cameraInfoTopic": "",
+      "transformMarkers": false,
+      "synchronize": false,
+      "imageTopic": "/camera_1/image_raw",
+      "minValue": null,
+      "maxValue": null
+    },
+    "Image!3": {
+      "cameraInfoTopic": "",
+      "transformMarkers": false,
+      "synchronize": false,
+      "imageTopic": "/camera_2/image_raw",
+      "minValue": null,
+      "maxValue": null
+    },
+    "Plot!1": {
+      "paths": [
+        {"value": "/imu.linear_acceleration.x", "enabled": true, "timestampMethod": "receiveTime"},
+        {"value": "/imu.linear_acceleration.y", "enabled": true, "timestampMethod": "receiveTime"},
+        {"value": "/imu.linear_acceleration.z", "enabled": true, "timestampMethod": "receiveTime"}
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "floating",
+      "showPlotValuesInLegend": true,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "sidebarDimension": 240,
+      "title": "IMU Acceleration"
+    },
+    "Plot!2": {
+      "paths": [
+        {"value": "/imu.angular_velocity.x", "enabled": true, "timestampMethod": "receiveTime"},
+        {"value": "/imu.angular_velocity.y", "enabled": true, "timestampMethod": "receiveTime"},
+        {"value": "/imu.angular_velocity.z", "enabled": true, "timestampMethod": "receiveTime"}
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "floating",
+      "showPlotValuesInLegend": true,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "sidebarDimension": 240,
+      "title": "Angular Velocity"
+    }
+  },
+  "globalVariables": {},
+  "userNodes": {},
+  "playbackConfig": {
+    "speed": 1
+  },
+  "layout": {
+    "first": {
+      "first": "Image!1",
+      "second": {
+        "first": "Image!2",
+        "second": "Image!3",
+        "direction": "row",
+        "splitPercentage": 50
+      },
+      "direction": "column",
+      "splitPercentage": 50
+    },
+    "second": {
+      "first": {
+        "first": "RawMessages!1",
+        "second": "RawMessages!2",
+        "direction": "row",
+        "splitPercentage": 50
+      },
+      "second": {
+        "first": "Plot!1",
+        "second": "Plot!2",
+        "direction": "row",
+        "splitPercentage": 50
+      },
+      "direction": "column",
+      "splitPercentage": 40
+    },
+    "direction": "row",
+    "splitPercentage": 60
+  }
+}
