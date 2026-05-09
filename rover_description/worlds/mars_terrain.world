@@ -1,0 +1,358 @@
+<?xml version="1.0"?>
+<!--
+  Mars terrain world for ARC/ERC/URC simulation.
+  Features: loose-soil ground (mu=0.4), 12 scattered rocks, 15° slope berm,
+  navigation gate (2.5 m opening), ArUco target panel, GPS origin set to
+  ARC Turkey placeholder (update before competition).
+
+  World name is "depot" to match ros_gz_bridge topic paths in sim.launch.py.
+-->
+<sdf version="1.8">
+  <world name="depot">
+    <gravity>0 0 -9.8066</gravity>
+    <physics name="default_physics" type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1</real_time_factor>
+    </physics>
+
+    <!-- Required system plugins (same as empty.world) -->
+    <plugin filename="ignition-gazebo-physics-system"
+            name="ignition::gazebo::systems::Physics"/>
+    <plugin filename="ignition-gazebo-user-commands-system"
+            name="ignition::gazebo::systems::UserCommands"/>
+    <plugin filename="ignition-gazebo-scene-broadcaster-system"
+            name="ignition::gazebo::systems::SceneBroadcaster"/>
+    <plugin filename="ignition-gazebo-imu-system"
+            name="ignition::gazebo::systems::Imu"/>
+    <plugin filename="ignition-gazebo-navsat-system"
+            name="ignition::gazebo::systems::NavSat"/>
+    <plugin filename="ignition-gazebo-sensors-system"
+            name="ignition::gazebo::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="ignition-gazebo-contact-system"
+            name="ignition::gazebo::systems::Contact"/>
+
+    <!-- Reddish Mars-like sky and ambient -->
+    <scene>
+      <ambient>0.35 0.22 0.15 1</ambient>
+      <background>0.55 0.38 0.22 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <!-- Sun — warm reddish tint to simulate Mars atmosphere -->
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 20 0 0 0</pose>
+      <diffuse>0.85 0.70 0.55 1</diffuse>
+      <specular>0.20 0.15 0.10 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- ─── GPS origin: ARC Turkey placeholder ─────────────────────────── -->
+    <!-- Update latitude_deg / longitude_deg to competition site before shipping -->
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>37.8700</latitude_deg>
+      <longitude_deg>32.4800</longitude_deg>
+      <elevation>1020.0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+
+    <!-- ─── Ground plane — reddish Mars soil, loose friction ──────────── -->
+    <model name="mars_ground">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box><size>100 100 0.1</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.4</mu>
+                <mu2>0.4</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>100 100 0.1</size></box>
+          </geometry>
+          <material>
+            <ambient>0.58 0.28 0.12 1</ambient>
+            <diffuse>0.68 0.34 0.16 1</diffuse>
+            <specular>0.02 0.02 0.02 1</specular>
+          </material>
+        </visual>
+      </link>
+      <pose>0 0 -0.05 0 0 0</pose>
+    </model>
+
+    <!-- ─── Rocks — 6 small (r=0.08) ────────────────────────────────── -->
+    <model name="rock_s1">
+      <static>true</static>
+      <pose>3.0 2.0 0.08 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><sphere><radius>0.08</radius></sphere></geometry>
+          <surface><friction><ode><mu>0.4</mu><mu2>0.4</mu2></ode></friction></surface>
+        </collision>
+        <visual name="vis"><geometry><sphere><radius>0.08</radius></sphere></geometry>
+          <material><ambient>0.42 0.22 0.10 1</ambient><diffuse>0.52 0.28 0.13 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="rock_s2">
+      <static>true</static>
+      <pose>-2.5 4.0 0.08 0 0 0.8</pose>
+      <link name="link">
+        <collision name="col"><geometry><sphere><radius>0.08</radius></sphere></geometry>
+          <surface><friction><ode><mu>0.4</mu><mu2>0.4</mu2></ode></friction></surface>
+        </collision>
+        <visual name="vis"><geometry><sphere><radius>0.08</radius></sphere></geometry>
+          <material><ambient>0.44 0.20 0.09 1</ambient><diffuse>0.54 0.26 0.12 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="rock_s3">
+      <static>true</static>
+      <pose>5.5 -3.0 0.08 0 0 1.2</pose>
+      <link name="link">
+        <collision name="col"><geometry><sphere><radius>0.08</radius></sphere></geometry>
+          <surface><friction><ode><mu>0.4</mu><mu2>0.4</mu2></ode></friction></surface>
+        </collision>
+        <visual name="vis"><geometry><sphere><radius>0.08</radius></sphere></geometry>
+          <material><ambient>0.40 0.24 0.11 1</ambient><diffuse>0.50 0.30 0.14 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="rock_s4">
+      <static>true</static>
+      <pose>-4.0 -2.5 0.08 0 0 0.3</pose>
+      <link name="link">
+        <collision name="col"><geometry><sphere><radius>0.08</radius></sphere></geometry>
+          <surface><friction><ode><mu>0.4</mu><mu2>0.4</mu2></ode></friction></surface>
+        </collision>
+        <visual name="vis"><geometry><sphere><radius>0.08</radius></sphere></geometry>
+          <material><ambient>0.43 0.21 0.10 1</ambient><diffuse>0.53 0.27 0.13 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="rock_s5">
+      <static>true</static>
+      <pose>7.0 1.5 0.08 0 0 2.1</pose>
+      <link name="link">
+        <collision name="col"><geometry><sphere><radius>0.08</radius></sphere></geometry>
+          <surface><friction><ode><mu>0.4</mu><mu2>0.4</mu2></ode></friction></surface>
+        </collision>
+        <visual name="vis"><geometry><sphere><radius>0.08</radius></sphere></geometry>
+          <material><ambient>0.41 0.23 0.10 1</ambient><diffuse>0.51 0.29 0.13 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="rock_s6">
+      <static>true</static>
+      <pose>1.0 -5.5 0.08 0 0 0.6</pose>
+      <link name="link">
+        <collision name="col"><geometry><sphere><radius>0.08</radius></sphere></geometry>
+          <surface><friction><ode><mu>0.4</mu><mu2>0.4</mu2></ode></friction></surface>
+        </collision>
+        <visual name="vis"><geometry><sphere><radius>0.08</radius></sphere></geometry>
+          <material><ambient>0.45 0.21 0.09 1</ambient><diffuse>0.55 0.27 0.12 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ─── Rocks — 4 medium (r=0.18) ───────────────────────────────── -->
+    <model name="rock_m1">
+      <static>true</static>
+      <pose>4.0 -1.0 0.18 0 0 1.0</pose>
+      <link name="link">
+        <collision name="col"><geometry><sphere><radius>0.18</radius></sphere></geometry>
+          <surface><friction><ode><mu>0.4</mu><mu2>0.4</mu2></ode></friction></surface>
+        </collision>
+        <visual name="vis"><geometry><sphere><radius>0.18</radius></sphere></geometry>
+          <material><ambient>0.48 0.26 0.11 1</ambient><diffuse>0.58 0.32 0.14 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="rock_m2">
+      <static>true</static>
+      <pose>-3.0 3.5 0.18 0 0 0.4</pose>
+      <link name="link">
+        <collision name="col"><geometry><sphere><radius>0.18</radius></sphere></geometry>
+          <surface><friction><ode><mu>0.4</mu><mu2>0.4</mu2></ode></friction></surface>
+        </collision>
+        <visual name="vis"><geometry><sphere><radius>0.18</radius></sphere></geometry>
+          <material><ambient>0.46 0.28 0.12 1</ambient><diffuse>0.56 0.34 0.15 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="rock_m3">
+      <static>true</static>
+      <pose>2.0 5.0 0.18 0 0 1.7</pose>
+      <link name="link">
+        <collision name="col"><geometry><sphere><radius>0.18</radius></sphere></geometry>
+          <surface><friction><ode><mu>0.4</mu><mu2>0.4</mu2></ode></friction></surface>
+        </collision>
+        <visual name="vis"><geometry><sphere><radius>0.18</radius></sphere></geometry>
+          <material><ambient>0.50 0.24 0.10 1</ambient><diffuse>0.60 0.30 0.13 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="rock_m4">
+      <static>true</static>
+      <pose>6.5 -4.0 0.18 0 0 0.9</pose>
+      <link name="link">
+        <collision name="col"><geometry><sphere><radius>0.18</radius></sphere></geometry>
+          <surface><friction><ode><mu>0.4</mu><mu2>0.4</mu2></ode></friction></surface>
+        </collision>
+        <visual name="vis"><geometry><sphere><radius>0.18</radius></sphere></geometry>
+          <material><ambient>0.47 0.25 0.11 1</ambient><diffuse>0.57 0.31 0.14 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ─── Rocks — 2 large (r=0.30) ────────────────────────────────── -->
+    <model name="rock_l1">
+      <static>true</static>
+      <pose>-5.0 0.5 0.30 0 0 0.7</pose>
+      <link name="link">
+        <collision name="col"><geometry><sphere><radius>0.30</radius></sphere></geometry>
+          <surface><friction><ode><mu>0.4</mu><mu2>0.4</mu2></ode></friction></surface>
+        </collision>
+        <visual name="vis"><geometry><sphere><radius>0.30</radius></sphere></geometry>
+          <material><ambient>0.50 0.24 0.09 1</ambient><diffuse>0.62 0.30 0.12 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="rock_l2">
+      <static>true</static>
+      <pose>8.5 3.0 0.30 0 0 1.4</pose>
+      <link name="link">
+        <collision name="col"><geometry><sphere><radius>0.30</radius></sphere></geometry>
+          <surface><friction><ode><mu>0.4</mu><mu2>0.4</mu2></ode></friction></surface>
+        </collision>
+        <visual name="vis"><geometry><sphere><radius>0.30</radius></sphere></geometry>
+          <material><ambient>0.52 0.22 0.08 1</ambient><diffuse>0.64 0.28 0.11 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ─── Slope berm — 15° incline, 4 m long, triggers slope_detector ── -->
+    <!--
+      A 4 m long, 3 m wide slab tilted at 15° (0.2618 rad) around Y-axis.
+      Rover drives up from X=10; far edge rises ~1.04 m above ground.
+      Center at X=12, Z=0.52 (mid-height of ramp).
+    -->
+    <model name="slope_berm">
+      <static>true</static>
+      <pose>12.0 0.0 0.52 0 -0.2618 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box><size>4.2 3.0 0.08</size></box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.5</mu>
+                <mu2>0.5</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>4.2 3.0 0.08</size></box>
+          </geometry>
+          <material>
+            <ambient>0.55 0.30 0.14 1</ambient>
+            <diffuse>0.65 0.36 0.18 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ─── Navigation gate — 2.5 m opening, 1.5 m tall poles ──────── -->
+    <model name="gate_pole_left">
+      <static>true</static>
+      <pose>20.0 -1.25 0.75 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <cylinder><radius>0.04</radius><length>1.5</length></cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder><radius>0.04</radius><length>1.5</length></cylinder>
+          </geometry>
+          <material>
+            <ambient>1.0 0.5 0.0 1</ambient>
+            <diffuse>1.0 0.6 0.0 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="gate_pole_right">
+      <static>true</static>
+      <pose>20.0 1.25 0.75 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <cylinder><radius>0.04</radius><length>1.5</length></cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder><radius>0.04</radius><length>1.5</length></cylinder>
+          </geometry>
+          <material>
+            <ambient>1.0 0.5 0.0 1</ambient>
+            <diffuse>1.0 0.6 0.0 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ─── ArUco target panel — white panel at X=25, facing -X ──────── -->
+    <!--
+      Flat 0.6 m × 0.6 m panel. Rover approaches from negative X.
+      No texture — rely on aruco_detection to detect printed marker placed on it.
+      Rotated 90° around Z so face is visible from rover start position.
+    -->
+    <model name="aruco_target">
+      <static>true</static>
+      <pose>25.0 0.0 0.5 0 0 1.5708</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box><size>0.05 0.6 0.6</size></box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.05 0.6 0.6</size></box>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>1.0 1.0 1.0 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>

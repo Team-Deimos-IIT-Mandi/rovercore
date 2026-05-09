@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot
+  name="Assem10">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.160930995517805 0.0567423417730914 -0.00782758720815043"
+        rpy="0 0 0" />
+      <mass
+        value="9.90010001726695" />
+      <inertia
+        ixx="0.0700249747187285"
+        ixy="2.77044119297997E-07"
+        ixz="9.64699999229296E-05"
+        iyy="0.0306181387356148"
+        iyz="-4.05669516072176E-07"
+        izz="0.0533139186451046" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.776470588235294 0.756862745098039 0.737254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="RF">
+    <inertial>
+      <origin
+        xyz="-0.070127125179043 5.89168811093721E-06 -1.21221895692525E-05"
+        rpy="0 0 0" />
+      <mass
+        value="3.57448453557898" />
+      <inertia
+        ixx="0.0295859622143953"
+        ixy="-3.45032340310931E-10"
+        ixz="4.65651313211761E-10"
+        iyy="0.0205584479844293"
+        iyz="2.28253922016119E-06"
+        izz="0.0205548004805363" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/RF.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/RF.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RF_joint"
+    type="continuous">
+    <origin
+      xyz="-0.29083 -0.30404 -0.25109"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="RF" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      effort="100"
+      velocity="10" />
+  </joint>
+  <link
+    name="LF">
+    <inertial>
+      <origin
+        xyz="0.0702271724870632 -1.04460431388231E-05 -8.51704052695634E-06"
+        rpy="0 0 0" />
+      <mass
+        value="3.57448131006854" />
+      <inertia
+        ixx="0.0295859622143955"
+        ixy="-5.08954755758024E-10"
+        ixz="-2.77206581178434E-10"
+        iyy="0.0205560592467253"
+        iyz="-2.86650441261477E-06"
+        izz="0.0205571892182404" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/LF.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/LF.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LF_joint"
+    type="continuous">
+    <origin
+      xyz="-0.290826080497761 0.316247207262208 -0.251089525412"
+      rpy="-1.5707963267949 0 -1.5707963267949" />
+    <parent
+      link="base_link" />
+    <child
+      link="LF" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      effort="100"
+      velocity="10" />
+  </joint>
+  <link
+    name="LB">
+    <inertial>
+      <origin
+        xyz="0.0702271251790433 1.20538068726916E-05 -6.03035724583423E-06"
+        rpy="0 0 0" />
+      <mass
+        value="3.574484535579" />
+      <inertia
+        ixx="0.0295859622143955"
+        ixy="4.61662707464414E-10"
+        ixz="-3.50351239944112E-10"
+        iyy="0.0205548533242689"
+        iyz="2.32377721637767E-06"
+        izz="0.0205583951406968" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/LB.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/LB.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="LB_joint"
+    type="continuous">
+    <origin
+      xyz="-0.29083 0.31625 0.34891"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="LB" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      effort="100"
+      velocity="10" />
+  </joint>
+  <link
+    name="RB">
+    <inertial>
+      <origin
+        xyz="-0.0702271724870632 1.23412855801974E-05 -5.41779169571655E-06"
+        rpy="0 0 0" />
+      <mass
+        value="3.57448131006854" />
+      <inertia
+        ixx="0.0295859622143954"
+        ixy="-5.64502264178318E-10"
+        ixz="1.31208309299921E-10"
+        iyy="0.0205546643219842"
+        iyz="2.16675039901438E-06"
+        izz="0.0205585841429814" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/RB.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/RB.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RB_joint"
+    type="continuous">
+    <origin
+      xyz="-0.29083 -0.30414 0.34891"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="RB" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      effort="100"
+      velocity="10" />
+  </joint>
+  <link
+    name="IMU">
+    <inertial>
+      <origin
+        xyz="0.00134193003921145 0.00154722539149073 -0.00169171674705683"
+        rpy="0 0 0" />
+      <mass
+        value="0.01" />
+      <inertia
+        ixx="1e-05"
+        ixy="0"
+        ixz="0"
+        iyy="1e-05"
+        iyz="0"
+        izz="1e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/IMU.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/IMU.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="IMU_joint"
+    type="fixed">
+    <origin
+      xyz="0.023111 0.0074304 0.026248"
+      rpy="-1.5708 0.019058 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="IMU" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="OPTICAL">
+    <inertial>
+      <origin
+        xyz="-1.73472347597681E-18 1.38777878078145E-17 -0.00318525013167438"
+        rpy="0 0 0" />
+      <mass
+        value="0.01" />
+      <inertia
+        ixx="1e-05"
+        ixy="0"
+        ixz="0"
+        iyy="1e-05"
+        iyz="0"
+        izz="1e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/OPTICAL.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/OPTICAL.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="OPTICAL_joint"
+    type="fixed">
+    <origin
+      xyz="-0.091551 0.0046556 0.087323"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="OPTICAL" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="GPS">
+    <inertial>
+      <origin
+        xyz="0 1.38777878078145E-17 -0.0295024951902178"
+        rpy="0 0 0" />
+      <mass
+        value="0.0146410874338426" />
+      <inertia
+        ixx="3.17358826692755E-05"
+        ixy="-1.16645391067021E-21"
+        ixz="3.22446708881848E-20"
+        iyy="3.17358826692755E-05"
+        iyz="1.78096689542018E-20"
+        izz="1.93641269939486E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/GPS.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/GPS.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="GPS_joint"
+    type="fixed">
+    <origin
+      xyz="0.19045 0.20596 0.09541"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="GPS" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link name="FLOW_CAM">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
+    </inertial>
+  </link>
+  <joint name="FLOW_CAM_joint" type="fixed">
+    <origin xyz="-0.16 0.0 -0.22" rpy="-1.5708 0 -1.5708"/>
+    <parent link="base_link"/>
+    <child link="FLOW_CAM"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <ros2_control name="GazeboSimSystem" type="system">
+    <hardware>
+      <plugin>ign_ros2_control/IgnitionSystem</plugin>
+    </hardware>
+    <joint name="LF_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="RF_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="LB_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="RB_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+
+  <gazebo reference="base_link">
+    <material>Gazebo/Pink</material>
+  </gazebo>
+  
+  <gazebo reference="LF">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <material>Gazebo/Red</material>
+  </gazebo>
+  
+  <gazebo reference="RF">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <material>Gazebo/Red</material>
+  </gazebo>
+  
+  <gazebo reference="LB">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <material>Gazebo/Red</material>
+  </gazebo>
+  
+  <gazebo reference="RB">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <!-- Diff drive via Ignition's built-in plugin (no gz_ros2_control needed) -->
+  <gazebo>
+    <plugin filename="ignition-gazebo-diff-drive-system" name="ignition::gazebo::systems::DiffDrive">
+      <left_joint>LF_joint</left_joint>
+      <left_joint>LB_joint</left_joint>
+      <right_joint>RF_joint</right_joint>
+      <right_joint>RB_joint</right_joint>
+      <wheel_separation>0.62</wheel_separation>
+      <wheel_radius>0.14</wheel_radius>
+      <max_linear_acceleration>1.0</max_linear_acceleration>
+      <min_linear_acceleration>-1.0</min_linear_acceleration>
+      <max_angular_acceleration>2.0</max_angular_acceleration>
+      <min_angular_acceleration>-2.0</min_angular_acceleration>
+      <odom_publish_frequency>50</odom_publish_frequency>
+      <topic>cmd_vel</topic>
+      <odom_topic>odom</odom_topic>
+      <!-- <tf_topic>tf</tf_topic> -->
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_link</child_frame_id>
+    </plugin>
+  </gazebo>
+
+  <!-- Joint state publisher for wheel positions -->
+  <gazebo>
+    <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher">
+      <joint_name>LF_joint</joint_name>
+      <joint_name>LB_joint</joint_name>
+      <joint_name>RF_joint</joint_name>
+      <joint_name>RB_joint</joint_name>
+      <topic>joint_states</topic>
+    </plugin>
+  </gazebo>
+
+  <!-- IMU sensor on the IMU link -->
+  <gazebo reference="IMU">
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>200</update_rate>
+      <topic>imu/data</topic>
+      <imu>
+        <angular_velocity>
+          <x><noise type="gaussian"><mean>0.0</mean><stddev>0.0002</stddev></noise></x>
+          <y><noise type="gaussian"><mean>0.0</mean><stddev>0.0002</stddev></noise></y>
+          <z><noise type="gaussian"><mean>0.0</mean><stddev>0.0002</stddev></noise></z>
+        </angular_velocity>
+        <linear_acceleration>
+          <x><noise type="gaussian"><mean>0.0</mean><stddev>0.017</stddev></noise></x>
+          <y><noise type="gaussian"><mean>0.0</mean><stddev>0.017</stddev></noise></y>
+          <z><noise type="gaussian"><mean>0.0</mean><stddev>0.017</stddev></noise></z>
+        </linear_acceleration>
+      </imu>
+    </sensor>
+  </gazebo>
+
+  <!-- GPS (NavSat) sensor on the GPS link -->
+  <gazebo reference="GPS">
+    <sensor name="navsat_sensor" type="navsat">
+      <always_on>true</always_on>
+      <update_rate>10</update_rate>
+      <topic>gps/fix</topic>
+    </sensor>
+  </gazebo>
+
+  <!-- RGBD Camera on the OPTICAL link -->
+  <gazebo reference="OPTICAL">
+    <sensor name="rgbd_camera" type="camera">
+      <always_on>true</always_on>
+      <update_rate>15</update_rate>
+      <topic>rgbd_camera/image</topic>
+      <camera>
+        <horizontal_fov>1.0472</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.1</near>
+          <far>100</far>
+        </clip>
+      </camera>
+    </sensor>
+  </gazebo>
+
+  <!-- Downward optical flow camera on FLOW_CAM link (simulates PMW3901) -->
+  <gazebo reference="FLOW_CAM">
+    <sensor name="flow_camera" type="camera">
+      <always_on>true</always_on>
+      <update_rate>15</update_rate>
+      <topic>flow_cam/image</topic>
+      <camera>
+        <horizontal_fov>1.0472</horizontal_fov>
+        <image>
+          <width>120</width>
+          <height>120</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.01</near>
+          <far>10</far>
+        </clip>
+      </camera>
+    </sensor>
+  </gazebo>
+
+  <!-- Downward rangefinder on FLOW_CAM link (simulates MTF-01 ToF) -->
+  <gazebo reference="FLOW_CAM">
+    <sensor name="range_sensor" type="gpu_lidar">
+      <always_on>true</always_on>
+      <update_rate>15</update_rate>
+      <topic>range/height</topic>
+      <pose>0 0 0 0 0 0</pose>
+      <lidar>
+        <scan>
+          <horizontal>
+            <samples>1</samples>
+            <resolution>1</resolution>
+            <min_angle>0</min_angle>
+            <max_angle>0</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.01</min>
+          <max>8.0</max>
+          <resolution>0.001</resolution>
+        </range>
+      </lidar>
+    </sensor>
+  </gazebo>
+
+  <!-- 2D Lidar on base_link -->
+  <gazebo reference="base_link">
+    <sensor name="lidar" type="gpu_lidar">
+      <always_on>true</always_on>
+      <update_rate>10</update_rate>
+      <topic>scan</topic>
+      <pose>0.1 0 0.15 0 0 0</pose>
+      <lidar>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.15</min>
+          <max>12.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </lidar>
+    </sensor>
+  </gazebo>
+
+</robot>

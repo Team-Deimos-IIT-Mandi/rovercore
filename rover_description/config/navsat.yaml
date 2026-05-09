@@ -1,0 +1,22 @@
+# NavSat Transform — converts GPS lat/lon → odom-frame XY
+#
+# TUNING GUIDE:
+# 1. Set magnetic_declination_radians for your location (lookup online)
+# 2. yaw_offset: if rover's IMU 0° yaw != East, set offset here
+# 3. datum: set to your competition field origin GPS coordinates
+
+navsat_transform_node:
+  ros__parameters:
+    use_sim_time: true
+    frequency: 10                          # match GPS update rate
+    magnetic_declination_radians: 0.19     # TUNE: MDRS Utah ≈ 11° ≈ 0.19 rad. Change for your location.
+    yaw_offset: 0.0                        # TUNE: calibrate on-site if IMU 0° != East
+    broadcast_cartesian_transform: false   # EKF Global handles TF, not navsat
+    wait_for_datum: true                   # wait for datum before publishing
+    # TUNE: Set datum to competition field origin GPS coordinates [lat, lon, heading]
+    # For MDRS Utah: [38.4063, -110.7918, 0.0]
+    # For simulation: use Gazebo's default origin
+    datum: [38.4063, -110.7918, 0.0]       # TUNE: lat, lon, yaw (rad) of field origin
+    use_odometry_yaw: false                # use IMU heading, not odom yaw
+    zero_altitude: true                    # 2D rover, ignore altitude
+    publish_filtered_gps: false

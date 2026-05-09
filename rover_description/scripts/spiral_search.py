@@ -7,32 +7,20 @@ from nav_msgs.msg import Odometry
 from visualization_msgs.msg import Marker
 from std_msgs.msg import Bool
 import math
-import numpy as np
-
-def quaternion_from_euler(ai, aj, ak):
-    ai /= 2.0; aj /= 2.0; ak /= 2.0
-    ci = math.cos(ai); si = math.sin(ai)
-    cj = math.cos(aj); sj = math.sin(aj)
-    ck = math.cos(ak); sk = math.sin(ak)
-    cc = ci*ck; cs = ci*sk; sc = si*ck; ss = si*sk
-
-    q = np.empty((4, ))
-    q[0] = sc * cj - cs * sj
-    q[1] = cc * sj + ss * cj
-    q[2] = cs * cj - sc * sj
-    q[3] = cc * cj + ss * sj
-    return q
 
 class SpiralWaypointGenerator(Node):
     def __init__(self):
         super().__init__('spiral_waypoint_generator')
 
         # Parameters
-        self.threshold_distance = 2.0
+        self.declare_parameter('threshold_distance', 2.0)
+        self.declare_parameter('spiral_radius', 30.0)
+        self.declare_parameter('step_increment', 0.1)
+        self.threshold_distance = self.get_parameter('threshold_distance').get_parameter_value().double_value
+        self.spiral_radius = self.get_parameter('spiral_radius').get_parameter_value().double_value
+        self.step_increment = self.get_parameter('step_increment').get_parameter_value().double_value
         self.mission_started = False
         self.initial_pose = None
-        self.spiral_radius = 30.0
-        self.step_increment = 0.1
         self.waypoints = []
         
         self.current_position = None
@@ -75,7 +63,6 @@ class SpiralWaypointGenerator(Node):
             
             waypoint = PoseStamped()
             waypoint.header.frame_id = 'odom'
-            # SYNC FIX: Using a clean timestamp for generated waypoints
             waypoint.header.stamp = self.get_clock().now().to_msg()
             waypoint.pose.position = Point(x=x, y=y, z=0.0)
             
@@ -138,13 +125,13 @@ class SpiralWaypointGenerator(Node):
             
             if distance < self.threshold_distance:
                 goal_msg = self.waypoints.pop(0)
-                # SYNC FIX: Ensure the published goal has the absolute LATEST time
-                # Or set to 0.0 (rclpy.time.Time().to_msg()) if Nav2 is being stubborn
-                goal_msg.header.stamp = rclpy.time.Time().to_msg()
+                goal_msg.header.stamp = self.get_clock().now().to_msg()
                 self.goal_publisher.publish(goal_msg)
                 self.get_logger().info("Next waypoint published.")
         else:
-            self.get_logger().info("Spiral Search Finished", once=True)
+            if not hasattr(self, '_search_finished_logged'):
+                self._search_finished_logged = True
+                self.get_logger().info("Spiral Search Finished")
 
 def main(args=None):
     rclpy.init(args=args)

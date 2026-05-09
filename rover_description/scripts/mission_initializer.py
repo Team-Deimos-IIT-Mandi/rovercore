@@ -15,6 +15,7 @@ class MissionInitializer(Node):
         # 1. Declare Parameters (These will be filled by the launch file)
         self.declare_parameter('target_lat', 0.0)
         self.declare_parameter('target_lon', 0.0)
+        self.declare_parameter('arrival_threshold', 2.0)
 
         # 2. Pubs and Subs
         self.goal_pub = self.create_publisher(PoseStamped, '/goal_pose', 10)
@@ -40,7 +41,15 @@ class MissionInitializer(Node):
             # 3. Retrieve the arguments passed via terminal
             t_lat = self.get_parameter('target_lat').get_parameter_value().double_value
             t_lon = self.get_parameter('target_lon').get_parameter_value().double_value
-            
+
+            # Validate GPS coordinates before conversion
+            if not (-90.0 <= t_lat <= 90.0) or not (-180.0 <= t_lon <= 180.0):
+                self.get_logger().error(
+                    f'Invalid GPS coordinates: lat={t_lat}, lon={t_lon}. '
+                    'Latitude must be -90 to 90, longitude -180 to 180.'
+                )
+                return
+
             # Convert target to UTM
             t_easting, t_northing, _, _ = utm.from_latlon(t_lat, t_lon)
             self.target_odom_x = t_easting - self.origin_utm[0]
@@ -57,7 +66,7 @@ class MissionInitializer(Node):
 
         if not self.goal_sent:
             goal = PoseStamped()
-            goal.header.stamp = rclpy.time.Time().to_msg()
+            goal.header.stamp = self.get_clock().now().to_msg()
             goal.header.frame_id = 'odom'
             goal.pose.position.x = self.target_odom_x
             goal.pose.position.y = self.target_odom_y
@@ -68,10 +77,11 @@ class MissionInitializer(Node):
         dist = math.sqrt((self.current_odom_pos.x - self.target_odom_x)**2 + 
                          (self.current_odom_pos.y - self.target_odom_y)**2)
         
-        if dist < 2.0 and not self.mission_started:
+        threshold = self.get_parameter('arrival_threshold').get_parameter_value().double_value
+        if dist < threshold and not self.mission_started:
             self.mission_started = True
             self.start_search_pub.publish(Bool(data=True))
-            self.get_logger().warn("GPS GOAL REACHED. STARTING SEARCH PHASE.")
+            self.get_logger().warning("GPS GOAL REACHED. STARTING SEARCH PHASE.")
 
 def main(args=None):
     rclpy.init(args=args)

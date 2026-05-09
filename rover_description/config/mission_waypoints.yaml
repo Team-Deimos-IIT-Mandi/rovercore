@@ -1,0 +1,19 @@
+mission:
+  name: "ARC_2026_Mission"
+  waypoints:
+    - label: "WP1_approach"
+      lat: 38.4065
+      lon: -110.7916
+      type: gps_nav
+    - label: "WP2_gate"
+      lat: 38.4067
+      lon: -110.7914
+      type: gate_pass
+    - label: "WP3_search"
+      lat: 38.4069
+      lon: -110.7912
+      type: search
+    - label: "WP4_science"
+      lat: 38.4071
+      lon: -110.7910
+      type: science

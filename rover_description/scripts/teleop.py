@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import rclpy
 from rclpy.node import Node
-from geometry_msgs.msg import TwistStamped
+from geometry_msgs.msg import Twist
 import sys, select, termios, tty
 
 msg = """
@@ -22,7 +22,7 @@ CTRL-C to quit
 class StampedTeleop(Node):
     def __init__(self):
         super().__init__('stamped_teleop')
-        self.publisher_ = self.create_publisher(TwistStamped, '/diff_drive_controller/cmd_vel', 10)
+        self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)
         
         self.settings = termios.tcgetattr(sys.stdin)
         self.linear_vel = 1.5
@@ -44,32 +44,29 @@ class StampedTeleop(Node):
         try:
             while True:
                 key = self.get_key()
-                ts = TwistStamped()
-                ts.header.stamp = self.get_clock().now().to_msg()
-                ts.header.frame_id = 'base_link'
+                ts = Twist()
 
                 if key == 'w':
-                    ts.twist.linear.x = self.linear_vel
+                    ts.linear.x = self.linear_vel
                 elif key == 's':
-                    ts.twist.linear.x = -self.linear_vel
+                    ts.linear.x = -self.linear_vel
                 elif key == 'a':
-                    ts.twist.angular.z = self.angular_vel
+                    ts.angular.z = self.angular_vel
                 elif key == 'd':
-                    ts.twist.angular.z = -self.angular_vel
+                    ts.angular.z = -self.angular_vel
                 elif key in [' ', 'k']:
-                    ts.twist.linear.x = 0.0
-                    ts.twist.angular.z = 0.0
-                elif key == '\x03': #CTRL -C 
+                    ts.linear.x = 0.0
+                    ts.angular.z = 0.0
+                elif key == '\x03': #CTRL -C
                     break
-                
+
                 if key != '':
                     self.publisher_.publish(ts)
 
         except Exception as e:
-            print(e)
+            self.get_logger().error(str(e))
         finally:
-            stop_msg = TwistStamped()
-            stop_msg.header.stamp = self.get_clock().now().to_msg()
+            stop_msg = Twist()
             self.publisher_.publish(stop_msg)
 
 def main(args=None):

@@ -16,15 +16,21 @@ install(
     scripts/teleop.py
     scripts/cmd_vel_relay.py
     scripts/aruco_detection.py
-    scripts/aruco_detection1.py
-    scripts/aruco_detection2.py
     scripts/spiral_search.py
     scripts/mission_initializer.py
+    scripts/robot_description_publisher.py
+    scripts/optical_flow_node.py
+    scripts/imu_filter_node.py
+    scripts/flow_derotation_node.py
+    scripts/nonholonomic_node.py
+    scripts/slip_detector_node.py
+    scripts/gps_gating_node.py
+    scripts/zupt_node.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
 install(
-  DIRECTORY launch urdf meshes config worlds scripts maps models
+  DIRECTORY urdf meshes launch rviz config worlds maps models
   DESTINATION share/${PROJECT_NAME}
 )
 
