@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot
   name="Assem10">
+  <!-- This is the true, ROS-oriented base frame (X-forward, Z-up) -->
+  <link name="base_link" />
+
+  <!-- This joint rotates your entire CAD assembly to fix the nose-dive -->
+  <joint name="base_to_chassis_joint" type="fixed">
+    <origin xyz="0 0 0.4" rpy="0 -1.5708 0" /> 
+    <parent link="base_link" />
+    <child link="chassis_link" />
+  </joint>
   <link
-    name="base_link">
+    name="chassis_link">
     <inertial>
       <origin
-        xyz="-0.160930995517805 0.0567423417730914 -0.00782758720815043"
+        xyz="0 0 0.43083"
         rpy="0 0 0" />
       <mass
         value="9.90010001726695" />
@@ -68,7 +77,7 @@
       <material
         name="">
         <color
-          rgba="1 1 1 1" />
+          rgba="0.752941176470588 0 0 1" />
       </material>
     </visual>
     <collision>
@@ -88,7 +97,7 @@
       xyz="-0.29083 -0.30404 -0.25109"
       rpy="-1.5708 0 -1.5708" />
     <parent
-      link="base_link" />
+      link="chassis_link" />
     <child
       link="RF" />
     <axis
@@ -144,7 +153,7 @@
       xyz="-0.290826080497761 0.316247207262208 -0.251089525412"
       rpy="-1.5707963267949 0 -1.5707963267949" />
     <parent
-      link="base_link" />
+      link="chassis_link" />
     <child
       link="LF" />
     <axis
@@ -180,7 +189,7 @@
       <material
         name="">
         <color
-          rgba="1 1 1 1" />
+          rgba="0.752941176470588 0 0 1" />
       </material>
     </visual>
     <collision>
@@ -200,7 +209,7 @@
       xyz="-0.29083 0.31625 0.34891"
       rpy="-1.5708 0 -1.5708" />
     <parent
-      link="base_link" />
+      link="chassis_link" />
     <child
       link="LB" />
     <axis
@@ -236,7 +245,7 @@
       <material
         name="">
         <color
-          rgba="1 1 1 1" />
+          rgba="0.752941176470588 0 0 1" />
       </material>
     </visual>
     <collision>
@@ -256,7 +265,7 @@
       xyz="-0.29083 -0.30414 0.34891"
       rpy="-1.5708 0 -1.5708" />
     <parent
-      link="base_link" />
+      link="chassis_link" />
     <child
       link="RB" />
     <axis
@@ -291,8 +300,7 @@
       </geometry>
       <material
         name="">
-        <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        <color rgba="0.0 0.4 0.8 1" />
       </material>
     </visual>
     <collision>
@@ -312,7 +320,7 @@
       xyz="0.023111 0.0074304 0.026248"
       rpy="-1.5708 0.019058 -1.5708" />
     <parent
-      link="base_link" />
+      link="chassis_link" />
     <child
       link="IMU" />
     <axis
@@ -344,8 +352,7 @@
       </geometry>
       <material
         name="">
-        <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        <color rgba="0.0 0.4 0.8 1" />
       </material>
     </visual>
     <collision>
@@ -365,7 +372,7 @@
       xyz="-0.091551 0.0046556 0.087323"
       rpy="-1.5708 0 -1.5708" />
     <parent
-      link="base_link" />
+      link="chassis_link" />
     <child
       link="OPTICAL" />
     <axis
@@ -397,8 +404,7 @@
       </geometry>
       <material
         name="">
-        <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        <color rgba="0.0 0.4 0.8 1" />
       </material>
     </visual>
     <collision>
@@ -418,7 +424,7 @@
       xyz="0.19045 0.20596 0.09541"
       rpy="-1.5708 0 -1.5708" />
     <parent
-      link="base_link" />
+      link="chassis_link" />
     <child
       link="GPS" />
     <axis
@@ -433,36 +439,10 @@
   </link>
   <joint name="FLOW_CAM_joint" type="fixed">
     <origin xyz="-0.16 0.0 -0.22" rpy="-1.5708 0 -1.5708"/>
-    <parent link="base_link"/>
+    <parent link="chassis_link"/>
     <child link="FLOW_CAM"/>
     <axis xyz="0 0 0"/>
   </joint>
-  <ros2_control name="GazeboSimSystem" type="system">
-    <hardware>
-      <plugin>ign_ros2_control/IgnitionSystem</plugin>
-    </hardware>
-    <joint name="LF_joint">
-      <command_interface name="velocity"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="RF_joint">
-      <command_interface name="velocity"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="LB_joint">
-      <command_interface name="velocity"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="RB_joint">
-      <command_interface name="velocity"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-  </ros2_control>
-
   <gazebo reference="base_link">
     <material>Gazebo/Pink</material>
   </gazebo>
@@ -520,7 +500,6 @@
       <joint_name>LB_joint</joint_name>
       <joint_name>RF_joint</joint_name>
       <joint_name>RB_joint</joint_name>
-      <topic>joint_states</topic>
     </plugin>
   </gazebo>
 
@@ -556,10 +535,10 @@
 
   <!-- RGBD Camera on the OPTICAL link -->
   <gazebo reference="OPTICAL">
-    <sensor name="rgbd_camera" type="camera">
+    <sensor name="rgbd_camera" type="rgbd_camera">
       <always_on>true</always_on>
       <update_rate>15</update_rate>
-      <topic>rgbd_camera/image</topic>
+      <topic>rgbd_camera</topic>
       <camera>
         <horizontal_fov>1.0472</horizontal_fov>
         <image>
@@ -572,6 +551,12 @@
           <far>100</far>
         </clip>
       </camera>
+      <depth_camera>
+        <clip>
+          <near>0.1</near>
+          <far>10</far>
+        </clip>
+      </depth_camera>
     </sensor>
   </gazebo>
 
@@ -617,36 +602,6 @@
           <max>8.0</max>
           <resolution>0.001</resolution>
         </range>
-      </lidar>
-    </sensor>
-  </gazebo>
-
-  <!-- 2D Lidar on base_link -->
-  <gazebo reference="base_link">
-    <sensor name="lidar" type="gpu_lidar">
-      <always_on>true</always_on>
-      <update_rate>10</update_rate>
-      <topic>scan</topic>
-      <pose>0.1 0 0.15 0 0 0</pose>
-      <lidar>
-        <scan>
-          <horizontal>
-            <samples>360</samples>
-            <resolution>1</resolution>
-            <min_angle>-3.14159</min_angle>
-            <max_angle>3.14159</max_angle>
-          </horizontal>
-        </scan>
-        <range>
-          <min>0.15</min>
-          <max>12.0</max>
-          <resolution>0.01</resolution>
-        </range>
-        <noise>
-          <type>gaussian</type>
-          <mean>0.0</mean>
-          <stddev>0.01</stddev>
-        </noise>
       </lidar>
     </sensor>
   </gazebo>
