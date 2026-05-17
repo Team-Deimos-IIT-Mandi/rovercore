@@ -443,250 +443,81 @@
     <child link="FLOW_CAM"/>
     <axis xyz="0 0 0"/>
   </joint>
-
-  <!-- ==================== RGB CAMERAS (7x) ==================== -->
-  <!-- rpy derivation: camera looks along +Y of sensor frame in gz-sim.
-       base_to_chassis_joint rpy="0 -1.5708 0" rotates chassis relative to base_link.
-       Forward (+X base) = rpy "-1.5708 0 -1.5708"  (same as OPTICAL)
-       Left   (+Y base) = rpy "0 0 0"
-       Rear   (-X base) = rpy "1.5708 0 0"
-       Right  (-Y base) = rpy "0 0 3.1416"
-       FL 45° (+X+Y)/√2 = rpy "-0.7854 0 0"
-       FR 45° (+X-Y)/√2 = rpy "-0.7854 0 3.1416"
-       Down   (-Z base) = rpy "0 0 1.5708"  -->
-
-  <link name="CAM_FRONT">
+  <link
+    name="Front_Cam1">
     <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="0.05"/>
-      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
-    </inertial>
-    <!-- Housing -->
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.04 0.05"/></geometry>
-      <material name="cam_housing"><color rgba="0.15 0.15 0.15 1"/></material>
-    </visual>
-    <!-- Lens (cylinder axis = +Y = viewing direction; rpy="-1.5708 0 0" rotates Z→Y) -->
-    <visual>
-      <origin xyz="0 0.028 0" rpy="-1.5708 0 0"/>
-      <geometry><cylinder radius="0.014" length="0.016"/></geometry>
-      <material name="cam_lens"><color rgba="0.05 0.05 0.25 1"/></material>
-    </visual>
-    <!-- Color accent stripe (white = CAM_FRONT) -->
-    <visual>
-      <origin xyz="0 -0.021 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.002 0.014"/></geometry>
-      <material name="stripe_front"><color rgba="0.95 0.95 0.95 1"/></material>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.04 0.05"/></geometry>
-    </collision>
-  </link>
-  <joint name="CAM_FRONT_joint" type="fixed">
-    <origin xyz="0.07 0.0 -0.22" rpy="-1.5708 0 -1.5708"/>
-    <parent link="chassis_link"/>
-    <child link="CAM_FRONT"/>
-  </joint>
-
-  <link name="CAM_FL">
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="0.05"/>
-      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
+      <origin
+        xyz="0 1.38777878078145E-17 -0.0295024951902178"
+        rpy="0 0 0" />
+      <mass
+        value="0.0146410874338426" />
+      <inertia
+        ixx="3.17358826692755E-05"
+        ixy="-1.16645391067021E-21"
+        ixz="3.22446708881848E-20"
+        iyy="3.17358826692755E-05"
+        iyz="1.78096689542018E-20"
+        izz="1.93641269939486E-06" />
     </inertial>
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.04 0.05"/></geometry>
-      <material name="cam_housing"/>
-    </visual>
-    <visual>
-      <origin xyz="0 0.028 0" rpy="-1.5708 0 0"/>
-      <geometry><cylinder radius="0.014" length="0.016"/></geometry>
-      <material name="cam_lens"/>
-    </visual>
-    <!-- Cyan = front-left -->
-    <visual>
-      <origin xyz="0 -0.021 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.002 0.014"/></geometry>
-      <material name="stripe_fl"><color rgba="0.0 0.85 0.85 1"/></material>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/GPS.STL" />
+      </geometry>
+      <material
+        name="">
+        <color rgba="0.0 0.4 0.8 1" />
+      </material>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.04 0.05"/></geometry>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+      </geometry>
     </collision>
   </link>
-  <joint name="CAM_FL_joint" type="fixed">
-    <origin xyz="0.07 0.20 -0.18" rpy="-0.7854 0 0"/>
-    <parent link="chassis_link"/>
-    <child link="CAM_FL"/>
-  </joint>
 
-  <link name="CAM_FR">
+  <link
+    name="Front_Cam2">
     <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="0.05"/>
-      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
+      <origin
+        xyz="0 1.38777878078145E-17 -0.0295024951902178"
+        rpy="0 0 0" />
+      <mass
+        value="0.0146410874338426" />
+      <inertia
+        ixx="3.17358826692755E-05"
+        ixy="-1.16645391067021E-21"
+        ixz="3.22446708881848E-20"
+        iyy="3.17358826692755E-05"
+        iyz="1.78096689542018E-20"
+        izz="1.93641269939486E-06" />
     </inertial>
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.04 0.05"/></geometry>
-      <material name="cam_housing"/>
-    </visual>
-    <visual>
-      <origin xyz="0 0.028 0" rpy="-1.5708 0 0"/>
-      <geometry><cylinder radius="0.014" length="0.016"/></geometry>
-      <material name="cam_lens"/>
-    </visual>
-    <!-- Orange = front-right -->
-    <visual>
-      <origin xyz="0 -0.021 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.002 0.014"/></geometry>
-      <material name="stripe_fr"><color rgba="1.0 0.5 0.0 1"/></material>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/GPS.STL" />
+      </geometry>
+      <material
+        name="">
+        <color rgba="0.0 0.4 0.8 1" />
+      </material>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.04 0.05"/></geometry>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+      </geometry>
     </collision>
   </link>
-  <joint name="CAM_FR_joint" type="fixed">
-    <origin xyz="0.07 -0.20 -0.18" rpy="-0.7854 0 3.1416"/>
-    <parent link="chassis_link"/>
-    <child link="CAM_FR"/>
-  </joint>
-
-  <link name="CAM_LEFT">
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="0.05"/>
-      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.04 0.05"/></geometry>
-      <material name="cam_housing"/>
-    </visual>
-    <visual>
-      <origin xyz="0 0.028 0" rpy="-1.5708 0 0"/>
-      <geometry><cylinder radius="0.014" length="0.016"/></geometry>
-      <material name="cam_lens"/>
-    </visual>
-    <!-- Green = left -->
-    <visual>
-      <origin xyz="0 -0.021 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.002 0.014"/></geometry>
-      <material name="stripe_left"><color rgba="0.0 0.85 0.0 1"/></material>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.04 0.05"/></geometry>
-    </collision>
-  </link>
-  <joint name="CAM_LEFT_joint" type="fixed">
-    <origin xyz="0.04 0.26 0.15" rpy="0 0 0"/>
-    <parent link="chassis_link"/>
-    <child link="CAM_LEFT"/>
-  </joint>
-
-  <link name="CAM_RIGHT">
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="0.05"/>
-      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.04 0.05"/></geometry>
-      <material name="cam_housing"/>
-    </visual>
-    <visual>
-      <origin xyz="0 0.028 0" rpy="-1.5708 0 0"/>
-      <geometry><cylinder radius="0.014" length="0.016"/></geometry>
-      <material name="cam_lens"/>
-    </visual>
-    <!-- Purple = right -->
-    <visual>
-      <origin xyz="0 -0.021 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.002 0.014"/></geometry>
-      <material name="stripe_right"><color rgba="0.6 0.0 0.85 1"/></material>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.04 0.05"/></geometry>
-    </collision>
-  </link>
-  <joint name="CAM_RIGHT_joint" type="fixed">
-    <origin xyz="0.04 -0.26 0.15" rpy="0 0 3.1416"/>
-    <parent link="chassis_link"/>
-    <child link="CAM_RIGHT"/>
-  </joint>
-
-  <link name="CAM_REAR">
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="0.05"/>
-      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.04 0.05"/></geometry>
-      <material name="cam_housing"/>
-    </visual>
-    <visual>
-      <origin xyz="0 0.028 0" rpy="-1.5708 0 0"/>
-      <geometry><cylinder radius="0.014" length="0.016"/></geometry>
-      <material name="cam_lens"/>
-    </visual>
-    <!-- Red = rear -->
-    <visual>
-      <origin xyz="0 -0.021 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.002 0.014"/></geometry>
-      <material name="stripe_rear"><color rgba="0.9 0.1 0.1 1"/></material>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.04 0.05"/></geometry>
-    </collision>
-  </link>
-  <joint name="CAM_REAR_joint" type="fixed">
-    <origin xyz="0.07 0.0 0.28" rpy="1.5708 0 0"/>
-    <parent link="chassis_link"/>
-    <child link="CAM_REAR"/>
-  </joint>
-
-  <link name="CAM_SCIENCE">
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="0.05"/>
-      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
-    </inertial>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.04 0.05"/></geometry>
-      <material name="cam_housing"/>
-    </visual>
-    <visual>
-      <origin xyz="0 0.028 0" rpy="-1.5708 0 0"/>
-      <geometry><cylinder radius="0.014" length="0.016"/></geometry>
-      <material name="cam_lens"/>
-    </visual>
-    <!-- Yellow = science/downward -->
-    <visual>
-      <origin xyz="0 -0.021 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.002 0.014"/></geometry>
-      <material name="stripe_science"><color rgba="1.0 0.9 0.0 1"/></material>
-    </visual>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry><box size="0.07 0.04 0.05"/></geometry>
-    </collision>
-  </link>
-  <joint name="CAM_SCIENCE_joint" type="fixed">
-    <origin xyz="-0.12 0.0 -0.20" rpy="0 0 1.5708"/>
-    <parent link="chassis_link"/>
-    <child link="CAM_SCIENCE"/>
-  </joint>
 
   <gazebo reference="base_link">
     <material>Gazebo/Pink</material>
@@ -802,104 +633,6 @@
           <far>10</far>
         </clip>
       </depth_camera>
-    </sensor>
-  </gazebo>
-
-  <!-- CAM_FRONT: RGB forward HD — primary navigation + ArUco detection feed -->
-  <gazebo reference="CAM_FRONT">
-    <sensor name="cam_front" type="camera">
-      <always_on>true</always_on>
-      <update_rate>30</update_rate>
-      <topic>cam/front/image_raw</topic>
-      <camera>
-        <horizontal_fov>1.3963</horizontal_fov>
-        <image><width>1280</width><height>720</height><format>R8G8B8</format></image>
-        <clip><near>0.1</near><far>100</far></clip>
-      </camera>
-    </sensor>
-  </gazebo>
-
-  <!-- CAM_FL: RGB front-left 45° -->
-  <gazebo reference="CAM_FL">
-    <sensor name="cam_fl" type="camera">
-      <always_on>true</always_on>
-      <update_rate>15</update_rate>
-      <topic>cam/front_left/image_raw</topic>
-      <camera>
-        <horizontal_fov>1.5708</horizontal_fov>
-        <image><width>640</width><height>480</height><format>R8G8B8</format></image>
-        <clip><near>0.1</near><far>50</far></clip>
-      </camera>
-    </sensor>
-  </gazebo>
-
-  <!-- CAM_FR: RGB front-right 45° -->
-  <gazebo reference="CAM_FR">
-    <sensor name="cam_fr" type="camera">
-      <always_on>true</always_on>
-      <update_rate>15</update_rate>
-      <topic>cam/front_right/image_raw</topic>
-      <camera>
-        <horizontal_fov>1.5708</horizontal_fov>
-        <image><width>640</width><height>480</height><format>R8G8B8</format></image>
-        <clip><near>0.1</near><far>50</far></clip>
-      </camera>
-    </sensor>
-  </gazebo>
-
-  <!-- CAM_LEFT: RGB left side -->
-  <gazebo reference="CAM_LEFT">
-    <sensor name="cam_left" type="camera">
-      <always_on>true</always_on>
-      <update_rate>15</update_rate>
-      <topic>cam/left/image_raw</topic>
-      <camera>
-        <horizontal_fov>1.5708</horizontal_fov>
-        <image><width>640</width><height>480</height><format>R8G8B8</format></image>
-        <clip><near>0.1</near><far>50</far></clip>
-      </camera>
-    </sensor>
-  </gazebo>
-
-  <!-- CAM_RIGHT: RGB right side -->
-  <gazebo reference="CAM_RIGHT">
-    <sensor name="cam_right" type="camera">
-      <always_on>true</always_on>
-      <update_rate>15</update_rate>
-      <topic>cam/right/image_raw</topic>
-      <camera>
-        <horizontal_fov>1.5708</horizontal_fov>
-        <image><width>640</width><height>480</height><format>R8G8B8</format></image>
-        <clip><near>0.1</near><far>50</far></clip>
-      </camera>
-    </sensor>
-  </gazebo>
-
-  <!-- CAM_REAR: RGB rear -->
-  <gazebo reference="CAM_REAR">
-    <sensor name="cam_rear" type="camera">
-      <always_on>true</always_on>
-      <update_rate>15</update_rate>
-      <topic>cam/rear/image_raw</topic>
-      <camera>
-        <horizontal_fov>1.5708</horizontal_fov>
-        <image><width>640</width><height>480</height><format>R8G8B8</format></image>
-        <clip><near>0.1</near><far>50</far></clip>
-      </camera>
-    </sensor>
-  </gazebo>
-
-  <!-- CAM_SCIENCE: RGB downward — science sample inspection -->
-  <gazebo reference="CAM_SCIENCE">
-    <sensor name="cam_science" type="camera">
-      <always_on>true</always_on>
-      <update_rate>30</update_rate>
-      <topic>cam/science/image_raw</topic>
-      <camera>
-        <horizontal_fov>1.2217</horizontal_fov>
-        <image><width>1280</width><height>720</height><format>R8G8B8</format></image>
-        <clip><near>0.05</near><far>10</far></clip>
-      </camera>
     </sensor>
   </gazebo>
 

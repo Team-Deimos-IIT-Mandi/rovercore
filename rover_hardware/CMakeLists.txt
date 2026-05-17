@@ -43,6 +43,11 @@ install(
 )
 
 install(
+  DIRECTORY launch config
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(
   FILES rover_hardware.xml
   DESTINATION share/${PROJECT_NAME}
 )

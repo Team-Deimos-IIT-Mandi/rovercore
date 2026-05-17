@@ -1,0 +1,116 @@
+# EKF Local — odom frame
+# Fuses: IMU, wheel odom (via slip detector), optical flow, non-holonomic constraint, ZUPT
+#
+# TUNING GUIDE:
+# 1. Launch sim + state_estimation.launch.py
+# 2. In RViz, add Odometry display for /odometry/local
+# 3. Drive rover with teleop, compare /odometry/local path vs Gazebo ground truth
+# 4. Adjust covariance values below — lower = more trust in that sensor
+#
+# Every value marked TUNE: is a knob you'll adjust by watching the rover.
+
+ekf_local_node:
+  ros__parameters:
+    use_sim_time: false
+    frequency: 30.0         # TUNE: 30Hz — 50Hz overloads Jetson with full sensor suite.
+    two_d_mode: true         # rover operates on a 2D plane (suppresses roll/pitch in state)
+    publish_tf: true
+    map_frame: map
+    odom_frame: odom
+    base_link_frame: base_link
+    world_frame: odom        # local EKF operates in odom frame
+
+    # --- SENSOR 0: IMU ---
+    imu0: /imu/filtered
+    imu0_config: [false, false, false,   # x, y, z position (not from IMU)
+                  true,  true,  true,    # roll, pitch, yaw orientation
+                  false, false, false,   # x, y, z velocity (not from IMU)
+                  true,  true,  true,    # roll_vel, pitch_vel, yaw_vel
+                  true,  true,  false]   # x_accel, y_accel, z_accel (no vertical accel in 2D)
+    imu0_differential: false
+    imu0_relative: false
+    imu0_remove_gravitational_acceleration: true
+    imu0_queue_size: 10
+
+    # --- SENSOR 1: Wheel Odometry (via slip detector) ---
+    odom0: /odom/adjusted
+    odom0_config: [false, false, false,  # no position from wheels (integrates drift)
+                   false, false, false,  # no orientation from wheels
+                   true,  false, false,  # vx only (TUNE: set true for vy if needed)
+                   false, false, true,   # yaw_vel only
+                   false, false, false]  # no acceleration
+    odom0_differential: false
+    odom0_queue_size: 10
+
+    # --- SENSOR 2: Optical Flow (de-rotated) ---
+    odom1: /optical_flow/corrected
+    odom1_config: [false, false, false,  # no position
+                   false, false, false,  # no orientation
+                   true,  true,  false,  # vx, vy from flow (primary velocity source)
+                   false, false, false,  # no angular vel
+                   false, false, false]  # no acceleration
+    odom1_differential: false
+    odom1_queue_size: 10
+
+    # --- SENSOR 3: Non-Holonomic Constraint (Vy=0, Vz=0) ---
+    odom2: /constraints/nonholonomic
+    odom2_config: [false, false, false,
+                   false, false, false,
+                   false, true,  true,   # vy=0, vz=0
+                   false, false, false,
+                   false, false, false]
+    odom2_differential: false
+    odom2_queue_size: 5
+
+    # --- SENSOR 4: ZUPT (all velocities zero when stationary) ---
+    odom3: /constraints/zupt
+    odom3_config: [false, false, false,
+                   false, false, false,
+                   true,  true,  true,   # vx=0, vy=0, vz=0
+                   true,  true,  true,   # wx=0, wy=0, wz=0
+                   false, false, false]
+    odom3_differential: false
+    odom3_queue_size: 5
+
+    # --- PROCESS NOISE COVARIANCE ---
+    # Diagonal of the 15x15 process noise matrix.
+    # Order: x, y, z, roll, pitch, yaw, vx, vy, vz, vroll, vpitch, vyaw, ax, ay, az
+    # TUNE: Lower values = smoother filter, slower response. Higher = noisier, faster response.
+    process_noise_covariance: [
+      0.05,  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
+      0.0,   0.05,  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
+      0.0,   0.0,   0.06,  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
+      0.0,   0.0,   0.0,   0.03,  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
+      0.0,   0.0,   0.0,   0.0,   0.03,  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
+      0.0,   0.0,   0.0,   0.0,   0.0,   0.06,  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
+      0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.025, 0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
+      0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.025, 0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
+      0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.04,  0.0,   0.0,   0.0,   0.0,   0.0,   0.0,
+      0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.01,  0.0,   0.0,   0.0,   0.0,   0.0,
+      0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.01,  0.0,   0.0,   0.0,   0.0,
+      0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.02,  0.0,   0.0,   0.0,
+      0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.01,  0.0,   0.0,
+      0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.01,  0.0,
+      0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.0,   0.015]
+
+    # Initial estimate covariance — how uncertain the initial state is
+    # TUNE: Larger values = less confidence in starting at origin, faster convergence
+    initial_estimate_covariance: [
+      1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+      0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+      0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+      0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+      0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+      0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+      0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+      0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+      0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,  0.0,
+      0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,  0.0,
+      0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,  0.0,
+      0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,  0.0,
+      0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,  0.0,
+      0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9, 0.0,
+      0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  0.0,  1e-9]
+
+    # No lagged data for local EKF (all inputs are low-latency)
+    smooth_lagged_data: false

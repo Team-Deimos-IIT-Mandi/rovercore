@@ -26,6 +26,11 @@ install(
     scripts/slip_detector_node.py
     scripts/gps_gating_node.py
     scripts/zupt_node.py
+    scripts/gps_driver_node.py
+    scripts/icm20948_driver_node.py
+    scripts/mtf01_driver_node.py
+    scripts/joint_state_restamper.py
+    scripts/joy_teleop.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

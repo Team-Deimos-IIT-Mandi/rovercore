@@ -6,7 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /RobotModel1
-        - /LaserScan1
       Splitter Ratio: 0.5
     Tree Height: 600
   - Class: rviz_common/Views
@@ -59,17 +58,17 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz_default_plugins/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: true
       Marker Scale: 0.5
       Name: TF
-      Show Arrows: true
+      Show Arrows: false
       Show Axes: true
-      Show Names: true
+      Show Names: false
       Update Interval: 0
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -101,20 +100,6 @@ Visualization Manager:
         Value: /scan
       Use Fixed Frame: true
       Use rainbow: false
-      Value: true
-    - Class: rviz_default_plugins/Image
-      Enabled: true
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Camera
-      Normalize Range: true
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /rgbd_camera/image
       Value: true
     - Alpha: 1
       Class: rviz_default_plugins/Map
@@ -219,10 +204,123 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /waypoints_marker
       Value: true
+    # ── Camera feeds ──────────────────────────────────────────────────────────
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: "FRONT RGB"
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /cam/front/image_raw
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: "OPTICAL Depth"
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /rgbd_camera/image
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: "Front-Left"
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /cam/front_left/image_raw
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: "Front-Right"
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /cam/front_right/image_raw
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: "Left"
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /cam/left/image_raw
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: "Right"
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /cam/right/image_raw
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: "Rear"
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /cam/rear/image_raw
+      Value: true
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: "Science"
+      Normalize Range: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /cam/science/image_raw
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: base_link
+    Fixed Frame: odom
     Frame Rate: 30
   Name: root
   Tools:
@@ -284,17 +382,65 @@ Visualization Manager:
       Yaw: 0
     Saved: ~
 Window Geometry:
-  Camera:
-    collapsed: false
   Displays:
     collapsed: false
-  Height: 900
+  Height: 1080
   Hide Left Dock: false
   Hide Right Dock: true
   Selection:
     collapsed: false
   Views:
     collapsed: true
-  Width: 1500
-  X: 100
-  Y: 100
+  Width: 1920
+  X: 0
+  Y: 0
+  # Camera image panels — horizontal strip at bottom, FRONT RGB centred (2× width)
+  # Order L→R: Front-Left | Left | Rear | [FRONT RGB wide] | Science | Right | Front-Right | OPTICAL Depth
+  "FRONT RGB":
+    collapsed: false
+    Height: 320
+    Width: 300
+    X: 805
+    Y: 760
+  "Front-Left":
+    collapsed: false
+    Height: 320
+    Width: 170
+    X: 280
+    Y: 760
+  "Left":
+    collapsed: false
+    Height: 320
+    Width: 170
+    X: 455
+    Y: 760
+  "Rear":
+    collapsed: false
+    Height: 320
+    Width: 170
+    X: 630
+    Y: 760
+  "Science":
+    collapsed: false
+    Height: 320
+    Width: 170
+    X: 1110
+    Y: 760
+  "Right":
+    collapsed: false
+    Height: 320
+    Width: 170
+    X: 1285
+    Y: 760
+  "Front-Right":
+    collapsed: false
+    Height: 320
+    Width: 170
+    X: 1460
+    Y: 760
+  "OPTICAL Depth":
+    collapsed: false
+    Height: 320
+    Width: 170
+    X: 1635
+    Y: 760
