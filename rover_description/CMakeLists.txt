@@ -13,6 +13,7 @@ find_package(ament_cmake REQUIRED)
 
 install(
   PROGRAMS
+    scripts/fuel_trail_follower.py #adding the fuel_trail_follower.py
     scripts/teleop.py
     scripts/cmd_vel_relay.py
     scripts/aruco_detection.py
