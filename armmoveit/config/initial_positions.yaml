@@ -1,0 +1,13 @@
+# Default initial positions for rover_with_arm's ros2_control fake system
+
+initial_positions:
+  claw1-slide: 0
+  claw2-slide: 0
+  finger1-rotate: 0
+  finger2-rotate: 0
+  gripper-wrist: 0
+  link_1: 0
+  link_2: 0
+  link_3: 0
+  wrist_1: 0
+  z_axis: 0

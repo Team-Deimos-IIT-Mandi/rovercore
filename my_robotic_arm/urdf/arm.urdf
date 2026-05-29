@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="arm_gripper_urdf">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.0603212602811141 0.0650115074142707 0.02162446729854"
+        rpy="0 0 0" />
+      <mass
+        value="0.50142029465297" />
+      <inertia
+        ixx="0.000319514636903112"
+        ixy="-7.87438279933821E-08"
+        ixz="-3.28639901204E-07"
+        iyy="0.000333118854517782"
+        iyz="-1.2582250163801E-08"
+        izz="0.000510935815274996" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="zaxis">
+    <inertial>
+      <origin
+        xyz="-0.00716005792070847 0.00404721155954859 0.0365015581064805"
+        rpy="0 0 0" />
+      <mass
+        value="1.33461322322797" />
+      <inertia
+        ixx="0.00294407502659064"
+        ixy="7.60099411489531E-05"
+        ixz="1.20714449731523E-05"
+        iyy="0.00302546474877606"
+        iyz="-7.39450020622318E-06"
+        izz="0.00523883860594506" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/zaxis.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/zaxis.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="z_axis"
+    type="revolute">
+    <origin
+      xyz="0.0211020680489503 0.0649999999999998 0.0950000000000002"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="zaxis" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="6.24"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link1">
+    <inertial>
+      <origin
+        xyz="0.0342960393506419 0.0650866615949618 0.260139710834608"
+        rpy="0 0 0" />
+      <mass
+        value="0.471717784430801" />
+      <inertia
+        ixx="0.0048215045864105"
+        ixy="-2.95077784158004E-09"
+        ixz="-0.000442320588912317"
+        iyy="0.00469876738868576"
+        iyz="-1.91396301469037E-09"
+        izz="0.000540612480368946" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link_1"
+    type="revolute">
+    <origin
+      xyz="0.0717427736589908 -0.118676975137196 0.0429999999999999"
+      rpy="0 0 -0.539222444193772" />
+    <parent
+      link="zaxis" />
+    <child
+      link="link1" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0.52"
+      upper="2.2"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link2">
+    <inertial>
+      <origin
+        xyz="-0.0111842896220878 0.0390244957145194 0.0568810553641114"
+        rpy="0 0 0" />
+      <mass
+        value="0.56505728937743" />
+      <inertia
+        ixx="0.000736827471110781"
+        ixy="-1.02697637259464E-10"
+        ixz="5.1414535348473E-05"
+        iyy="0.00112037157600434"
+        iyz="5.72166182908804E-12"
+        izz="0.00102896352167454" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link_2"
+    type="revolute">
+    <origin
+      xyz="0.0463762994663664 0.0259999999999979 0.447603886095535"
+      rpy="0 0.103241752091021 0" />
+    <parent
+      link="link1" />
+    <child
+      link="link2" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1"
+      upper="1"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link3">
+    <inertial>
+      <origin
+        xyz="-0.15229382933397 0.000156854221345315 0.00310777146765556"
+        rpy="0 0 0" />
+      <mass
+        value="0.878471466072429" />
+      <inertia
+        ixx="0.000362156422178765"
+        ixy="-3.12472541195768E-11"
+        ixz="-2.12308143553033E-07"
+        iyy="0.00439952004825401"
+        iyz="-3.79063978101467E-08"
+        izz="0.00435043337988437" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="link_3"
+    type="revolute">
+    <origin
+      xyz="0.067242668214866 0.0390000000000044 0.0871856567347071"
+      rpy="0.468343930204125 -0.299928960515459 0" />
+    <parent
+      link="link2" />
+    <child
+      link="link3" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      lower="0"
+      upper="6.28"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="wrist1">
+    <inertial>
+      <origin
+        xyz="-0.00151017412525437 0.0524789597245494 0.0116604873944556"
+        rpy="0 0 0" />
+      <mass
+        value="0.148650042219505" />
+      <inertia
+        ixx="3.34444822230191E-05"
+        ixy="5.00779885062825E-10"
+        ixz="8.60606304733012E-07"
+        iyy="3.64087946207514E-05"
+        iyz="-5.3279704581146E-10"
+        izz="2.6910358122397E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/wrist1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/wrist1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wrist_1"
+    type="revolute">
+    <origin
+      xyz="-0.544000000000017 -0.0524800000000021 0"
+      rpy="0 0 0" />
+    <parent
+      link="link3" />
+    <child
+      link="wrist1" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="gripper-base">
+    <inertial>
+      <origin
+        xyz="3.49703257014611E-05 -0.0166081836484884 0.00245791883868079"
+        rpy="0 0 0" />
+      <mass
+        value="0.413549848316491" />
+      <inertia
+        ixx="0.000518022183409299"
+        ixy="-2.99453705129393E-07"
+        ixz="-6.16065422654147E-07"
+        iyy="0.00324028081480373"
+        iyz="-1.37365900028011E-05"
+        izz="0.00283649097301424" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/gripper-base.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.25" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/gripper-base.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="gripper-wrist"
+    type="continuous">
+    <origin
+      xyz="-0.00704202903975437 0.0524785020943702 0.0543441409794076"
+      rpy="-1.65253448174348 0.0997346165681447 2.45313293712552" />
+    <parent
+      link="wrist1" />
+    <child
+      link="gripper-base" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="claw1">
+    <inertial>
+      <origin
+        xyz="0.02549326292166 -0.0438997271227292 -0.00962893950260642"
+        rpy="0 0 0" />
+      <mass
+        value="0.0969827563371482" />
+      <inertia
+        ixx="1.81542355458617E-05"
+        ixy="-3.4227080855438E-07"
+        ixz="-1.12963395426777E-06"
+        iyy="3.24587841714838E-05"
+        iyz="2.45205523852197E-08"
+        izz="2.18715307415096E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/claw1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.698039215686274 0.698039215686274 0.698039215686274 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/claw1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="claw1-slide"
+    type="prismatic">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="gripper-base" />
+    <child
+      link="claw1" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.053"
+      upper="0.053"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="finger1">
+    <inertial>
+      <origin
+        xyz="-0.00709221732505511 -0.0522490411599353 0.000137460998135976"
+        rpy="0 0 0" />
+      <mass
+        value="0.0165732372278614" />
+      <inertia
+        ixx="5.35494385454589E-06"
+        ixy="-2.42629156140275E-07"
+        ixz="-4.65175481726915E-09"
+        iyy="4.13132761397344E-06"
+        iyz="-1.31654832542712E-08"
+        izz="1.59037915575076E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/finger1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.698039215686274 0.698039215686274 0.698039215686274 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/finger1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="finger1-rotate"
+    type="revolute">
+    <origin
+      xyz="0.0086586 -0.060063 0.0013876"
+      rpy="0 0 0" />
+    <parent
+      link="claw1" />
+    <child
+      link="finger1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0.769"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="claw2">
+    <inertial>
+      <origin
+        xyz="-0.0252889521008238 -0.0441107341461657 0.0109916971832964"
+        rpy="0 0 0" />
+      <mass
+        value="0.0983378412337925" />
+      <inertia
+        ixx="1.8458831390781E-05"
+        ixy="3.42267710596492E-07"
+        ixz="-1.12964259635216E-06"
+        iyy="3.27633747747371E-05"
+        iyz="-2.45175752188469E-08"
+        izz="2.18756138577448E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/claw2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.776470588235294 0.756862745098039 0.737254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/claw2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="claw2-slide"
+    type="prismatic">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="gripper-base" />
+    <child
+      link="claw2" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.053"
+      upper="0.053"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="finger2">
+    <inertial>
+      <origin
+        xyz="0.0066304555915801 -0.0523726517355783 -5.96001071877066E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.0165732374112398" />
+      <inertia
+        ixx="5.39025640808696E-06"
+        ixy="1.93164512321618E-07"
+        ixz="-2.33368356203983E-09"
+        iyy="4.09601481363207E-06"
+        iyz="1.38478243688029E-08"
+        izz="1.59037914292937E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/finger2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.698039215686274 0.698039215686274 0.698039215686274 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://arm_gripper_urdf/meshes/finger2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="finger2-rotate"
+    type="revolute">
+    <origin
+      xyz="-0.0086586 -0.060063 0.00010471"
+      rpy="0 0 0" />
+    <parent
+      link="claw2" />
+    <child
+      link="finger2" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="0.769"
+      effort="0"
+      velocity="0" />
+  </joint>
+</robot>

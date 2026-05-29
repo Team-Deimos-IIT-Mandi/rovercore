@@ -1,0 +1,57 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    gripper_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    rover_base_controller:
+      type: diff_drive_controller/DiffDriveController
+
+arm_controller:
+  ros__parameters:
+    joints:
+      - z_axis
+      - link_1
+      - link_2
+      - link_3
+      - wrist_1
+      - gripper-wrist
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+
+gripper_controller:
+  ros__parameters:
+    joints:
+      
+      - claw1-slide
+      - claw2-slide
+      - finger1-rotate
+      - finger2-rotate
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+
+rover_base_controller:
+  ros__parameters:
+    left_wheel_names: ["LF_joint", "LB_joint"]
+    right_wheel_names: ["RF_joint", "RB_joint"]
+    wheel_separation: 0.5874
+    wheel_radius: 0.11
+    use_stamped_vel: false
+    publish_rate: 50.0
+    odom_frame_id: odom
+    base_frame_id: base_link
+    pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
+    twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
