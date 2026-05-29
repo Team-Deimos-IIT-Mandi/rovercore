@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-e6bb5fbb01f3dc442cca.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "moveit_ros_robot_interaction",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "moveit_robot_interaction::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-moveit_robot_interaction-Release-a5b510cfd84d7979e70b.json",
+					"name" : "moveit_robot_interaction",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "moveit_ros_robot_interaction_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-moveit_ros_robot_interaction_uninstall-Release-c62ad9af62ce11d7a5f5.json",
+					"name" : "moveit_ros_robot_interaction_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Release-e33235a98fd8a0a51e9d.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/deepak/ws_moveit/build/moveit_ros_robot_interaction",
+		"source" : "/home/deepak/ws_moveit/src/moveit2/moveit_ros/robot_interaction"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

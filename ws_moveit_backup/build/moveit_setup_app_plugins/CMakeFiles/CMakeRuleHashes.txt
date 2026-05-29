@@ -1,0 +1,5 @@
+# Hashes of file build rules.
+bfd806ccf438eeb6194b69ff7a9faa96 CMakeFiles/moveit_setup_app_plugins_autogen
+573a3757c42bf5ea29acc122f92e7e7e CMakeFiles/moveit_setup_app_plugins_uninstall
+baa4a6cf686e521355a730edc88c5e36 include/moveit_setup_app_plugins/moc_launches_widget.cpp
+95477679495e95bf576599bd4a1a652a include/moveit_setup_app_plugins/moc_perception_widget.cpp

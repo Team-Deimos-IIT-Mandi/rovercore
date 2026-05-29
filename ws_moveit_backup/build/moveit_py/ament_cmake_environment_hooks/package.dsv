@@ -1,0 +1,4 @@
+source;share/moveit_py/local_setup.bash
+source;share/moveit_py/local_setup.dsv
+source;share/moveit_py/local_setup.sh
+source;share/moveit_py/local_setup.zsh

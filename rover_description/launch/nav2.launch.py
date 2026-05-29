@@ -48,7 +48,7 @@ def generate_launch_description():
     )
 
     # ---------------------------------------------------------------------------
-    # depth_image_proc: convert /rgbd_camera/image (depth) → /rgbd_camera/points
+    # depth_image_proc: convert /rgbd_camera/depth_image → /rgbd_camera/points
     #
     # NOTE: This node also requires a CameraInfo message on the topic
     #       /rgbd_camera/camera_info.  Make sure the Gazebo bridge publishes that
@@ -57,15 +57,18 @@ def generate_launch_description():
     #       in sim.launch.py) or that a camera_info_manager node supplies it.
     # ---------------------------------------------------------------------------
     depth_to_pointcloud = Node(
-        package='depth_image_proc',
-        executable='point_cloud_xyz_node',
-        name='depth_image_to_pointcloud',
-        output='screen',
-        parameters=[{'use_sim_time': use_sim_time}],
-        remappings=[
-            ('image_rect', '/rgbd_camera/image'),
-            ('camera_info', '/rgbd_camera/camera_info'),
-            ('points', '/rgbd_camera/points'),
+    package='depth_image_proc',
+    executable='point_cloud_xyz_node',
+    name='depth_image_to_pointcloud',
+    output='screen',
+    parameters=[{'use_sim_time': use_sim_time}],
+    remappings=[
+        # Point this to the depth topic published by sim.launch.py
+        ('image_rect', '/rgbd_camera/depth_image'), 
+        
+        ('camera_info', '/rgbd_camera/camera_info'), 
+        
+        ('points', '/rgbd_camera/points'),
         ],
     )
 

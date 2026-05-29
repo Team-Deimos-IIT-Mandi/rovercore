@@ -32,7 +32,14 @@ def _srb(name):
 
 WORLDS = {
     'depot':      {'world_name': 'depot',      'z': '0.50', 'file': None},   # resolved at runtime from pkg_share
-    'mars':       {'world_name': 'mars',       'z': '0.50', 'file': _srb('mars.sdf')},
+    
+    # UPDATED: Now points to your local mars.world.sdf and uses the "mars_world" SDF tag
+    'mars':       {
+        'world_name': 'mars_world', 
+        'z': '0.5', 
+        'file': os.path.join(get_package_share_directory(_PKG), 'worlds', 'mars.world.sdf')
+    },
+    
     'moon':       {'world_name': 'moon',       'z': '0.50', 'file': _srb('moon.sdf')},
     'mars_array': {'world_name': 'mars_array', 'z': '0.50', 'file': _srb('mars_array.sdf')},
     'moon_array': {'world_name': 'moon_array', 'z': '0.50', 'file': _srb('moon_array.sdf')},
@@ -66,6 +73,7 @@ def launch_setup(context, *args, **kwargs):
     )
     gz_resource_path = os.pathsep.join(filter(os.path.isdir, [
         os.path.dirname(pkg_share),   # rover meshes / models
+        os.path.join(pkg_share, 'models'), # rover_description models (e.g. gale_crater_patch2)
         srb_assets_cache,             # martian_surface*, martian_rock*, lunar_rock*
     ]))
 
@@ -131,8 +139,8 @@ def launch_setup(context, *args, **kwargs):
             f'{wp("link/FLOW_CAM/sensor/range_sensor/scan")}@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
             # RGBD depth camera
             '/rgbd_camera/image@sensor_msgs/msg/Image[ignition.msgs.Image',
+            '/rgbd_camera/depth_image@sensor_msgs/msg/Image[ignition.msgs.Image', # Add this line
             '/rgbd_camera/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
-            # RGB cameras (publish directly to their <topic> names)
             '/cam/front/image_raw@sensor_msgs/msg/Image[ignition.msgs.Image',
             '/cam/front/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
             '/cam/front_left/image_raw@sensor_msgs/msg/Image[ignition.msgs.Image',
@@ -189,6 +197,7 @@ def launch_setup(context, *args, **kwargs):
 
     return [
         SetEnvironmentVariable('IGN_GAZEBO_RESOURCE_PATH', gz_resource_path),
+        SetEnvironmentVariable('GZ_SIM_RESOURCE_PATH', gz_resource_path),
         node_rsp,
         node_restamper,
         gazebo_launch,

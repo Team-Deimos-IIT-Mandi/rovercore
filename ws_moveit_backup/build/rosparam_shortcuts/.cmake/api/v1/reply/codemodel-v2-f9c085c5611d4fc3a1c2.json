@@ -1,0 +1,97 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-13ebc0e8519b57861395.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "rosparam_shortcuts",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "rosparam_shortcuts::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-rosparam_shortcuts-e5b532417437ae08fa45.json",
+					"name" : "rosparam_shortcuts",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "rosparam_shortcuts_example::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-rosparam_shortcuts_example-68c38a8a0cd68b6b7505.json",
+					"name" : "rosparam_shortcuts_example",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "rosparam_shortcuts_node_parameters_example::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-rosparam_shortcuts_node_parameters_example-dca05d13978888ca6814.json",
+					"name" : "rosparam_shortcuts_node_parameters_example",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "rosparam_shortcuts_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-rosparam_shortcuts_uninstall-04523a5e775e45ac7793.json",
+					"name" : "rosparam_shortcuts_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-2275c7679541b8da83e4.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/deepak/ws_moveit/build/rosparam_shortcuts",
+		"source" : "/home/deepak/ws_moveit/src/rosparam_shortcuts"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

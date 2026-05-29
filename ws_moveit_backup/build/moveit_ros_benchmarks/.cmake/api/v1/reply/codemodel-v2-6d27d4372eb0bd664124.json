@@ -1,0 +1,97 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-666a2c2e5a57086d378a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "moveit_ros_benchmarks",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "moveit_combine_predefined_poses_benchmark::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-moveit_combine_predefined_poses_benchmark-Release-86f38677de4e4eec48f8.json",
+					"name" : "moveit_combine_predefined_poses_benchmark",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "moveit_ros_benchmarks::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-moveit_ros_benchmarks-Release-6446097990656769dd2a.json",
+					"name" : "moveit_ros_benchmarks",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "moveit_ros_benchmarks_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-moveit_ros_benchmarks_uninstall-Release-102f847b8f0af4cb3c61.json",
+					"name" : "moveit_ros_benchmarks_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "moveit_run_benchmark::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-moveit_run_benchmark-Release-20e8cc32c98c257781bf.json",
+					"name" : "moveit_run_benchmark",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Release-fdef47a289ea82bc3451.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/deepak/ws_moveit/build/moveit_ros_benchmarks",
+		"source" : "/home/deepak/ws_moveit/src/moveit2/moveit_ros/benchmarks"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

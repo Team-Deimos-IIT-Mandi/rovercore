@@ -17,6 +17,8 @@ install(
     scripts/cmd_vel_relay.py
     scripts/aruco_detection.py
     scripts/spiral_search.py
+    scripts/mission_coordinator.py
+    scripts/task_fuel_trail.py
     scripts/mission_initializer.py
     scripts/robot_description_publisher.py
     scripts/optical_flow_node.py
@@ -31,11 +33,17 @@ install(
     scripts/mtf01_driver_node.py
     scripts/joint_state_restamper.py
     scripts/joy_teleop.py
+    scripts/qos_relay.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
 install(
   DIRECTORY urdf meshes launch rviz config worlds maps models
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(
+  FILES model.config
   DESTINATION share/${PROJECT_NAME}
 )
 

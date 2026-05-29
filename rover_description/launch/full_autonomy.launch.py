@@ -2,7 +2,7 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
@@ -13,12 +13,32 @@ def generate_launch_description():
     pkg_share = get_package_share_directory('rover_description')
 
     # ---------------------------------------------------------------------------
+    # Resource Path Configuration (Gazebo Harmonic / Gz Sim 8)
+    # ---------------------------------------------------------------------------
+    # Locate the space_robotics_gz_envs asset cache
+    srb_assets_cache = os.path.normpath(
+        os.path.join(os.path.dirname(__file__), '..', '..', '..', '..',
+                     'src', 'space_robotics_gz_envs', 'assets', 'cache')
+    )
+    
+    # Combine the workspace install directories and local model folders
+    gz_resource_path = os.pathsep.join(filter(os.path.isdir, [
+        os.path.dirname(pkg_share),        # rover meshes / standard package models
+        os.path.join(pkg_share, 'models'), # rover_description custom models
+        srb_assets_cache,                  # procgen martian/lunar rocks
+    ]))
+
+    # Export variables immediately so all child launch files and nodes inherit them
+    set_gz_resource_path = SetEnvironmentVariable('GZ_SIM_RESOURCE_PATH', gz_resource_path)
+    set_ign_resource_path = SetEnvironmentVariable('IGN_GAZEBO_RESOURCE_PATH', gz_resource_path)
+
+    # ---------------------------------------------------------------------------
     # Launch arguments
     # ---------------------------------------------------------------------------
     world_arg = DeclareLaunchArgument(
         'world',
-        default_value=os.path.join(pkg_share, 'worlds', 'empty.world'),
-        description='Path to Gazebo world file'
+        default_value='depot',
+        description='Simulation world key (choices: depot, mars, moon, mars_array, moon_array)'
     )
 
     arm_arg = DeclareLaunchArgument(
@@ -81,34 +101,9 @@ def generate_launch_description():
         output='screen',
         parameters=[{'use_sim_time': True}],
     )
-
     # ---------------------------------------------------------------------------
-    # 5. Mission nodes
+    # The Spinal Cord: Relays standard cmd_vel to Gazebo's hardware topic
     # ---------------------------------------------------------------------------
-    mission_initializer = Node(
-        package='rover_description',
-        executable='mission_initializer.py',
-        name='mission_initializer',
-        output='screen',
-        parameters=[{'use_sim_time': True}],
-    )
-
-    spiral_search = Node(
-        package='rover_description',
-        executable='spiral_search.py',
-        name='spiral_search',
-        output='screen',
-        parameters=[{'use_sim_time': True}],
-    )
-
-    aruco_detection = Node(
-        package='rover_description',
-        executable='aruco_detection.py',
-        name='aruco_detection',
-        output='screen',
-        parameters=[{'use_sim_time': True}],
-    )
-
     cmd_vel_relay = Node(
         package='rover_description',
         executable='cmd_vel_relay.py',
@@ -117,7 +112,59 @@ def generate_launch_description():
         parameters=[{'use_sim_time': True}],
     )
 
+    # ---------------------------------------------------------------------------
+    # 5. Mission nodes
+    # ---------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------
+    # TF Tape: Connects Gazebo's proprietary camera frame to the ROS 2 base_link
+    # ---------------------------------------------------------------------------
+    # 1. Places the camera on the rover and pitches it down 0.5 rad
+    camera_mount_tf = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='camera_mount_tf',
+        arguments=['0.3', '0', '0.4', '0', '0.0', '0', 'base_link', 'camera_mount_link'],
+        parameters=[{'use_sim_time': True}],
+    )
+
+    # 2. Rotates the mount link to the standard Optical Frame (Z forward, X right, Y down)
+    camera_optical_tf = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='camera_optical_tf',
+        arguments=['0', '0', '0', '-1.5708', '0', '-1.5708', 'camera_mount_link', 'Rover/base_link/rgbd_camera'],
+        parameters=[{'use_sim_time': True}],
+    )
+    # THE BRAIN: The Action Client talking to Nav2
+    mission_coordinator = Node(
+        package='rover_description',
+        executable='mission_coordinator.py',
+        name='mission_coordinator',
+        output='screen',
+        parameters=[{
+            'use_sim_time': True,
+            'wp_astronaut': [16.0, -12.0],
+            'wp_oxygen': [23.8, -6.0],
+            'wp_base': [-2.0, 3.5]
+        }],
+    )
+
+    # THE EYES: Your OpenCV script
+    vision_worker = Node(
+        package='rover_description',
+        executable='task_fuel_trail.py', 
+        name='vision_worker',
+        output='screen',
+        parameters=[{
+            'use_sim_time': True,
+            'linear_speed': 0.2,
+            'kp_line': 0.005
+        }],
+    )
+
     return LaunchDescription([
+        set_gz_resource_path,
+        set_ign_resource_path,
         world_arg,
         arm_arg,
         sim_launch,
@@ -125,8 +172,9 @@ def generate_launch_description():
         nav2_launch,
         # watchdog,
         # slope_detector,
-        mission_initializer,
-        spiral_search,
-        aruco_detection,
         cmd_vel_relay,
+        mission_coordinator,
+        vision_worker,
+        camera_mount_tf,
+        camera_optical_tf,
     ])

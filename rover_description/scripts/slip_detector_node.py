@@ -29,6 +29,8 @@ class SlipDetectorNode(Node):
         self.slip_cov = self.get_parameter('slip_cov').value
 
         self.flow_vx = 0.0
+        self.last_flow_time = self.get_clock().now()
+        self.flow_active = False
 
         self.sub_flow = self.create_subscription(
             Odometry, '/optical_flow/corrected', self.flow_cb, 10)
@@ -40,14 +42,18 @@ class SlipDetectorNode(Node):
 
     def flow_cb(self, msg: Odometry):
         self.flow_vx = msg.twist.twist.linear.x
+        self.last_flow_time = self.get_clock().now()
+        self.flow_active = True
 
     def odom_cb(self, msg: Odometry):
         wheel_vx = msg.twist.twist.linear.x
 
+        time_since_flow = (self.get_clock().now() - self.last_flow_time).nanoseconds / 1e9
+
         # Slip = wheels commanding motion but rover not moving.
         # If wheels report near-zero, no slip possible regardless of flow noise.
         MIN_WHEEL_SPEED = 0.05
-        if abs(wheel_vx) < MIN_WHEEL_SPEED:
+        if abs(wheel_vx) < MIN_WHEEL_SPEED or not self.flow_active or time_since_flow > 0.5:
             slip_ratio = 0.0
         else:
             denom = max(abs(wheel_vx), abs(self.flow_vx), 0.01)
