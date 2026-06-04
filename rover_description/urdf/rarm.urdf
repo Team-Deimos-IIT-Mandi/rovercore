@@ -466,7 +466,7 @@
     </collision>
   </link>
   <joint name="CAM_FRONT_joint" type="fixed">
-    <origin xyz="0.07 0.0 -0.22" rpy="0 1.5708 0"/>
+  <origin xyz="0.07 0.0 -0.22" rpy="-1.5708 0 -1.5708"/>
     <parent link="chassis_link"/>
     <child link="CAM_FRONT"/>
   </joint>
@@ -497,7 +497,7 @@
     </collision>
   </link>
   <joint name="CAM_FL_joint" type="fixed">
-    <origin xyz="0.07 0.20 -0.18" rpy="1.5708 0.7854 1.5708"/>
+  <origin xyz="0.07 0.20 -0.18" rpy="-1.5708 -0.7854 -1.5708"/>
     <parent link="chassis_link"/>
     <child link="CAM_FL"/>
   </joint>
@@ -528,7 +528,7 @@
     </collision>
   </link>
   <joint name="CAM_FR_joint" type="fixed">
-    <origin xyz="0.07 -0.20 -0.18" rpy="-1.5708 0.7854 -1.5708"/>
+  <origin xyz="0.07 -0.20 -0.18" rpy="-1.5708 0.7854 -1.5708"/>
     <parent link="chassis_link"/>
     <child link="CAM_FR"/>
   </joint>
@@ -559,7 +559,7 @@
     </collision>
   </link>
   <joint name="CAM_LEFT_joint" type="fixed">
-    <origin xyz="0.04 0.26 0.15" rpy="1.5708 0 1.5708"/>
+  <origin xyz="0.04 0.26 0.15" rpy="0 1.5708 0"/>
     <parent link="chassis_link"/>
     <child link="CAM_LEFT"/>
   </joint>
@@ -590,7 +590,7 @@
     </collision>
   </link>
   <joint name="CAM_RIGHT_joint" type="fixed">
-    <origin xyz="0.04 -0.26 0.15" rpy="-1.5708 0 -1.5708"/>
+  <origin xyz="0.04 -0.26 0.15" rpy="0 -1.5708 -3.1416"/>
     <parent link="chassis_link"/>
     <child link="CAM_RIGHT"/>
   </joint>
@@ -621,7 +621,7 @@
     </collision>
   </link>
   <joint name="CAM_REAR_joint" type="fixed">
-    <origin xyz="0.07 0.0 0.28" rpy="0 -1.5708 -3.1416"/>
+  <origin xyz="0.07 0.0 0.28" rpy="1.5708 0 1.5708"/>
     <parent link="chassis_link"/>
     <child link="CAM_REAR"/>
   </joint>
@@ -652,7 +652,7 @@
     </collision>
   </link>
   <joint name="CAM_SCIENCE_joint" type="fixed">
-    <origin xyz="-0.12 0.0 -0.20" rpy="0 0 1.5708"/>
+  <origin xyz="-0.12 0.0 -0.20" rpy="-1.5708 0 -1.5708"/>
     <parent link="chassis_link"/>
     <child link="CAM_SCIENCE"/>
   </joint>
