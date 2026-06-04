@@ -687,7 +687,9 @@
     <plugin filename="ignition-gazebo-imu-system" name="ignition::gazebo::systems::Imu">
     </plugin>
   </gazebo>
+
  
+
   <gazebo reference="IMU">
     <sensor name="imu_sensor" type="imu">
       <always_on>true</always_on>
