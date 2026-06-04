@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot name="rover_with_arm">
-
   <link name="base_link" />
-
   <joint name="base_to_chassis_joint" type="fixed">
     <origin xyz="0 0 0.43083" rpy="0 -1.5708 0" />
     <parent link="base_link" />
@@ -48,7 +46,6 @@
       </geometry>
     </collision>
   </link>
-
   <link
     name="RF">
     <inertial>
@@ -273,7 +270,6 @@
       effort="1000"
       velocity="10" />
   </joint>
-
   <link
     name="IMU">
     <inertial>
@@ -443,7 +439,6 @@
     <child link="FLOW_CAM"/>
     <axis xyz="0 0 0"/>
   </joint>
-
   <link name="CAM_FRONT">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -475,7 +470,6 @@
     <parent link="chassis_link"/>
     <child link="CAM_FRONT"/>
   </joint>
-
   <link name="CAM_FL">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -507,7 +501,6 @@
     <parent link="chassis_link"/>
     <child link="CAM_FL"/>
   </joint>
-
   <link name="CAM_FR">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -539,7 +532,6 @@
     <parent link="chassis_link"/>
     <child link="CAM_FR"/>
   </joint>
-
   <link name="CAM_LEFT">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -571,7 +563,6 @@
     <parent link="chassis_link"/>
     <child link="CAM_LEFT"/>
   </joint>
-
   <link name="CAM_RIGHT">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -603,7 +594,6 @@
     <parent link="chassis_link"/>
     <child link="CAM_RIGHT"/>
   </joint>
-
   <link name="CAM_REAR">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -635,7 +625,6 @@
     <parent link="chassis_link"/>
     <child link="CAM_REAR"/>
   </joint>
-
   <link name="CAM_SCIENCE">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -667,7 +656,6 @@
     <parent link="chassis_link"/>
     <child link="CAM_SCIENCE"/>
   </joint>
-
   <gazebo reference="base_link">
     <material>Gazebo/Pink</material>
   </gazebo>
@@ -695,22 +683,11 @@
     <mu2>0.05</mu2>
     <material>Gazebo/Red</material>
   </gazebo>
-
- 
-
   <gazebo>
     <plugin filename="ignition-gazebo-imu-system" name="ignition::gazebo::systems::Imu">
     </plugin>
   </gazebo>
-
-  <!-- <gazebo>
-    <plugin filename="ignition-gazebo-sensors-system" name="ignition::gazebo::systems::Sensors">
-      <render_engine>ogre2</render_engine>
-    </plugin>
-  </gazebo> -->
-
  
-
   <gazebo reference="IMU">
     <sensor name="imu_sensor" type="imu">
       <always_on>true</always_on>
@@ -730,7 +707,6 @@
       </imu>
     </sensor>
   </gazebo>
-
   <gazebo reference="GPS">
     <sensor name="navsat_sensor" type="navsat">
       <always_on>true</always_on>
@@ -738,12 +714,13 @@
       <topic>gps/fix</topic>
     </sensor>
   </gazebo>
-
+  <!-- FIXED: Added <pose> to rotate sensor frame so +X (Gazebo optical axis) aligns with link +Y (lens direction) -->
   <gazebo reference="OPTICAL">
     <sensor name="rgbd_camera" type="rgbd_camera">
       <always_on>true</always_on>
       <update_rate>10</update_rate>
       <topic>rgbd_camera</topic>
+      <pose>0 0 0 0 0 1.5708</pose>
       <camera>
         <horizontal_fov>1.0472</horizontal_fov>
         <image>
@@ -764,12 +741,13 @@
       </depth_camera>
     </sensor>
   </gazebo>
-
+  <!-- FIXED: Added <pose> to align sensor optical axis with lens direction -->
   <gazebo reference="CAM_FRONT">
     <sensor name="cam_front" type="camera">
       <always_on>true</always_on>
       <update_rate>5</update_rate>
       <topic>cam/front/image_raw</topic>
+      <pose>0 0 0 0 0 1.5708</pose>
       <camera>
         <horizontal_fov>1.3963</horizontal_fov>
         <image><width>1280</width><height>720</height><format>R8G8B8</format></image>
@@ -777,12 +755,13 @@
       </camera>
     </sensor>
   </gazebo>
-
+  <!-- FIXED: Added <pose> to align sensor optical axis with lens direction -->
   <gazebo reference="CAM_FL">
     <sensor name="cam_fl" type="camera">
       <always_on>true</always_on>
       <update_rate>10</update_rate>
       <topic>cam/front_left/image_raw</topic>
+      <pose>0 0 0 0 0 1.5708</pose>
       <camera>
         <horizontal_fov>1.5708</horizontal_fov>
         <image><width>640</width><height>480</height><format>R8G8B8</format></image>
@@ -790,12 +769,13 @@
       </camera>
     </sensor>
   </gazebo>
-
+  <!-- FIXED: Added <pose> to align sensor optical axis with lens direction -->
   <gazebo reference="CAM_FR">
     <sensor name="cam_fr" type="camera">
       <always_on>true</always_on>
       <update_rate>10</update_rate>
       <topic>cam/front_right/image_raw</topic>
+      <pose>0 0 0 0 0 1.5708</pose>
       <camera>
         <horizontal_fov>1.5708</horizontal_fov>
         <image><width>640</width><height>480</height><format>R8G8B8</format></image>
@@ -803,12 +783,13 @@
       </camera>
     </sensor>
   </gazebo>
-
+  <!-- FIXED: Added <pose> to align sensor optical axis with lens direction -->
   <gazebo reference="CAM_LEFT">
     <sensor name="cam_left" type="camera">
       <always_on>true</always_on>
       <update_rate>10</update_rate>
       <topic>cam/left/image_raw</topic>
+      <pose>0 0 0 0 0 1.5708</pose>
       <camera>
         <horizontal_fov>1.5708</horizontal_fov>
         <image><width>640</width><height>480</height><format>R8G8B8</format></image>
@@ -816,25 +797,13 @@
       </camera>
     </sensor>
   </gazebo>
-
+  <!-- FIXED: Added <pose> to align sensor optical axis with lens direction -->
   <gazebo reference="CAM_RIGHT">
     <sensor name="cam_right" type="camera">
       <always_on>true</always_on>
       <update_rate>10</update_rate>
       <topic>cam/right/image_raw</topic>
-      <camera>
-        <horizontal_fov>1.5708</horizontal_fov>
-        <image><width>640</width><height>480</height><format>R8G8B8</format></image>
-        <clip><near>0.1</near><far>50</far></clip>
-      </camera>
-  </sensor>
-  </gazebo>
-
-  <gazebo reference="CAM_REAR">
-    <sensor name="cam_rear" type="camera">
-      <always_on>true</always_on>
-      <update_rate>10</update_rate>
-      <topic>cam/rear/image_raw</topic>
+      <pose>0 0 0 0 0 1.5708</pose>
       <camera>
         <horizontal_fov>1.5708</horizontal_fov>
         <image><width>640</width><height>480</height><format>R8G8B8</format></image>
@@ -842,12 +811,27 @@
       </camera>
     </sensor>
   </gazebo>
-
+  <!-- FIXED: Added <pose> to align sensor optical axis with lens direction -->
+  <gazebo reference="CAM_REAR">
+    <sensor name="cam_rear" type="camera">
+      <always_on>true</always_on>
+      <update_rate>10</update_rate>
+      <topic>cam/rear/image_raw</topic>
+      <pose>0 0 0 0 0 1.5708</pose>
+      <camera>
+        <horizontal_fov>1.5708</horizontal_fov>
+        <image><width>640</width><height>480</height><format>R8G8B8</format></image>
+        <clip><near>0.1</near><far>50</far></clip>
+      </camera>
+    </sensor>
+  </gazebo>
+  <!-- FIXED: Added <pose> to align sensor optical axis with lens direction -->
   <gazebo reference="CAM_SCIENCE">
     <sensor name="cam_science" type="camera">
       <always_on>true</always_on>
       <update_rate>5</update_rate>
       <topic>cam/science/image_raw</topic>
+      <pose>0 0 0 0 0 1.5708</pose>
       <camera>
         <horizontal_fov>1.2217</horizontal_fov>
         <image><width>1280</width><height>720</height><format>R8G8B8</format></image>
@@ -855,12 +839,13 @@
       </camera>
     </sensor>
   </gazebo>
-
+  <!-- FIXED: Added <pose> to align sensor optical axis with lens direction -->
   <gazebo reference="FLOW_CAM">
     <sensor name="flow_camera" type="camera">
       <always_on>true</always_on>
       <update_rate>10</update_rate>
       <topic>flow_cam/image</topic>
+      <pose>0 0 0 0 0 1.5708</pose>
       <camera>
         <horizontal_fov>1.0472</horizontal_fov>
         <image>
@@ -875,13 +860,13 @@
       </camera>
     </sensor>
   </gazebo>
-
+  <!-- FIXED: Changed lidar pose to point downward for height measurement -->
   <gazebo reference="FLOW_CAM">
     <sensor name="range_sensor" type="gpu_lidar">
       <always_on>true</always_on>
       <update_rate>10</update_rate>
       <topic>range/height</topic>
-      <pose>0 0 0 0 0 0</pose>
+      <pose>0 0 0 0 1.5708 0</pose>
       <lidar>
         <scan>
           <horizontal>
@@ -899,13 +884,11 @@
       </lidar>
     </sensor>
   </gazebo>
-
   <joint name="rover_to_arm_joint" type="fixed">
     <origin xyz="0.08 0.0 0.50083" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="arm_base_link" />
   </joint>
-
   <link
     name="arm_base_link">
     <inertial>
@@ -1518,8 +1501,6 @@
       effort="100"
       velocity="10" />
   </joint>
-
-
   <ros2_control name="GazeboSimSystem" type="system">
   <hardware>
     <plugin>gz_ros2_control/GazeboSimSystem</plugin>
@@ -1579,7 +1560,6 @@
       </state_interface>
       <state_interface name="velocity"/>
     </joint>
-
     <joint name="gripper-wrist">
       <command_interface name="position">
         <param name="p">100.0</param>
@@ -1590,7 +1570,6 @@
       </state_interface>
       <state_interface name="velocity"/>
     </joint>
-
     <joint name="claw1-slide">
       <command_interface name="position">
         <param name="p">100.0</param>
@@ -1634,8 +1613,6 @@
       </state_interface>
       <state_interface name="velocity"/>
     </joint>
-
-
     <joint name="LB_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
@@ -1657,20 +1634,13 @@
       <state_interface name="velocity"/>
     </joint>
   </ros2_control>
-
   <gazebo>
     <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
       <parameters>$(find armmoveit)/config/ros2_controllers.yaml</parameters>
-
       <ros>
         <remapping>/rover_base_controller/cmd_vel_unstamped:=/cmd_vel</remapping>
       </ros>
-
       
     </plugin>
   </gazebo>
-
-  
-
-  
 </robot>
