@@ -71,12 +71,12 @@ def generate_launch_description():
         output='screen',
         parameters=[robot_description_dict, sim_time]
     )
-    world_file = os.path.join(armmoveit_pkg, 'worlds', 'agriculture.world')
+    world_file = os.path.join(rover_pkg, 'worlds', 'mars_terrain.world')
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(ros_gz_sim_pkg, 'launch', 'gz_sim.launch.py')
         ),
-        launch_arguments={'gz_args': f'-r empty.sdf'}.items(),
+        launch_arguments={'gz_args': f'-r {world_file}'}.items(),
     )
 
     # ── Upgraded Gazebo Bridge (Clock + All Rover Cameras) ───────────
@@ -113,6 +113,17 @@ def generate_launch_description():
             '/rgbd_camera/image@sensor_msgs/msg/Image[gz.msgs.Image',
             '/rgbd_camera/depth_image@sensor_msgs/msg/Image[gz.msgs.Image',
             '/rgbd_camera/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
+        ],
+        output='screen'
+    )
+
+    # Bridge to forward IMU data from Gazebo to ROS 2
+    imu_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        name='imu_bridge',
+        arguments=[
+            '/imu/data@sensor_msgs/msg/Imu[gz.msgs.IMU'
         ],
         output='screen'
     )
@@ -176,7 +187,7 @@ def generate_launch_description():
     )
 
     # ── PHASE 5: Controllers (Triggered by Spawn) ────────────────────
-    # ── PHASE 5: Controllers (Triggered by Spawn) ────────────────────
+    ## ── PHASE 5: Controllers (Triggered by Spawn + Buffer) ───────────
     jsb = Node(
         package="controller_manager",
         executable="spawner",
@@ -197,11 +208,18 @@ def generate_launch_description():
         executable="spawner",
         arguments=["rover_base_controller", "--controller-manager-timeout", "100"],
     )
-    # As soon as the rover finishes spawning (~5-7 seconds in), load the controllers.
+    
+    # ADDED TIMERACTION HERE: Wait 5 seconds AFTER spawn request finishes
+    # to let Gazebo finish generating the newly added camera sensors.
     delay_spawners = RegisterEventHandler(
         OnProcessExit(
             target_action=spawn,
-            on_exit=[jsb, arm_ctrl, grip_ctrl, rover_base_spawner] 
+            on_exit=[
+                TimerAction(
+                    period=5.0, 
+                    actions=[jsb, arm_ctrl, grip_ctrl, rover_base_spawner]
+                )
+            ] 
         )
     )
     
@@ -215,4 +233,5 @@ def generate_launch_description():
         delay_move_group,
         launch_rviz_when_ready,  
         delay_spawners,
+        imu_bridge,
     ])

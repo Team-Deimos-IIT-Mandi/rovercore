@@ -102,7 +102,7 @@
     <axis
       xyz="-1 0 0" />
     <limit
-      effort="100"
+      effort="1000"
       velocity="10" />
   </joint>
   <link
@@ -158,7 +158,7 @@
     <axis
       xyz="-1 0 0" />
     <limit
-      effort="100"
+      effort="1000"
       velocity="10" />
   </joint>
   <link
@@ -214,7 +214,7 @@
     <axis
       xyz="-1 0 0" />
     <limit
-      effort="100"
+      effort="1000"
       velocity="10" />
   </joint>
   <link
@@ -270,7 +270,7 @@
     <axis
       xyz="-1 0 0" />
     <limit
-      effort="100"
+      effort="1000"
       velocity="10" />
   </joint>
 
@@ -471,7 +471,7 @@
     </collision>
   </link>
   <joint name="CAM_FRONT_joint" type="fixed">
-    <origin xyz="0.07 0.0 -0.22" rpy="-1.5708 0 -1.5708"/>
+    <origin xyz="0.07 0.0 -0.22" rpy="0 1.5708 0"/>
     <parent link="chassis_link"/>
     <child link="CAM_FRONT"/>
   </joint>
@@ -503,7 +503,7 @@
     </collision>
   </link>
   <joint name="CAM_FL_joint" type="fixed">
-    <origin xyz="0.07 0.20 -0.18" rpy="-0.7854 0 0"/>
+    <origin xyz="0.07 0.20 -0.18" rpy="1.5708 0.7854 1.5708"/>
     <parent link="chassis_link"/>
     <child link="CAM_FL"/>
   </joint>
@@ -535,7 +535,7 @@
     </collision>
   </link>
   <joint name="CAM_FR_joint" type="fixed">
-    <origin xyz="0.07 -0.20 -0.18" rpy="-0.7854 0 3.1416"/>
+    <origin xyz="0.07 -0.20 -0.18" rpy="-1.5708 0.7854 -1.5708"/>
     <parent link="chassis_link"/>
     <child link="CAM_FR"/>
   </joint>
@@ -567,7 +567,7 @@
     </collision>
   </link>
   <joint name="CAM_LEFT_joint" type="fixed">
-    <origin xyz="0.04 0.26 0.15" rpy="0 0 0"/>
+    <origin xyz="0.04 0.26 0.15" rpy="1.5708 0 1.5708"/>
     <parent link="chassis_link"/>
     <child link="CAM_LEFT"/>
   </joint>
@@ -599,7 +599,7 @@
     </collision>
   </link>
   <joint name="CAM_RIGHT_joint" type="fixed">
-    <origin xyz="0.04 -0.26 0.15" rpy="0 0 3.1416"/>
+    <origin xyz="0.04 -0.26 0.15" rpy="-1.5708 0 -1.5708"/>
     <parent link="chassis_link"/>
     <child link="CAM_RIGHT"/>
   </joint>
@@ -631,7 +631,7 @@
     </collision>
   </link>
   <joint name="CAM_REAR_joint" type="fixed">
-    <origin xyz="0.07 0.0 0.28" rpy="1.5708 0 0"/>
+    <origin xyz="0.07 0.0 0.28" rpy="0 -1.5708 -3.1416"/>
     <parent link="chassis_link"/>
     <child link="CAM_REAR"/>
   </joint>
@@ -674,54 +674,47 @@
   
   <gazebo reference="LF">
     <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
+    <mu2>0.05</mu2>
     <material>Gazebo/Red</material>
   </gazebo>
   
   <gazebo reference="RF">
     <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
+    <mu2>0.05</mu2>
     <material>Gazebo/Red</material>
   </gazebo>
   
   <gazebo reference="LB">
     <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
+    <mu2>0.05</mu2>
     <material>Gazebo/Red</material>
   </gazebo>
   
   <gazebo reference="RB">
     <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
+    <mu2>0.05</mu2>
     <material>Gazebo/Red</material>
   </gazebo>
 
+ 
+
   <gazebo>
-    <plugin filename="ignition-gazebo-diff-drive-system" name="ignition::gazebo::systems::DiffDrive">
-      <left_joint>LF_joint</left_joint>
-      <left_joint>LB_joint</left_joint>
-      <right_joint>RF_joint</right_joint>
-      <right_joint>RB_joint</right_joint>
-      <wheel_separation>0.62</wheel_separation>
-      <wheel_radius>0.14</wheel_radius>
-      <max_linear_acceleration>1.0</max_linear_acceleration>
-      <min_linear_acceleration>-1.0</min_linear_acceleration>
-      <max_angular_acceleration>2.0</max_angular_acceleration>
-      <min_angular_acceleration>-2.0</min_angular_acceleration>
-      <odom_publish_frequency>50</odom_publish_frequency>
-      <topic>/model/Rover/cmd_vel</topic>
-      <odom_topic>/model/Rover/odom</odom_topic>
-      <frame_id>odom</frame_id>
-      <child_frame_id>base_link</child_frame_id>
+    <plugin filename="ignition-gazebo-imu-system" name="ignition::gazebo::systems::Imu">
     </plugin>
   </gazebo>
+
+  <!-- <gazebo>
+    <plugin filename="ignition-gazebo-sensors-system" name="ignition::gazebo::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+  </gazebo> -->
 
  
 
   <gazebo reference="IMU">
     <sensor name="imu_sensor" type="imu">
       <always_on>true</always_on>
-      <update_rate>200</update_rate>
+      <update_rate>50</update_rate>
       <topic>imu/data</topic>
       <imu>
         <angular_velocity>

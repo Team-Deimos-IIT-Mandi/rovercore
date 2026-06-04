@@ -47,8 +47,8 @@ rover_base_controller:
   ros__parameters:
     left_wheel_names: ["LF_joint", "LB_joint"]
     right_wheel_names: ["RF_joint", "RB_joint"]
-    wheel_separation: 0.5874
-    wheel_radius: 0.11
+    wheel_separation: 0.62
+    wheel_radius: 0.14
     use_stamped_vel: false
     publish_rate: 50.0
     odom_frame_id: odom
