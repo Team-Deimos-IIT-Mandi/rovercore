@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--This does not replace URDF, and is not an extension of URDF.
-    This is a format for representing semantic information about the robot structure.
-    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
--->
 <robot name="rover_with_arm">
-    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
-    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
-    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
-    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
-    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
-<group name="arm">
-        <chain base_link="arm_base_link" tip_link="gripper-base" />
+    <group name="arm">
+        <chain base_link="chassis_link" tip_link="gripper-base" />
     </group>
 
     <group name="gripper">
@@ -26,17 +17,18 @@
         <joint name="link_3" value="0.6245"/>
         <joint name="wrist_1" value="-0.7546"/>
         <joint name="z_axis" value="3.6544"/>
-        <joint name="gripper-wrist" value="0.0"/> </group_state>
+        <joint name="gripper-wrist" value="0.0"/> 
+    </group_state>
 
     <end_effector name="gripper" parent_link="gripper-base" group="gripper" parent_group="arm"/>
-    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+    
     <virtual_joint name="virtual_joint" type="fixed" parent_frame="world" child_link="base_link"/>
-    <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
+    
     <passive_joint name="LB_joint"/>
     <passive_joint name="LF_joint"/>
     <passive_joint name="RB_joint"/>
     <passive_joint name="RF_joint"/>
-    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+
     <disable_collisions link1="CAM_FL" link2="CAM_FR" reason="Never"/>
     <disable_collisions link1="CAM_FL" link2="CAM_FRONT" reason="Never"/>
     <disable_collisions link1="CAM_FL" link2="CAM_LEFT" reason="Never"/>
@@ -50,7 +42,6 @@
     <disable_collisions link1="CAM_FL" link2="OPTICAL" reason="Never"/>
     <disable_collisions link1="CAM_FL" link2="RB" reason="Never"/>
     <disable_collisions link1="CAM_FL" link2="RF" reason="Never"/>
-    <disable_collisions link1="CAM_FL" link2="arm_base_link" reason="Never"/>
     <disable_collisions link1="CAM_FL" link2="chassis_link" reason="Adjacent"/>
     <disable_collisions link1="CAM_FL" link2="link1" reason="Never"/>
     <disable_collisions link1="CAM_FL" link2="link2" reason="Never"/>
@@ -69,7 +60,6 @@
     <disable_collisions link1="CAM_FR" link2="OPTICAL" reason="Never"/>
     <disable_collisions link1="CAM_FR" link2="RB" reason="Never"/>
     <disable_collisions link1="CAM_FR" link2="RF" reason="Never"/>
-    <disable_collisions link1="CAM_FR" link2="arm_base_link" reason="Never"/>
     <disable_collisions link1="CAM_FR" link2="chassis_link" reason="Adjacent"/>
     <disable_collisions link1="CAM_FR" link2="link2" reason="Never"/>
     <disable_collisions link1="CAM_FR" link2="link3" reason="Never"/>
@@ -86,7 +76,6 @@
     <disable_collisions link1="CAM_FRONT" link2="OPTICAL" reason="Never"/>
     <disable_collisions link1="CAM_FRONT" link2="RB" reason="Never"/>
     <disable_collisions link1="CAM_FRONT" link2="RF" reason="Never"/>
-    <disable_collisions link1="CAM_FRONT" link2="arm_base_link" reason="Default"/>
     <disable_collisions link1="CAM_FRONT" link2="chassis_link" reason="Adjacent"/>
     <disable_collisions link1="CAM_FRONT" link2="link1" reason="Never"/>
     <disable_collisions link1="CAM_FRONT" link2="link2" reason="Never"/>
@@ -103,7 +92,6 @@
     <disable_collisions link1="CAM_LEFT" link2="OPTICAL" reason="Never"/>
     <disable_collisions link1="CAM_LEFT" link2="RB" reason="Never"/>
     <disable_collisions link1="CAM_LEFT" link2="RF" reason="Never"/>
-    <disable_collisions link1="CAM_LEFT" link2="arm_base_link" reason="Never"/>
     <disable_collisions link1="CAM_LEFT" link2="chassis_link" reason="Adjacent"/>
     <disable_collisions link1="CAM_LEFT" link2="claw1" reason="Never"/>
     <disable_collisions link1="CAM_LEFT" link2="claw2" reason="Never"/>
@@ -121,7 +109,6 @@
     <disable_collisions link1="CAM_REAR" link2="OPTICAL" reason="Never"/>
     <disable_collisions link1="CAM_REAR" link2="RB" reason="Never"/>
     <disable_collisions link1="CAM_REAR" link2="RF" reason="Never"/>
-    <disable_collisions link1="CAM_REAR" link2="arm_base_link" reason="Never"/>
     <disable_collisions link1="CAM_REAR" link2="chassis_link" reason="Adjacent"/>
     <disable_collisions link1="CAM_REAR" link2="claw1" reason="Never"/>
     <disable_collisions link1="CAM_REAR" link2="claw2" reason="Never"/>
@@ -137,7 +124,6 @@
     <disable_collisions link1="CAM_RIGHT" link2="OPTICAL" reason="Never"/>
     <disable_collisions link1="CAM_RIGHT" link2="RB" reason="Never"/>
     <disable_collisions link1="CAM_RIGHT" link2="RF" reason="Never"/>
-    <disable_collisions link1="CAM_RIGHT" link2="arm_base_link" reason="Never"/>
     <disable_collisions link1="CAM_RIGHT" link2="chassis_link" reason="Adjacent"/>
     <disable_collisions link1="CAM_RIGHT" link2="claw1" reason="Never"/>
     <disable_collisions link1="CAM_RIGHT" link2="claw2" reason="Never"/>
@@ -152,7 +138,6 @@
     <disable_collisions link1="CAM_SCIENCE" link2="OPTICAL" reason="Never"/>
     <disable_collisions link1="CAM_SCIENCE" link2="RB" reason="Never"/>
     <disable_collisions link1="CAM_SCIENCE" link2="RF" reason="Never"/>
-    <disable_collisions link1="CAM_SCIENCE" link2="arm_base_link" reason="Never"/>
     <disable_collisions link1="CAM_SCIENCE" link2="chassis_link" reason="Adjacent"/>
     <disable_collisions link1="CAM_SCIENCE" link2="claw1" reason="Never"/>
     <disable_collisions link1="CAM_SCIENCE" link2="claw2" reason="Never"/>
@@ -170,7 +155,6 @@
     <disable_collisions link1="GPS" link2="OPTICAL" reason="Never"/>
     <disable_collisions link1="GPS" link2="RB" reason="Never"/>
     <disable_collisions link1="GPS" link2="RF" reason="Never"/>
-    <disable_collisions link1="GPS" link2="arm_base_link" reason="Never"/>
     <disable_collisions link1="GPS" link2="chassis_link" reason="Adjacent"/>
     <disable_collisions link1="GPS" link2="link2" reason="Never"/>
     <disable_collisions link1="GPS" link2="zaxis" reason="Never"/>
@@ -179,7 +163,6 @@
     <disable_collisions link1="IMU" link2="OPTICAL" reason="Never"/>
     <disable_collisions link1="IMU" link2="RB" reason="Never"/>
     <disable_collisions link1="IMU" link2="RF" reason="Never"/>
-    <disable_collisions link1="IMU" link2="arm_base_link" reason="Never"/>
     <disable_collisions link1="IMU" link2="chassis_link" reason="Adjacent"/>
     <disable_collisions link1="IMU" link2="claw2" reason="Never"/>
     <disable_collisions link1="IMU" link2="link1" reason="Never"/>
@@ -191,7 +174,6 @@
     <disable_collisions link1="LB" link2="OPTICAL" reason="Never"/>
     <disable_collisions link1="LB" link2="RB" reason="Never"/>
     <disable_collisions link1="LB" link2="RF" reason="Never"/>
-    <disable_collisions link1="LB" link2="arm_base_link" reason="Never"/>
     <disable_collisions link1="LB" link2="chassis_link" reason="Adjacent"/>
     <disable_collisions link1="LB" link2="claw1" reason="Never"/>
     <disable_collisions link1="LB" link2="claw2" reason="Never"/>
@@ -204,7 +186,6 @@
     <disable_collisions link1="LF" link2="OPTICAL" reason="Never"/>
     <disable_collisions link1="LF" link2="RB" reason="Never"/>
     <disable_collisions link1="LF" link2="RF" reason="Never"/>
-    <disable_collisions link1="LF" link2="arm_base_link" reason="Never"/>
     <disable_collisions link1="LF" link2="chassis_link" reason="Adjacent"/>
     <disable_collisions link1="LF" link2="claw1" reason="Never"/>
     <disable_collisions link1="LF" link2="claw2" reason="Never"/>
@@ -216,7 +197,6 @@
     <disable_collisions link1="LF" link2="zaxis" reason="Never"/>
     <disable_collisions link1="OPTICAL" link2="RB" reason="Never"/>
     <disable_collisions link1="OPTICAL" link2="RF" reason="Never"/>
-    <disable_collisions link1="OPTICAL" link2="arm_base_link" reason="Never"/>
     <disable_collisions link1="OPTICAL" link2="chassis_link" reason="Adjacent"/>
     <disable_collisions link1="OPTICAL" link2="claw1" reason="Never"/>
     <disable_collisions link1="OPTICAL" link2="claw2" reason="Never"/>
@@ -229,7 +209,6 @@
     <disable_collisions link1="OPTICAL" link2="wrist1" reason="Never"/>
     <disable_collisions link1="OPTICAL" link2="zaxis" reason="Never"/>
     <disable_collisions link1="RB" link2="RF" reason="Never"/>
-    <disable_collisions link1="RB" link2="arm_base_link" reason="Never"/>
     <disable_collisions link1="RB" link2="chassis_link" reason="Adjacent"/>
     <disable_collisions link1="RB" link2="claw1" reason="Never"/>
     <disable_collisions link1="RB" link2="claw2" reason="Never"/>
@@ -239,7 +218,6 @@
     <disable_collisions link1="RB" link2="link1" reason="Never"/>
     <disable_collisions link1="RB" link2="wrist1" reason="Never"/>
     <disable_collisions link1="RB" link2="zaxis" reason="Never"/>
-    <disable_collisions link1="RF" link2="arm_base_link" reason="Never"/>
     <disable_collisions link1="RF" link2="chassis_link" reason="Adjacent"/>
     <disable_collisions link1="RF" link2="claw1" reason="Never"/>
     <disable_collisions link1="RF" link2="claw2" reason="Never"/>
@@ -249,12 +227,8 @@
     <disable_collisions link1="RF" link2="link1" reason="Never"/>
     <disable_collisions link1="RF" link2="wrist1" reason="Never"/>
     <disable_collisions link1="RF" link2="zaxis" reason="Never"/>
-    <disable_collisions link1="arm_base_link" link2="chassis_link" reason="Adjacent"/>
-    <disable_collisions link1="arm_base_link" link2="link1" reason="Never"/>
-    <disable_collisions link1="arm_base_link" link2="link2" reason="Never"/>
-    <disable_collisions link1="arm_base_link" link2="zaxis" reason="Adjacent"/>
     <disable_collisions link1="chassis_link" link2="wrist1" reason="Never"/>
-    <disable_collisions link1="chassis_link" link2="zaxis" reason="Never"/>
+    <disable_collisions link1="chassis_link" link2="zaxis" reason="Adjacent"/>
     <disable_collisions link1="claw1" link2="finger1" reason="Adjacent"/>
     <disable_collisions link1="claw1" link2="gripper-base" reason="Adjacent"/>
     <disable_collisions link1="claw1" link2="link1" reason="Never"/>
@@ -281,4 +255,29 @@
     <disable_collisions link1="link2" link2="wrist1" reason="Never"/>
     <disable_collisions link1="link2" link2="zaxis" reason="Never"/>
     <disable_collisions link1="link3" link2="wrist1" reason="Adjacent"/>
+    <disable_collisions link1="CAM_FL" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="CAM_FR" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="CAM_FRONT" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="CAM_LEFT" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="CAM_REAR" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="CAM_RIGHT" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="CAM_SCIENCE" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="GPS" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="IMU" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="LB" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="LF" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="OPTICAL" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="RB" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="RF" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="chassis_link" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="claw1" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="claw2" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="finger1" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="finger2" link2="gripper_rgbd_camera" reason="Never"/>
+    <disable_collisions link1="gripper-base" link2="gripper_rgbd_camera" reason="Adjacent"/>
+    <disable_collisions link1="gripper_rgbd_camera" link2="link1" reason="Never"/>
+    <disable_collisions link1="gripper_rgbd_camera" link2="link2" reason="Never"/>
+    <disable_collisions link1="gripper_rgbd_camera" link2="link3" reason="Never"/>
+    <disable_collisions link1="gripper_rgbd_camera" link2="wrist1" reason="Never"/>
+    <disable_collisions link1="gripper_rgbd_camera" link2="zaxis" reason="Never"/>
 </robot>

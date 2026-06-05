@@ -113,6 +113,12 @@ def generate_launch_description():
             '/rgbd_camera/image@sensor_msgs/msg/Image[gz.msgs.Image',
             '/rgbd_camera/depth_image@sensor_msgs/msg/Image[gz.msgs.Image',
             '/rgbd_camera/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
+
+
+            # 6. Gripper RGBD Camera
+            '/arm/gripper/rgbd_camera/image@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/arm/gripper/rgbd_camera/depth_image@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/arm/gripper/rgbd_camera/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked',
         ],
         output='screen'
     )

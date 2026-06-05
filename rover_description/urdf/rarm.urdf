@@ -886,51 +886,8 @@
       </lidar>
     </sensor>
   </gazebo>
-  <joint name="rover_to_arm_joint" type="fixed">
-    <origin xyz="0.08 0.0 0.50083" rpy="0 0 0" />
-    <parent link="base_link" />
-    <child link="arm_base_link" />
-  </joint>
-  <link
-    name="arm_base_link">
-    <inertial>
-      <origin
-        xyz="0.0603212602811141 0.0650115074142707 0.02162446729854"
-        rpy="0 0 0" />
-      <mass
-        value="0.50142029465297" />
-      <inertia
-        ixx="0.000319514636903112"
-        ixy="-7.87438279933821E-08"
-        ixz="-3.28639901204E-07"
-        iyy="0.000333118854517782"
-        iyz="-1.2582250163801E-08"
-        izz="0.000510935815274996" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://my_robotic_arm/meshes/base_link.STL" />
-      </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://my_robotic_arm/meshes/base_link.STL" />
-      </geometry>
-    </collision>
-  </link>
+  
+  
   <link
     name="zaxis">
     <inertial>
@@ -975,10 +932,10 @@
     name="z_axis"
     type="revolute">
     <origin
-      xyz="0.0211020680489503 0.0649999999999998 0.0950000000000002"
-      rpy="0 0 0" />
+      xyz="0.12 0.05 -0.02"
+      rpy="0 1.57 0" />
     <parent
-      link="arm_base_link" />
+      link="chassis_link" />
     <child
       link="zaxis" />
     <axis
@@ -1503,6 +1460,70 @@
       effort="100"
       velocity="10" />
   </joint>
+
+
+  <link name="gripper_rgbd_camera">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.05"/>
+      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.07 0.04 0.05"/></geometry>
+      <material name="cam_housing"><color rgba="0.15 0.15 0.15 1"/></material>
+    </visual>
+    <visual>
+      <origin xyz="0 0.028 0" rpy="-1.5708 0 0"/>
+      <geometry><cylinder radius="0.014" length="0.016"/></geometry>
+      <material name="cam_lens"><color rgba="0.05 0.05 0.25 1"/></material>
+    </visual>
+    <visual>
+      <origin xyz="0 -0.021 0" rpy="0 0 0"/>
+      <geometry><box size="0.07 0.002 0.014"/></geometry>
+      <material name="stripe_gripper"><color rgba="0.0 1.0 0.5 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.07 0.04 0.05"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="gripper_rgbd_camera_joint" type="fixed">
+    <origin xyz="0.0 0.02 0.05" rpy="1.34 0 -1.30"/>
+    <parent link="gripper-base"/>
+    <child link="gripper_rgbd_camera"/>
+  </joint>
+
+
+  <gazebo reference="gripper_rgbd_camera">
+    <sensor name="gripper_rgbd_sensor" type="rgbd_camera">
+      <always_on>true</always_on>
+      <update_rate>10</update_rate>
+      <topic>arm/gripper/rgbd_camera</topic>
+      <pose>0 0 0 0 0 0</pose>
+      <camera>
+        <horizontal_fov>1.0472</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.01</near>
+          <far>5.0</far>
+        </clip>
+      </camera>
+      <depth_camera>
+        <clip>
+          <near>0.01</near>
+          <far>5.0</far>
+        </clip>
+      </depth_camera>
+    </sensor>
+  </gazebo>
+
+
   <ros2_control name="GazeboSimSystem" type="system">
   <hardware>
     <plugin>gz_ros2_control/GazeboSimSystem</plugin>
@@ -1645,4 +1666,7 @@
       
     </plugin>
   </gazebo>
+
+
+
 </robot>
