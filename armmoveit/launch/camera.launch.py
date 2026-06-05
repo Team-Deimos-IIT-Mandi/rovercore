@@ -64,12 +64,7 @@ def generate_launch_description():
 
 
     urdf_file = os.path.join(rover_pkg, 'urdf', 'rarm.urdf')
-    moveit_config = (
-        MoveItConfigsBuilder("rover_with_arm", package_name="armmoveit")
-        .robot_description(file_path=urdf_file)  # <--- ADD THIS LINE
-        .planning_pipelines(pipelines=["ompl"])
-        .to_moveit_configs()
-    )
+    
 
     rsp = Node(
         package='robot_state_publisher',
@@ -127,15 +122,6 @@ def generate_launch_description():
         output='screen'
     )
 
-    imu_bridge = Node(
-        package='ros_gz_bridge',
-        executable='parameter_bridge',
-        name='imu_bridge',
-        arguments=[
-            '/imu/data@sensor_msgs/msg/Imu[gz.msgs.IMU'
-        ],
-        output='screen'
-    )
 
     spawn = Node(
         package='ros_gz_sim',
@@ -150,54 +136,7 @@ def generate_launch_description():
     )
     delay_spawn = TimerAction(period=5.0, actions=[spawn])
 
-    # ── PHASE 3: MoveGroup (12s) ─────────────────────────────────────
-    move_group = Node(
-        package="moveit_ros_move_group",
-        executable="move_group",
-        output="screen",
-        parameters=[
-            moveit_config.to_dict(),    # <--- This single line passes EVERY hidden MoveIt flag
-            robot_description_dict,     # Your direct URDF string
-            sim_time                    # {'use_sim_time': True}
-        ],
-    )
-
-    delay_move_group = TimerAction(period=10.0, actions=[move_group])
-
-    jsb = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["joint_state_broadcaster", "--controller-manager-timeout", "100"]
-    )
-    arm_ctrl = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["arm_controller", "--controller-manager-timeout", "100"]
-    )
-    grip_ctrl = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["gripper_controller", "--controller-manager-timeout", "100"]
-    )
-    rover_base_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["rover_base_controller", "--controller-manager-timeout", "100"],
-    )
     
-    # ADDED TIMERACTION HERE: Wait 5 seconds AFTER spawn request finishes
-    # to let Gazebo finish generating the newly added camera sensors.
-    delay_spawners = RegisterEventHandler(
-        OnProcessExit(
-            target_action=spawn,
-            on_exit=[
-                TimerAction(
-                    period=5.0, 
-                    actions=[jsb, arm_ctrl, grip_ctrl, rover_base_spawner]
-                )
-            ] 
-        )
-    )
     
     return LaunchDescription([
         set_ign_resource,
@@ -206,7 +145,4 @@ def generate_launch_description():
         gazebo,
         gz_bridge,
         delay_spawn,
-        delay_move_group, 
-        delay_spawners,
-        imu_bridge,
     ])
