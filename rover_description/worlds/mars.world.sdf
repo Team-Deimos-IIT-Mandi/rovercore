@@ -136,9 +136,9 @@
 
         <collision name="dome_collision">
           <geometry>
-            <box>
-              <size>3.0 3.0 2.0</size>
-            </box>
+            <mesh>
+              <uri>../models/gale_crater_patch2/meshes/dome.obj</uri>
+              <scale>0.82 0.82 0.82</scale> </mesh>
           </geometry>
         </collision>
 
@@ -242,7 +242,7 @@
     <model name="Arc_emergency_kit">
       <static>true</static>
 
-      <pose>-5 -2 0.13 1.5708 0 -1.570795</pose>
+      <pose>-5 -4 0.13 1.5708 0 -1.570795</pose>
 
       <link name="kit_link">
 

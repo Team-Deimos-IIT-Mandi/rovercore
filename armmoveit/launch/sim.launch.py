@@ -77,8 +77,16 @@ def generate_launch_description():
         output='screen',
         parameters=[robot_description_dict, sim_time]
     )
+    # Assuming you already have rover_pkg defined via get_package_share_directory
+    rover_models_path = os.path.join(rover_pkg, 'models')
 
-    world_file = os.path.join(rover_pkg, 'worlds', 'mars_terrain.world')
+    # Add this action to tell Gazebo where to look
+    set_gazebo_model_path = AppendEnvironmentVariable(
+        name='IGN_GAZEBO_RESOURCE_PATH',
+        value=rover_models_path
+    )
+
+    world_file = os.path.join(rover_pkg, 'worlds', 'mars.world.sdf')
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(ros_gz_sim_pkg, 'launch', 'gz_sim.launch.py')
@@ -144,7 +152,7 @@ def generate_launch_description():
             '-topic', 'robot_description',
             '-name',  'rover_with_arm',
             '-allow_renaming', 'true',
-            '-z', '0.2'
+            '-z', '5'
         ],
         output='screen',
     )
@@ -201,6 +209,7 @@ def generate_launch_description():
     
     return LaunchDescription([
         set_ign_resource,
+        set_gazebo_model_path,
         set_gz_resource,
         rsp,
         gazebo,
