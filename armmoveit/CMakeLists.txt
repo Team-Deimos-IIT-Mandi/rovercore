@@ -24,6 +24,11 @@ install(PROGRAMS
   DESTINATION lib/${PROJECT_NAME}
 )
 
+install(PROGRAMS
+  scripts/manip.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 
 
 install(DIRECTORY worlds DESTINATION share/${PROJECT_NAME})

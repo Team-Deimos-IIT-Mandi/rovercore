@@ -80,9 +80,8 @@
       <origin
         xyz="0 0 0"
         rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://rover_description/meshes/RF.STL" />
+     <geometry>
+        <cylinder radius="0.126" length="0.152" />
       </geometry>
     </collision>
   </link>
@@ -137,8 +136,7 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/LF.STL" />
+        <cylinder radius="0.126" length="0.152" />
       </geometry>
     </collision>
   </link>
@@ -193,8 +191,7 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/LB.STL" />
+        <cylinder radius="0.126" length="0.152" />
       </geometry>
     </collision>
   </link>
@@ -249,8 +246,7 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/RB.STL" />
+        <cylinder radius="0.126" length="0.152" />
       </geometry>
     </collision>
   </link>
