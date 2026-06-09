@@ -15,27 +15,6 @@ def generate_launch_description():
     teleport = os.path.join(scripts_dir, 'teleport_repair_tool.py')
 
     include_sim = IncludeLaunchDescription(PythonLaunchDescriptionSource(sim_launch))
-
-    # Start the sanitizer and HSV viewer shortly after sim to let topics appear
-    start_sanitizer = TimerAction(
-        period=6.0,
-        actions=[ExecuteProcess(cmd=['python3', depth_sanitizer], output='screen')]
-    )
-
-    start_hsv = TimerAction(
-        period=6.0,
-        actions=[ExecuteProcess(cmd=['python3', hsv_viewer], output='screen')]
-    )
-
-    # Teleport once after sim and spawn complete
-    teleport_action = TimerAction(
-        period=20.0,
-        actions=[ExecuteProcess(cmd=['python3', teleport], output='screen')]
-    )
-
     return LaunchDescription([
         include_sim,
-        start_sanitizer,
-        start_hsv,
-        teleport_action,
     ])

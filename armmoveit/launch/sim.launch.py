@@ -86,7 +86,7 @@ def generate_launch_description():
         value=rover_models_path
     )
 
-    world_file = os.path.join(rover_pkg, 'worlds', 'mars.world.sdf')
+    world_file = os.path.join(armmoveit_pkg, 'worlds', 'oxygen.world.sdf')
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(ros_gz_sim_pkg, 'launch', 'gz_sim.launch.py')
