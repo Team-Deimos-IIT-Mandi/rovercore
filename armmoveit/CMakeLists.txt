@@ -30,6 +30,14 @@ install(PROGRAMS
 )
 
 
+install(PROGRAMS
+  scripts/red_valve_tracker.py
+  scripts/valve.py           
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+
+
 
 install(DIRECTORY worlds DESTINATION share/${PROJECT_NAME})
 
