@@ -23,10 +23,20 @@ def generate_launch_description():
         output='screen'
     )
 
+
+    seeder_node = Node(
+        package='armmoveit',
+        executable='seeder.py', # Note: No .py extension
+        name='seeder',
+        output='screen'
+    )
+
     # 4. Wrap them in timers so Gazebo has time to boot up the cameras first!
     delay_tracker = TimerAction(period=5.0, actions=[tracker_node])
 
     return LaunchDescription([
         include_sim,
         delay_tracker,
+        seeder_node
+
     ])

@@ -998,7 +998,7 @@
       link="link1" />
     <axis
       xyz="0 -1 0" /> <limit
-      lower="-0.52"   upper="0.62"  effort="100"
+      lower="-0.52"   upper="0.96"  effort="100"
       velocity="10" />
   </joint>
   <link

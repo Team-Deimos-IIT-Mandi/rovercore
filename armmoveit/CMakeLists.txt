@@ -33,7 +33,14 @@ install(PROGRAMS
 install(PROGRAMS
   scripts/red_valve_tracker.py
   scripts/valve.py           
+  scripts/map.py
+  scripts/seeder.py
   DESTINATION lib/${PROJECT_NAME}
+)
+find_package(rosidl_default_generators REQUIRED)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "srv/GetIKSeed.srv"
 )
 
 
