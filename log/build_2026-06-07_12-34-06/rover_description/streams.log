@@ -1,0 +1,163 @@
+[0.020s] Invoking command in '/home/deepak/rovercore/build/rover_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/deepak/rovercore/rover_description -DCMAKE_INSTALL_PREFIX=/home/deepak/rovercore/install/rover_description
+[0.099s] -- The C compiler identification is GNU 11.4.0
+[0.179s] -- The CXX compiler identification is GNU 11.4.0
+[0.190s] -- Detecting C compiler ABI info
+[0.287s] -- Detecting C compiler ABI info - done
+[0.298s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.299s] -- Detecting C compile features
+[0.299s] -- Detecting C compile features - done
+[0.303s] -- Detecting CXX compiler ABI info
+[0.416s] -- Detecting CXX compiler ABI info - done
+[0.427s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.427s] -- Detecting CXX compile features
+[0.428s] -- Detecting CXX compile features - done
+[0.434s] -- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.667s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.833s] -- Found ament_lint_auto: 0.12.15 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.965s] -- Added test 'flake8' to check Python code syntax and style conventions
+[0.967s] -- Added test 'lint_cmake' to check CMake code style
+[0.969s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[0.975s] -- Added test 'xmllint' to check XML markup files
+[0.977s] -- Configuring done
+[0.980s] -- Generating done
+[0.982s] -- Build files have been written to: /home/deepak/rovercore/build/rover_description
+[0.989s] Invoked command in '/home/deepak/rovercore/build/rover_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/deepak/rovercore/rover_description -DCMAKE_INSTALL_PREFIX=/home/deepak/rovercore/install/rover_description
+[0.990s] Invoking command in '/home/deepak/rovercore/build/rover_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/deepak/rovercore/build/rover_description -- -j20 -l20
+[1.046s] Invoked command in '/home/deepak/rovercore/build/rover_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/deepak/rovercore/build/rover_description -- -j20 -l20
+[1.060s] Invoking command in '/home/deepak/rovercore/build/rover_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/deepak/rovercore/build/rover_description
+[1.070s] -- Install configuration: ""
+[1.070s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/teleop.py
+[1.070s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/cmd_vel_relay.py
+[1.070s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/aruco_detection.py
+[1.070s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/spiral_search.py
+[1.071s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/mission_initializer.py
+[1.071s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/robot_description_publisher.py
+[1.071s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/optical_flow_node.py
+[1.071s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/imu_filter_node.py
+[1.071s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/flow_derotation_node.py
+[1.071s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/nonholonomic_node.py
+[1.071s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/slip_detector_node.py
+[1.071s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/gps_gating_node.py
+[1.071s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/zupt_node.py
+[1.072s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/gps_driver_node.py
+[1.072s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/icm20948_driver_node.py
+[1.072s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/mtf01_driver_node.py
+[1.072s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/joint_state_restamper.py
+[1.072s] -- Installing: /home/deepak/rovercore/install/rover_description/lib/rover_description/joy_teleop.py
+[1.072s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/urdf
+[1.072s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/urdf/Assem10_real.urdf.xacro
+[1.072s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/urdf/rover_with_arm.urdf.xacro
+[1.072s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/urdf/Assem10.csv
+[1.072s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/urdf/rover.urdf
+[1.072s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/urdf/Assem10.urdf
+[1.072s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/meshes
+[1.072s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/meshes/IMU.STL
+[1.072s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/meshes/OPTICAL.STL
+[1.073s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/meshes/base_link.STL
+[1.112s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/meshes/LB.STL
+[1.112s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/meshes/GPS.STL
+[1.113s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/meshes/Assem10.urdf
+[1.113s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/meshes/RB.STL
+[1.113s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/meshes/LF.STL
+[1.114s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/meshes/RF.STL
+[1.114s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/launch
+[1.114s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/launch/sensors_hw.launch.py
+[1.115s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/launch/state_estimation.launch.py
+[1.115s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/launch/drone_bringup.launch.py
+[1.115s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/launch/full_autonomy.launch.py
+[1.115s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/launch/nav2.launch.py
+[1.115s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/launch/sim.launch.py
+[1.115s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/launch/slam.launch.py
+[1.115s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/rviz
+[1.115s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/rviz/nav2_config.rviz
+[1.116s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/config
+[1.116s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/config/ekf_local.yaml
+[1.116s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/config/nav2_params.yaml
+[1.116s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/config/navigate_and_search_bt.xml
+[1.116s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/config/mavros_params.yaml
+[1.116s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/config/mission_waypoints.yaml
+[1.116s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/config/ekf_global.yaml
+[1.116s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/config/imu_calibration.yaml
+[1.117s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/config/combined_controllers.yaml
+[1.117s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/config/joint_names_Assem10.yaml
+[1.117s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/config/cartographer.lua
+[1.117s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/config/navsat.yaml
+[1.117s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/config/hardware_params.yaml
+[1.117s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/config/rover_controllers.yaml
+[1.117s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/config/mission_config.yaml
+[1.117s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/worlds
+[1.118s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/worlds/mars.world.sdf
+[1.118s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/worlds/agriculture.world
+[1.118s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/worlds/empty.world
+[1.118s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/worlds/mars_terrain.world
+[1.118s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/maps
+[1.118s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/maps/my_map.yaml
+[1.118s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/maps/my_map.pgm
+[1.118s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models
+[1.119s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/rocks
+[1.119s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/rocks/rock_large.sdf
+[1.119s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/rocks/rock_medium.sdf
+[1.119s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/rocks/rock_small.sdf
+[1.119s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2
+[1.119s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/materials
+[1.119s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/materials/scripts
+[1.119s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/materials/scripts/sand_pebbles.material
+[1.120s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/materials/scripts/rock_texture_1.material
+[1.120s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/materials/textures
+[1.120s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/materials/textures/rock_texture_1.png
+[1.120s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/materials/textures/sand_pebbles.png
+[1.124s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes
+[1.125s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/Astronaut.obj
+[1.126s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/dome.obj
+[1.128s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/damaged_pipe.mtl
+[1.128s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/dome.mtl
+[1.128s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/Toolbox.mtl
+[1.128s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/Emergency_kit.obj
+[1.128s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/Astronaut_final.mtl
+[1.128s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/rocket.mtl
+[1.128s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/damaged_pipe.obj
+[1.129s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/Toolbox.obj
+[1.130s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/fuel_trail.mtl
+[1.130s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/gale_crater_patch2.stl
+[1.147s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/repair_tool.mtl
+[1.147s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/Emergency_kit.mtl
+[1.147s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/repair_tool.obj
+[1.148s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/fuel_trail.obj
+[1.148s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/rocket.obj
+[1.149s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/rocket.stl
+[1.149s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/model.config
+[1.149s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/model.sdf
+[1.149s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/fuel_trail
+[1.150s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/fuel_trail/model.config
+[1.150s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/fuel_trail/model.sdf
+[1.150s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/ramp.stl
+[1.153s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2.zip
+[1.164s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture
+[1.164s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials
+[1.164s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials/textures
+[1.164s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials/textures/SolarPanelsPolycrystallineTypeBFramedClean001_COL_3K.jpg
+[1.170s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials/textures/AgriBakeLarge.jpg
+[1.193s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials/textures/WoodPlanksWorn33_COL_VAR1_3K.jpg
+[1.195s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials/textures/WoodPlanksWornRed33_COL_VAR1_3K.jpg
+[1.199s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials/textures/MetalCorrugatedIronSheet002_METALNESS_3K_METALNESS.jpg
+[1.199s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials/textures/WoodPlanksWornWhite33_COL_VAR1_3K.jpg
+[1.201s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/meshes
+[1.202s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/meshes/agriculture_world.dae
+[1.204s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/model.config
+[1.204s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/model.sdf
+[1.204s] -- Installing: /home/deepak/rovercore/install/rover_description/share/ament_index/resource_index/package_run_dependencies/rover_description
+[1.205s] -- Installing: /home/deepak/rovercore/install/rover_description/share/ament_index/resource_index/parent_prefix_path/rover_description
+[1.205s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/environment/ament_prefix_path.sh
+[1.205s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/environment/ament_prefix_path.dsv
+[1.205s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/environment/path.sh
+[1.205s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/environment/path.dsv
+[1.206s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/local_setup.bash
+[1.206s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/local_setup.sh
+[1.206s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/local_setup.zsh
+[1.206s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/local_setup.dsv
+[1.206s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/package.dsv
+[1.206s] -- Installing: /home/deepak/rovercore/install/rover_description/share/ament_index/resource_index/packages/rover_description
+[1.207s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/cmake/rover_descriptionConfig.cmake
+[1.207s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/cmake/rover_descriptionConfig-version.cmake
+[1.207s] -- Installing: /home/deepak/rovercore/install/rover_description/share/rover_description/package.xml
+[1.211s] Invoked command in '/home/deepak/rovercore/build/rover_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/deepak/rovercore/build/rover_description

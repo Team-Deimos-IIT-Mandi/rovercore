@@ -1,0 +1,1 @@
+/home/deepak/rovercore/rover_description/launch/full_autonomy.launch.py

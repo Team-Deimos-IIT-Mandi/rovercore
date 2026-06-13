@@ -57,6 +57,7 @@ def generate_launch_description():
     #       in sim.launch.py) or that a camera_info_manager node supplies it.
     # ---------------------------------------------------------------------------
     depth_to_pointcloud = Node(
+<<<<<<< HEAD
     package='depth_image_proc',
     executable='point_cloud_xyz_node',
     name='depth_image_to_pointcloud',
@@ -69,6 +70,17 @@ def generate_launch_description():
         ('camera_info', '/rgbd_camera/camera_info'), 
         
         ('points', '/rgbd_camera/points'),
+=======
+        package='depth_image_proc',
+        executable='point_cloud_xyz_node',
+        name='depth_image_to_pointcloud',
+        output='screen',
+        parameters=[{'use_sim_time': use_sim_time}],
+        remappings=[
+            ('image_rect', '/rgbd_camera/depth_image'),
+            ('camera_info', '/rgbd_camera/camera_info'),
+            ('points', '/rgbd_camera/points'),
+>>>>>>> 2807e26 (Temporary save)
         ],
     )
 

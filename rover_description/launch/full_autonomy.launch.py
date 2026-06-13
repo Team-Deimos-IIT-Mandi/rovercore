@@ -38,12 +38,26 @@ def generate_launch_description():
     world_arg = DeclareLaunchArgument(
         'world',
         default_value='depot',
+<<<<<<< HEAD
         description='Simulation world key (choices: depot, mars, moon, mars_array, moon_array)'
+=======
+        description='Simulation world (e.g., depot, mars)'
+>>>>>>> 2807e26 (Temporary save)
     )
 
     arm_arg = DeclareLaunchArgument(
         'arm_enabled', default_value='false',
         description='Include arm controllers and MoveIt move_group in sim'
+    )
+
+    target_lat_arg = DeclareLaunchArgument(
+        'target_lat', default_value='39.8940850',
+        description='Target GPS Latitude (defaults to 2m ahead of astronaut in mars world)'
+    )
+
+    target_lon_arg = DeclareLaunchArgument(
+        'target_lon', default_value='32.7846688',
+        description='Target GPS Longitude (defaults to 2m ahead of astronaut in mars world)'
     )
 
     world = LaunchConfiguration('world')
@@ -104,6 +118,37 @@ def generate_launch_description():
     # ---------------------------------------------------------------------------
     # The Spinal Cord: Relays standard cmd_vel to Gazebo's hardware topic
     # ---------------------------------------------------------------------------
+<<<<<<< HEAD
+=======
+    mission_initializer = Node(
+        package='rover_description',
+        executable='mission_initializer.py',
+        name='mission_initializer',
+        output='screen',
+        parameters=[{
+            'use_sim_time': True,
+            'target_lat': LaunchConfiguration('target_lat'),
+            'target_lon': LaunchConfiguration('target_lon'),
+        }],
+    )
+
+    spiral_search = Node(
+        package='rover_description',
+        executable='spiral_search.py',
+        name='spiral_search',
+        output='screen',
+        parameters=[{'use_sim_time': True}],
+    )
+
+    aruco_detection = Node(
+        package='rover_description',
+        executable='aruco_detection.py',
+        name='aruco_detection',
+        output='screen',
+        parameters=[{'use_sim_time': True}],
+    )
+
+>>>>>>> 2807e26 (Temporary save)
     cmd_vel_relay = Node(
         package='rover_description',
         executable='cmd_vel_relay.py',
@@ -167,6 +212,8 @@ def generate_launch_description():
         set_ign_resource_path,
         world_arg,
         arm_arg,
+        target_lat_arg,
+        target_lon_arg,
         sim_launch,
         state_estimation_launch,
         nav2_launch,

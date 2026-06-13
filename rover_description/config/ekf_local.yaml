@@ -11,7 +11,7 @@
 
 ekf_local_node:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: true
     frequency: 30.0         # TUNE: 30Hz — 50Hz overloads Jetson with full sensor suite.
     two_d_mode: true         # rover operates on a 2D plane (suppresses roll/pitch in state)
     publish_tf: true
@@ -28,7 +28,15 @@ ekf_local_node:
                   true,  true,  true,    # roll_vel, pitch_vel, yaw_vel
                   true,  true,  false]   # x_accel, y_accel, z_accel (no vertical accel in 2D)
     imu0_differential: false
-    imu0_relative: false
+    # FIX (2026-06): was `false` — caused ~60-90° angular deviation.
+    # Root cause: IMU joint rpy=(-1.5708, 0.019, -1.5708) + sensor pose yaw=+1.5708.
+    # The 0.019-rad pitch component prevents perfect gimbal lock, so gz-sim reports
+    # yaw = atan2(0.019, 0) = +90° when rover faces East.  With relative=false the
+    # EKF fused this absolute 90° bias every cycle, making it believe the rover was
+    # heading North.  Nav2 fought that error → ~60° actual path deviation.
+    # With relative=true the EKF only integrates DELTA yaw from IMU; the initial
+    # state is already correct (yaw=0) and gyro deltas are unaffected by mounting.
+    imu0_relative: true
     imu0_remove_gravitational_acceleration: true
     imu0_queue_size: 10
 

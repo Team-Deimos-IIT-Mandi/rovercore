@@ -65,6 +65,17 @@ class SlipDetectorNode(Node):
         out.twist.twist = msg.twist.twist
         out.pose = msg.pose
 
+        # Gazebo DiffDrive bridge publishes zero pose covariance — inject sane defaults
+        # so the EKF doesn't treat pose with infinite confidence or ignore it entirely.
+        # Values match rover_controllers.yaml pose_covariance_diagonal.
+        if out.pose.covariance[0] == 0.0:
+            out.pose.covariance[0]  = 0.001   # x
+            out.pose.covariance[7]  = 0.001   # y
+            out.pose.covariance[14] = 0.001   # z
+            out.pose.covariance[21] = 0.001   # roll
+            out.pose.covariance[28] = 0.001   # pitch
+            out.pose.covariance[35] = 0.01    # yaw
+
         if slip_ratio > self.slip_threshold:
             # SLIP DETECTED — inflate covariance, EKF will ignore wheels
             out.twist.covariance[0] = self.slip_cov    # vx

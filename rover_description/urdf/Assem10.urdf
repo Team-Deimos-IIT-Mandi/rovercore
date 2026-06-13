@@ -205,6 +205,16 @@
     <axis xyz="0 0 0" />
   </joint>
 
+<<<<<<< HEAD
+=======
+  <link name="camera_depth_optical_frame"/>
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="OPTICAL"/>
+    <child link="camera_depth_optical_frame"/>
+    <origin xyz="0 0 0" rpy="-1.5708 0 0"/>
+  </joint>
+
+>>>>>>> 2807e26 (Temporary save)
   <link name="GPS">
     <inertial>
       <origin xyz="0 1.38777878078145E-17 -0.0295024951902178" rpy="0 0 0" />
@@ -515,7 +525,7 @@
   </gazebo>
 
   <gazebo>
-    <plugin filename="ignition-gazebo-diff-drive-system" name="ignition::gazebo::systems::DiffDrive">
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
       <left_joint>LF_joint</left_joint>
       <left_joint>LB_joint</left_joint>
       <right_joint>RF_joint</right_joint>
@@ -535,7 +545,7 @@
   </gazebo>
 
   <gazebo>
-    <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher">
+    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
       <joint_name>LF_joint</joint_name>
       <joint_name>LB_joint</joint_name>
       <joint_name>RF_joint</joint_name>
@@ -545,6 +555,7 @@
 
   <gazebo reference="IMU">
     <sensor name="imu_sensor" type="imu">
+      <pose>0 0 0 0 0 1.5708</pose>
       <always_on>true</always_on>
       <update_rate>200</update_rate>
       <topic>imu/data</topic>
@@ -567,12 +578,16 @@
     <sensor name="navsat_sensor" type="navsat">
       <always_on>true</always_on>
       <update_rate>10</update_rate>
-      <topic>gps/fix</topic>
+      <topic>gps/fix_raw</topic>
     </sensor>
   </gazebo>
 
   <gazebo reference="OPTICAL">
     <sensor name="rgbd_camera" type="rgbd_camera">
+<<<<<<< HEAD
+=======
+      <gz_frame_id>camera_depth_optical_frame</gz_frame_id>
+>>>>>>> 2807e26 (Temporary save)
       <pose>0 0 0 0 0 1.5708</pose>
       <always_on>true</always_on>
       <update_rate>15</update_rate>
@@ -718,6 +733,7 @@
 
   <gazebo reference="FLOW_CAM">
     <sensor name="flow_camera" type="camera">
+      <pose>0 0 0 0 0 1.5708</pose>
       <always_on>true</always_on>
       <update_rate>15</update_rate>
       <topic>flow_cam/image</topic>
@@ -738,10 +754,10 @@
 
   <gazebo reference="FLOW_CAM">
     <sensor name="range_sensor" type="gpu_lidar">
+      <pose>0 0 0 0 0 1.5708</pose>
       <always_on>true</always_on>
       <update_rate>15</update_rate>
       <topic>range/height</topic>
-      <pose>0 0 0 0 0 0</pose>
       <lidar>
         <scan>
           <horizontal>

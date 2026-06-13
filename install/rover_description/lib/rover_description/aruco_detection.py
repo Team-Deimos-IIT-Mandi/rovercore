@@ -1,0 +1,1 @@
+/home/deepak/rovercore/rover_description/scripts/aruco_detection.py

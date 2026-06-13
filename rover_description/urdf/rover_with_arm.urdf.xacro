@@ -309,8 +309,8 @@
   <gazebo reference="RB"><mu1>1.0</mu1><mu2>1.0</mu2><material>Gazebo/Red</material></gazebo>
 
   <gazebo>
-    <plugin filename="ignition-gazebo-diff-drive-system"
-            name="ignition::gazebo::systems::DiffDrive">
+    <plugin filename="gz-sim-diff-drive-system"
+            name="gz::sim::systems::DiffDrive">
       <left_joint>LF_joint</left_joint>
       <left_joint>LB_joint</left_joint>
       <right_joint>RF_joint</right_joint>
@@ -330,8 +330,8 @@
   </gazebo>
 
   <gazebo>
-    <plugin filename="ignition-gazebo-joint-state-publisher-system"
-            name="ignition::gazebo::systems::JointStatePublisher">
+    <plugin filename="gz-sim-joint-state-publisher-system"
+            name="gz::sim::systems::JointStatePublisher">
       <joint_name>LF_joint</joint_name>
       <joint_name>LB_joint</joint_name>
       <joint_name>RF_joint</joint_name>

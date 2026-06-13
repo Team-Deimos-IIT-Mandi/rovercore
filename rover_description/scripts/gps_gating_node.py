@@ -6,10 +6,11 @@ Subscribes:
     /odometry/local (nav_msgs/Odometry) — from EKF Local
 
 Publishes:
-    /gps/odom_gated (nav_msgs/Odometry) — only passes if within 3σ
+    /gps/odom_gated (nav_msgs/Odometry) — only passes if within gate
 """
 
 import math
+import copy
 import rclpy
 from rclpy.node import Node
 from nav_msgs.msg import Odometry
@@ -19,11 +20,15 @@ class GpsGatingNode(Node):
     def __init__(self):
         super().__init__('gps_gating_node')
 
-        self.declare_parameter('gate_sigma', 3.0)           # TUNE: sigma threshold
-        self.declare_parameter('gps_position_cov', 0.25)    # TUNE: GPS variance (0.5m accuracy → 0.25 m²)
+        self.declare_parameter('gate_sigma', 3.0)
+        self.declare_parameter('gps_position_cov', 4.0)   # x/y variance in m^2
+        self.declare_parameter('gps_z_cov', 100.0)
+        self.declare_parameter('gps_yaw_cov', 100.0)
 
-        self.gate_sigma = self.get_parameter('gate_sigma').value
-        self.gps_cov = self.get_parameter('gps_position_cov').value
+        self.gate_sigma = float(self.get_parameter('gate_sigma').value)
+        self.gps_cov = float(self.get_parameter('gps_position_cov').value)
+        self.gps_z_cov = float(self.get_parameter('gps_z_cov').value)
+        self.gps_yaw_cov = float(self.get_parameter('gps_yaw_cov').value)
 
         self.local_x = 0.0
         self.local_y = 0.0
@@ -48,25 +53,32 @@ class GpsGatingNode(Node):
         gps_x = msg.pose.pose.position.x
         gps_y = msg.pose.pose.position.y
 
-        # Innovation (difference between GPS and EKF estimate)
         dx = gps_x - self.local_x
         dy = gps_y - self.local_y
 
-        # Innovation covariance = EKF cov + GPS cov
         s_x = max(self.local_cov_x, 0.01) + self.gps_cov
         s_y = max(self.local_cov_y, 0.01) + self.gps_cov
 
-        # Mahalanobis distance (simplified, assumes diagonal covariance)
         d2 = (dx * dx / s_x) + (dy * dy / s_y)
         d = math.sqrt(d2)
 
-        threshold = self.gate_sigma
+        if d <= self.gate_sigma:
+            out = copy.deepcopy(msg)
 
-        if d <= threshold:
-            self.pub.publish(msg)
+            # Do not leave covariance as zeros.
+            cov = [0.0] * 36
+            cov[0] = self.gps_cov       # x variance
+            cov[7] = self.gps_cov       # y variance
+            cov[14] = self.gps_z_cov    # z variance
+            cov[21] = 1e6               # roll variance
+            cov[28] = 1e6               # pitch variance
+            cov[35] = self.gps_yaw_cov  # yaw variance
+            out.pose.covariance = cov
+
+            self.pub.publish(out)
         else:
             self.get_logger().warn(
-                f'GPS REJECTED: Mahalanobis d={d:.2f} > {threshold}σ '
+                f'GPS REJECTED: Mahalanobis d={d:.2f} > {self.gate_sigma}σ '
                 f'(jump={math.sqrt(dx*dx+dy*dy):.1f}m)',
                 throttle_duration_sec=2.0)
 
