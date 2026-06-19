@@ -23,7 +23,6 @@ A ROS 2 (Humble) workspace for **Assem10**, a 4-wheel differential-drive Mars ro
 | RGB camera (FL, FR, left, right, rear) | 5 | 640×480, 90° HFOV |
 | Science camera | 1 | 1280×720, 70° HFOV, 0.05–10 m close-range |
 | Downward optical flow | 1 | 120×120 px |
-| Rangefinder (lidar) | 1 | 1 beam, 0.01–8 m |
 | IMU (ICM-20948) | 1 | 200 Hz, I²C addr 0x69 |
 
 ### State Estimation
