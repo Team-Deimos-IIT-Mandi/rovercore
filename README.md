@@ -279,5 +279,5 @@ colcon test --packages-select rover_description
 - **Package name:** `rover_description`
 - **Version:** `0.0.0`
 - **License:** Apache-2.0
-- **Maintainer:** Mars Rover Team
+- **Maintainer:** Team-Deimos-IIT-Mandi
 - **Build type:** `ament_cmake` (with `ament_cmake_python`)
