@@ -1,0 +1,509 @@
+:root {
+    --bg-deep: #2b2b2b;
+    --bg-card: #353535;
+    --bg-surface: #3c3c3c;
+    --bg-input: #434343;
+    --border: #464646;
+    --border-focus: #E95420;
+    --text: #F6F6F6;
+    --muted: #aaaaaa;
+    --orange: #E95420;
+    --orange-hover: #C34113;
+    --green: #28B462;
+    --yellow: #F99B11;
+    --red: #E62D2D;
+    --blue: #19B6EE;
+    --purple: #a855f7;
+}
+
+body {
+    background-color: var(--bg-deep);
+    color: var(--text);
+    font-family: 'Ubuntu', system-ui, -apple-system, sans-serif;
+    font-size: 0.875rem;
+}
+
+/* ── Scrollbar ── */
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #777; }
+
+/* ── Navbar ── */
+
+.navbar {
+    background-color: #242424 !important;
+    border-bottom: 1px solid var(--border) !important;
+    height: 42px;
+}
+
+.navbar-brand {
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--orange) !important;
+    letter-spacing: 0.5px;
+}
+
+.nav-about-link {
+    color: #777;
+    font-size: 0.78rem;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.nav-about-link:hover {
+    color: var(--text);
+}
+
+/* ── About Page ── */
+
+.about-section {
+    margin-bottom: 20px;
+}
+
+.about-section h2 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--orange);
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+}
+
+.about-section p,
+.about-section li {
+    font-size: 0.8rem;
+    color: #ccc;
+}
+
+.about-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about-section li {
+    padding: 3px 0;
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 0.78rem;
+}
+
+.about-section li::before {
+    content: '› ';
+    color: var(--orange);
+    font-weight: 700;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 3px 10px;
+    font-size: 0.8rem;
+}
+
+.about-grid dt {
+    color: var(--muted);
+    font-weight: 400;
+}
+
+.about-grid dd {
+    color: #ccc;
+    margin: 0;
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 0.78rem;
+}
+
+/* ── Cards ── */
+
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+.card-header {
+    background-color: #3a3a3a;
+    border-bottom: 1px solid var(--border);
+    padding: 8px 12px;
+    font-weight: 500;
+    font-size: 0.75rem;
+    color: #ccc;
+}
+
+.card-body {
+    padding: 12px;
+}
+
+/* ── Status Row ── */
+
+.state-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+}
+
+.state-badge {
+    font-family: 'Ubuntu Mono', 'Ubuntu', monospace;
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 4px 14px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    border-left: 3px solid var(--muted);
+    background-color: var(--bg-surface);
+    color: var(--muted);
+}
+
+.state-badge.boot                  { border-left-color: var(--blue);  color: var(--blue); }
+.state-badge.dome_exit             { border-left-color: var(--purple); color: var(--purple); }
+.state-badge.astronaut_search      { border-left-color: var(--blue);  color: var(--blue); }
+.state-badge.fuel_trail_follow     { border-left-color: var(--green); color: var(--green); }
+.state-badge.oxygen_tank_nav       { border-left-color: var(--yellow); color: var(--yellow); }
+.state-badge.dome_return           { border-left-color: var(--purple); color: var(--purple); }
+.state-badge.sequence_complete     { border-left-color: var(--green); color: var(--green); }
+.state-badge.emergency_stop        { border-left-color: var(--red); color: var(--red); animation: pulse-text 0.8s ease-in-out infinite; }
+
+@keyframes pulse-text {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ── Buttons ── */
+
+.btn {
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 0.8rem;
+    padding: 5px 14px;
+    border: 1px solid var(--border);
+    transition: all 0.12s ease;
+}
+
+.btn-advance {
+    font-size: 0.78rem;
+    padding: 5px 14px;
+}
+
+.btn-estop {
+    background: linear-gradient(180deg, #db3737 0%, #b02a2a 100%);
+    border: 1px solid #8c2020;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 7px 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+}
+
+.btn-estop:hover {
+    background: linear-gradient(180deg, #c43131 0%, #9e2525 100%);
+    border-color: #751a1a;
+    color: #fff;
+}
+
+.btn-outline-info {
+    border-color: #555;
+    color: #ccc;
+    background: linear-gradient(180deg, #484848 0%, #3d3d3d 100%);
+}
+.btn-outline-info:hover {
+    background: linear-gradient(180deg, #505050 0%, #454545 100%);
+    border-color: var(--orange);
+    color: var(--orange);
+}
+
+.btn-outline-success {
+    border-color: var(--green);
+    color: var(--green);
+    background: transparent;
+}
+.btn-outline-success:hover {
+    background-color: rgba(40, 180, 98, 0.12);
+    border-color: var(--green);
+    color: var(--green);
+}
+
+.btn-outline-danger {
+    border-color: var(--red);
+    color: var(--red);
+    background: transparent;
+}
+.btn-outline-danger:hover {
+    background-color: rgba(230, 45, 45, 0.12);
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.btn-outline-secondary {
+    border-color: var(--border);
+    color: var(--muted);
+    background: transparent;
+}
+.btn-outline-secondary:hover {
+    background-color: rgba(255,255,255,0.06);
+    border-color: #666;
+    color: var(--text);
+}
+
+/* ── Mission Flow ── */
+
+.mission-flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px;
+}
+
+.mission-flow .step {
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 4px;
+    color: #777;
+    background-color: #2e2e2e;
+    border: 1px solid #3a3a3a;
+    white-space: nowrap;
+}
+
+.mission-flow .step.active {
+    border-color: var(--orange);
+    color: var(--orange);
+    background-color: rgba(233, 84, 32, 0.08);
+}
+
+.mission-flow .step.done {
+    color: var(--green);
+    border-color: #3a3a3a;
+}
+
+.mission-flow .arrow {
+    color: #555;
+    font-size: 0.7rem;
+    padding: 0 2px;
+}
+
+/* ── Nodes ── */
+
+.nodes-table {
+    width: 100%;
+    font-size: 0.8rem;
+}
+
+.nodes-table .node-row {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.nodes-table .node-row:last-child {
+    border-bottom: none;
+}
+
+.node-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.node-status-dot.running {
+    background-color: var(--green);
+    box-shadow: 0 0 6px rgba(40, 180, 98, 0.5);
+}
+
+.node-status-dot.stopped {
+    background-color: #555;
+}
+
+.node-name {
+    flex: 1;
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+.node-meta {
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-right: 10px;
+    min-width: 90px;
+    text-align: right;
+}
+
+.node-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.node-actions .btn {
+    padding: 2px 10px;
+    font-size: 0.7rem;
+    min-width: 50px;
+}
+
+/* ── Camera Feed ── */
+
+.camera-feed {
+    width: 100%;
+    max-height: 380px;
+    object-fit: contain;
+    background-color: #000;
+    border-radius: 4px;
+}
+
+.camera-placeholder {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1a1a1a;
+    border-radius: 4px;
+    color: #555;
+    font-size: 0.8rem;
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+.camera-topic-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.camera-topic-input {
+    flex: 1;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: #ccc;
+    padding: 4px 8px;
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 0.75rem;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.camera-topic-input:focus {
+    border-color: var(--border-focus);
+}
+
+.camera-tab-remove {
+    margin-left: 4px;
+    color: var(--red);
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.4;
+}
+
+.camera-tab-remove:hover {
+    opacity: 1;
+}
+
+/* ── Logs ── */
+
+.log-container {
+    max-height: 300px;
+    overflow-y: auto;
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 0.72rem;
+    background-color: #1a1a1a;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.log-entry {
+    padding: 1px 0;
+    border-bottom: 1px solid rgba(70, 70, 70, 0.3);
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.log-entry .log-level {
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+.log-entry .log-level.INFO  { color: var(--blue); }
+.log-entry .log-level.WARN  { color: var(--yellow); }
+.log-entry .log-level.ERROR { color: var(--red); }
+.log-entry .log-level.FATAL { color: var(--red); background-color: rgba(230, 45, 45, 0.12); }
+.log-entry .log-level.DEBUG { color: #777; }
+
+.log-entry .log-name {
+    color: var(--green);
+    margin-right: 4px;
+}
+
+/* ── Tabs ── */
+
+.nav-tabs {
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+}
+
+.nav-tabs .nav-link {
+    color: #999;
+    border: 1px solid transparent;
+    border-radius: 5px 5px 0 0;
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-bottom: -1px;
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: transparent;
+    background-color: rgba(255,255,255,0.04);
+    color: var(--text);
+}
+
+.nav-tabs .nav-link.active {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-bottom-color: var(--bg-card);
+    color: var(--text);
+}
+
+/* ── Add Camera Form ── */
+
+.add-camera-form .form-control {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-size: 0.8rem;
+}
+
+.add-camera-form .form-control:focus {
+    border-color: var(--border-focus);
+    box-shadow: none;
+}
+
+.form-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-bottom: 2px;
+}
+
+/* ── Misc ── */
+
+hr {
+    border-color: var(--border);
+    opacity: 0.5;
+}
+
+.text-secondary {
+    color: var(--muted) !important;
+}
