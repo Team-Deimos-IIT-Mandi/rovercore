@@ -151,7 +151,7 @@ class MissionManager(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = MissionManager()
-    node.change_state('DOME_EXIT')  # Start in the middle of the sequence for testing purposes
+    node.change_state('DOME_EXIT')  # auto-advance from BOOTING
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:

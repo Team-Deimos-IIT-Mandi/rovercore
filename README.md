@@ -64,6 +64,41 @@ The mission is designed to run without Nav2 autonomy — all navigation is odome
 <br>
 1. Reman's Laptop(Gazebo Ignition) : [output.webm](https://github.com/user-attachments/assets/3e24419f-9114-4432-886b-92a7b103dc4c)
 
+## Troubleshooting
+
+### Build & Source
+| Symptom | Cause / Fix |
+|---|---|
+| `source install/setup.bash` fails | Workspace not built yet — run `colcon build` first |
+| `colcon build` fails with Python import errors | Missing system deps — `sudo apt install python3-opencv python3-numpy python3-scipy` |
+
+### Simulation (Gazebo)
+| Symptom | Cause / Fix |
+|---|---|
+| Gazebo window is blank / no terrain | World file not found — verify `world:=mars` (or `depot`, `moon`) is a valid world name |
+| No camera topics (`/cam/front/image_raw` etc.) | ROS-Gazebo bridge not connected — check `ros_gz_bridge` is running in the launch |
+| `/cmd_vel` published but rover doesn't move | Diff-drive controller not loaded — `ros2 control list_controllers` |
+| `/odom` not publishing | Wheel odometry plugin not active in Gazebo — verify URDF has `<plugin name="gz_ros2_control">` |
+
+### State Estimation
+| Symptom | Cause / Fix |
+|---|---|
+| `/gps/odom` not publishing | EKF Global not receiving data — check `/gps/fix` and NavSat transform config |
+| `/imu/filtered` not publishing | Notch filter node not running or IMU data missing |
+| EKF covariance grows unbounded | Sensor dropout — check all input topics with `ros2 topic echo` |
+
+### Navigation (Nav2)
+| Symptom | Cause / Fix |
+|---|---|
+| Nav2 "Received invalid goal" | Map frame not set — verify `use_sim_time` matches between nodes |
+| Robot spins in place / can't plan | Costmap inflated — check `nav2_params.yaml` footprint and inflation radius |
+| AMCL localization fails | Initial pose estimate wrong — use "2D Pose Estimate" in RViz |
+
+### Real Hardware
+| Symptom | Cause / Fix |
+|---|---|
+| Serial port error (`/dev/ttyTHS0`) | Permission denied — `sudo usermod -a -G dialout $USER` then log out and back in |
+| CAN-FD not working | Check bus: `sudo ip link set can0 up type can bitrate 5000000 dbitrate 5000000 fd on` |
 
 ## Mission Flow
 
@@ -753,7 +788,7 @@ Competition mission state machine with Flask web dashboard.
 |---|---|
 | `mission_manager.py` | Central mission FSM, state transitions |
 | `dome_exit.py` | Vision-guided airlock door exit |
-| `astronaut_searcher.py` | Navigate to fixed astronaut coordinate (x=-14, y=16) |
+| `astronaut_searcher.py` | Navigate to fixed astronaut coordinate (15.5, -11.4) |
 | `fuel_trail_follower.py` | HSV fuel trail line following (FSM-integrated) |
 | `oxygen_tank_navigator.py` | Navigate to oxygen tank (x=25.8, y=-6.0) |
 | `dome_return_navigator.py` | Navigate to dome (x=-5.0, y=3.5) |
@@ -850,6 +885,8 @@ ros2 run rover_description arc_night_mission.webapp.app
 ```bash
 colcon test --packages-select rover_description
 ```
+
+
 
 ## Dependencies
 

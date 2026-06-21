@@ -573,3 +573,35 @@ python app.py
 ```
 
 Then go to **http://localhost:5000** or the printed IP address. From the dashboard, start each node via the UI, or start them all and monitor progress.
+
+## Troubleshooting
+
+### Mission FSM
+| Symptom | Cause / Fix |
+|---|---|
+| Mission stuck at `BOOTING` | `mission_manager` didn't auto-transition — ensure `main()` calls `change_state('DOME_EXIT')` |
+| Worker node not taking control | Node subscribes to `rover/mission_state` — verify `mission_manager` is running **first** |
+| "FSM rejected transition" | State mismatch — worker tried to advance from a state the FSM isn't in. Check `ros2 topic echo /rover/mission_state` |
+
+### Fuel Trail Follower
+| Symptom | Cause / Fix |
+|---|---|
+| Trail not detected (dark line invisible) | HSV `trail` profile wrong for current lighting — use the debug trackbars to re-tune, then update hardcoded values in `fuel_trail_follower.py:66-70` |
+| Rocket not found (orange not detected) | Orange HSV mask too narrow — expand range in `fuel_trail_follower.py:72-75` |
+| OpenCV debug windows don't appear | Running over SSH or headless — forward X (`ssh -X`) or use `opencv-python-headless` (ROS topics publish without windows) |
+| `rocket_damage_report.jpg` not saved | Permission denied — check write permission in the working directory |
+
+### Web Dashboard
+| Symptom | Cause / Fix |
+|---|---|
+| Dashboard shows `UNKNOWN` state | `ros_bridge` can't reach `mission_manager` — verify the mission manager node is running and publishing `rover/mission_state` |
+| Camera feeds show blank / 204 No Content | Camera topic not subscribed — add via `POST /api/cameras/add` with `{"label": "...", "topic": "..."}` |
+| `Address already in use` on startup | Port 5000 is taken — kill the old process: `lsof -ti :5000 \| xargs kill` or change the port in `app.py:168` |
+| Node won't start from dashboard | Check the log panel — common issues: missing `install/setup.bash`, Python import errors, or the node isn't in `NODES` list |
+
+### General
+| Symptom | Cause / Fix |
+|---|---|
+| `ModuleNotFoundError: No module named 'flask'` | Run `pip install -r requirements.txt` from the `arc_night_mission/` directory |
+| Dead code errors | `align_and_move_node.py` and `final_turn_node.py` are vestiges — remove `__pycache__/` if stale bytecode causes confusion |
+| `__init__.py` missing | `arc_night_mission/` intentionally has no `__init__.py` — nodes run as standalone scripts |

@@ -86,8 +86,6 @@ This directory contains **30 ROS 2 Python nodes** and a sub-package (`arc_night_
 | `fuel_trail_follower.py` | HSV-based line tracker for the fuel trail. |
 | `oxygen_tank_navigator.py` | Odometry-target drive to reach the oxygen tank. |
 | `dome_return_navigator.py` | Odometry-target drive to return to the dome. |
-| `align_and_move_node.py` | Precision alignment and movement node. |
-| `final_turn_node.py` | Final turn maneuver to conclude the mission. |
 
 ### Running the Arc Night Mission
 
@@ -168,3 +166,31 @@ if __name__ == '__main__':
 ```
 
 State machines (`science_mission.py`, `pick_place_server.py`) extract core logic into pure-Python classes independent of ROS for testability.
+
+## Troubleshooting
+
+### Hardware Drivers
+| Symptom | Cause / Fix |
+|---|---|
+| GPS not publishing (`/gps/fix`) | Wrong serial port — check `gps_port:=/dev/rover_gps` or try `/dev/ttyUSB0` |
+| IMU not responding | I²C address mismatch — verify `imu_addr:=105` (0x69) and `imu_bus:=1` |
+| `mtf01_driver_node` no output | MSP baud rate mismatch — sensor defaults to 115200; check `stty` settings |
+
+### Computer Vision
+| Symptom | Cause / Fix |
+|---|---|
+| ArUco markers not detected | Wrong dictionary — code uses `DICT_4X4_50`, ensure markers match |
+| Fuel trail not detected | HSV values tuned for specific lighting — re-tune with `test.py` or the debug trackbars |
+| No camera images (`sensor_msgs/Image`) | Gazebo bridge not bridging the camera topic — check `/ros_gz_bridge` parameters |
+
+### Science & Arm
+| Symptom | Cause / Fix |
+|---|---|
+| Science mission stuck at `NAV` | `/science/sample` service not being called — trigger it manually or via dashboard |
+| Pick-and-place won't execute | Arm controller not loaded — `ros2 control list_controllers` should show `arm_controller` |
+
+### General
+| Symptom | Cause / Fix |
+|---|---|
+| Node crashes with `rclpy.init()` error | Node is being run inside an already-initialized context — run as standalone script, not imported |
+| `cv2.error` about window creation | Running headless — install `opencv-python-headless` or forward X display (`export DISPLAY=:0`)
