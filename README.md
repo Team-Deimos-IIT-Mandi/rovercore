@@ -60,7 +60,8 @@ This sub-package is the **main mission pipeline** for the Arc Night competition 
 The mission is designed to run without Nav2 autonomy — all navigation is odometry-based with simple proportional controllers, and all perception is pure OpenCV vision processing.
 
 ---
-**ONE ISSUE THAT THIS PACKAGE FACES IS THE FUEL TRAIL NODE. IN IT WE HAVE MASKED THE FUEL TRAIL FOR DETECTION-WHICH IS NOT ALWAYS WORKING WHEN WE ARE RUNNING IT ON A DIFFERENT GAZEBO- CURRENTLY THIS IS WORKING PROPERLY FOR IGNITION GAZEBO in Reman's Laptop- video attatched for reference**
+**ONE ISSUE THAT THIS PACKAGE FACES IS THE FUEL TRAIL NODE. IN IT WE HAVE MASKED THE FUEL TRAIL FOR DETECTION-WHICH IS NOT ALWAYS PROPERLY WORKING WHEN WE ARE RUNNING IT ON A DIFFERENT GAZEBO- CURRENTLY THIS IS WORKING PROPERLY FOR IGNITION GAZEBO in Reman's and Gazebo Harmonic in Deepak's Laptop - video attatched for reference**
+<br>
 [output.webm](https://github.com/user-attachments/assets/3e24419f-9114-4432-886b-92a7b103dc4c)
 
 
