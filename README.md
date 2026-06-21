@@ -5,8 +5,9 @@
 ## Contributors
 
 *  **Deepak Singla**
-*  **Aarush Jain**
 *  **Reman Dey**
+*  **Aarush Jain**
+
 
 ---
 
@@ -34,23 +35,18 @@ source install/setup.bash
 
 ### Step 3 — Launch the Arc Night Mission
 
-#### Option A: Manual Launch in Terminals
+Open a **second terminal**, source the workspace, and launch the Arc Night Mission:
 
 ```bash
-# Terminal 1 — start the FSM
-python3 arc_night_mission/mission_manager.py
-
-# Terminal 2 (after DOME_EXIT state is published) — start the exit node
-python3 arc_night_mission/dome_exit.py
-
-# SStart the other nodes in the arc_night mission in other terminals---launch file bnanae pe system crash horha hain mera
+source install/setup.bash
+ros2 launch rover_description arc_night_mission.launch.py
 ```
 
 #### Option B: Web Dashboard
 <img width="1799" height="882" alt="dashboard" src="https://github.com/user-attachments/assets/7e3a195e-2432-4db4-88d9-8abca886228c" />
 
 ```bash
-cd arc_night_mission/webapp
+cd scripts/arc_night_mission/webapp
 python app.py
 ```
 
@@ -282,7 +278,7 @@ def clamp(value, minimum, maximum):
 
 Vision-based node that follows a dark fuel trail by HSV color masking, then scans for an orange rocket and images its damage hole. This is the most perception-heavy node.
 
-#### ROS Interface
+#### ROS2 Interface
 
 | Direction | Topic / Service | Type |
 |---|---|---|
@@ -294,7 +290,7 @@ Vision-based node that follows a dark fuel trail by HSV color masking, then scan
 | Published | `/fuel_trail/debug_mask` | `sensor_msgs/Image` |
 | Client | `mission/complete_fuel_trail` | `std_srvs/srv/Trigger` |
 
-#### ROS Parameters (declared)
+#### ROS2 Parameters (declared)
 
 | Parameter | Type | Default | Description |
 |---|---|---|---|

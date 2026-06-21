@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+  navigate_and_search_bt.xml
+  Full recovery Nav2 BehaviorTree for rover outdoor navigation.
+
+  Strategy (6 outer retries):
+    1. Replan + follow path (inner retry on each step)
+    2. On outer failure → clear both costmaps → spin 90° → wait 5s → back up 0.3m
+-->
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <RecoveryNode number_of_retries="6" name="NavigateRecovery">
+
+      <!-- ── Normal navigation pipeline ── -->
+      <PipelineSequence name="NavigateWithReplanning">
+
+        <!-- Replan at 1 Hz; retry once on planner failure by clearing global costmap -->
+        <RateController hz="1.0">
+          <RecoveryNode number_of_retries="1" name="ComputePathRecovery">
+            <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
+            <ClearEntireCostmap name="ClearGlobalCostmap-OnPlanFail"
+                                service_name="global_costmap/clear_entirely_global_costmap"/>
+          </RecoveryNode>
+        </RateController>
+
+        <!-- Follow path; retry once on controller failure by clearing local costmap -->
+        <RecoveryNode number_of_retries="1" name="FollowPathRecovery">
+          <FollowPath path="{path}" controller_id="FollowPath"/>
+          <ClearEntireCostmap name="ClearLocalCostmap-OnFollowFail"
+                              service_name="local_costmap/clear_entirely_local_costmap"/>
+        </RecoveryNode>
+
+      </PipelineSequence>
+
+      <!-- ── Recovery fallback (fires after inner retries exhausted) ── -->
+      <ReactiveFallback name="RecoveryFallback">
+        <!-- If goal changed mid-recovery, exit immediately and replan -->
+        <GoalUpdated/>
+
+        <SequenceStar name="RecoveryActions">
+          <!-- 1. Clear stale obstacle data from both costmaps -->
+          <ClearEntireCostmap name="ClearLocalCostmap-Recovery"
+                              service_name="local_costmap/clear_entirely_local_costmap"/>
+          <ClearEntireCostmap name="ClearGlobalCostmap-Recovery"
+                              service_name="global_costmap/clear_entirely_global_costmap"/>
+          <!-- 2. Spin in place to re-observe surroundings -->
+          <Spin spin_dist="1.57"/>
+          <!-- 3. Wait for transient obstacles to clear -->
+          <Wait wait_duration="5.0"/>
+          <!-- 4. Back up to escape local minima -->
+          <BackUp backup_dist="0.30" backup_speed="0.15"/>
+        </SequenceStar>
+
+      </ReactiveFallback>
+
+    </RecoveryNode>
+  </BehaviorTree>
+</root>

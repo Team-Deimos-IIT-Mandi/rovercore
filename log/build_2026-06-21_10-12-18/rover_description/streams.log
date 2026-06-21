@@ -1,0 +1,172 @@
+[0.006s] Invoking command in '/home/remandey/my-programs/rovercore/build/rover_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/remandey/my-programs/rovercore/rover_description -DCMAKE_INSTALL_PREFIX=/home/remandey/my-programs/rovercore/install/rover_description
+[0.062s] -- The C compiler identification is GNU 11.4.0
+[0.106s] -- The CXX compiler identification is GNU 11.4.0
+[0.110s] -- Detecting C compiler ABI info
+[0.156s] -- Detecting C compiler ABI info - done
+[0.160s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.160s] -- Detecting C compile features
+[0.160s] -- Detecting C compile features - done
+[0.162s] -- Detecting CXX compiler ABI info
+[0.212s] -- Detecting CXX compiler ABI info - done
+[0.217s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.217s] -- Detecting CXX compile features
+[0.217s] -- Detecting CXX compile features - done
+[0.226s] -- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.309s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.369s] -- Found ament_lint_auto: 0.12.15 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.435s] -- Added test 'flake8' to check Python code syntax and style conventions
+[0.436s] -- Added test 'lint_cmake' to check CMake code style
+[0.437s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[0.440s] -- Added test 'xmllint' to check XML markup files
+[0.441s] -- Configuring done
+[0.442s] -- Generating done
+[0.443s] -- Build files have been written to: /home/remandey/my-programs/rovercore/build/rover_description
+[0.446s] Invoked command in '/home/remandey/my-programs/rovercore/build/rover_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/remandey/my-programs/rovercore/rover_description -DCMAKE_INSTALL_PREFIX=/home/remandey/my-programs/rovercore/install/rover_description
+[0.448s] Invoking command in '/home/remandey/my-programs/rovercore/build/rover_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/remandey/my-programs/rovercore/build/rover_description -- -j16 -l16
+[0.477s] Invoked command in '/home/remandey/my-programs/rovercore/build/rover_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/remandey/my-programs/rovercore/build/rover_description -- -j16 -l16
+[0.483s] Invoking command in '/home/remandey/my-programs/rovercore/build/rover_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/remandey/my-programs/rovercore/build/rover_description
+[0.487s] -- Install configuration: ""
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/teleop.py
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/cmd_vel_relay.py
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/aruco_detection.py
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/spiral_search.py
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/mission_initializer.py
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/mission_manager.py
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/dome_exit.py
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/astronaut_searcher.py
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/oxygen_tank_navigator.py
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/dome_return_navigator.py
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/fuel_trail_follower.py
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/robot_description_publisher.py
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/optical_flow_node.py
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/imu_filter_node.py
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/flow_derotation_node.py
+[0.487s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/nonholonomic_node.py
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/slip_detector_node.py
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/gps_gating_node.py
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/gps_fix_covariance_node.py
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/zupt_node.py
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/gps_driver_node.py
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/icm20948_driver_node.py
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/mtf01_driver_node.py
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/joint_state_restamper.py
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/lib/rover_description/joy_teleop.py
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/urdf
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/urdf/Assem10.urdf
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/urdf/rover.urdf
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/urdf/rover_with_arm.urdf.xacro
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/urdf/Assem10_real.urdf.xacro
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/urdf/Assem10.csv
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/meshes
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/meshes/OPTICAL.STL
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/meshes/Assem10.urdf
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/meshes/RB.STL
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/meshes/LF.STL
+[0.488s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/meshes/GPS.STL
+[0.489s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/meshes/LB.STL
+[0.489s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/meshes/RF.STL
+[0.489s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/meshes/IMU.STL
+[0.489s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/meshes/base_link.STL
+[0.510s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/launch
+[0.510s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/launch/drone_bringup.launch.py
+[0.510s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/launch/slam.launch.py
+[0.510s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/launch/state_estimation.launch.py
+[0.510s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/launch/__pycache__
+[0.510s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/launch/__pycache__/sim.launch.cpython-310.pyc
+[0.510s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/launch/nav2.launch.py
+[0.510s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/launch/sim.launch.py
+[0.510s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/launch/arc_night_mission.launch.py
+[0.510s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/launch/sensors_hw.launch.py
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/launch/full_autonomy.launch.py
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/rviz
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/rviz/nav2_config.rviz
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/config
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/config/joint_names_Assem10.yaml
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/config/mission_waypoints.yaml
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/config/cartographer.lua
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/config/nav2_params.yaml
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/config/mission_config.yaml
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/config/ekf_global.yaml
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/config/mavros_params.yaml
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/config/navigate_and_search_bt.xml
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/config/ekf_local.yaml
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/config/imu_calibration.yaml
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/config/rover_controllers.yaml
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/config/hardware_params.yaml
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/config/combined_controllers.yaml
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/config/navsat.yaml
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/worlds
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/worlds/agriculture.world
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/worlds/mars.world.sdf
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/worlds/empty.world
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/worlds/mars_terrain.world
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/maps
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/maps/my_map.yaml
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/maps/my_map.pgm
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/model.sdf
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/model.config
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials/textures
+[0.511s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials/textures/AgriBakeLarge.jpg
+[0.523s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials/textures/WoodPlanksWorn33_COL_VAR1_3K.jpg
+[0.524s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials/textures/WoodPlanksWornWhite33_COL_VAR1_3K.jpg
+[0.526s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials/textures/SolarPanelsPolycrystallineTypeBFramedClean001_COL_3K.jpg
+[0.529s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials/textures/MetalCorrugatedIronSheet002_METALNESS_3K_METALNESS.jpg
+[0.530s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/materials/textures/WoodPlanksWornRed33_COL_VAR1_3K.jpg
+[0.532s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/meshes
+[0.532s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/cpr_agriculture/meshes/agriculture_world.dae
+[0.533s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/ramp.stl
+[0.535s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2
+[0.535s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/model.sdf
+[0.535s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/model.config
+[0.535s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/materials
+[0.535s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/materials/textures
+[0.535s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/materials/textures/rock_texture_1.png
+[0.535s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/materials/textures/sand_pebbles.png
+[0.539s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/materials/scripts
+[0.539s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/materials/scripts/rock_texture_1.material
+[0.539s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/materials/scripts/sand_pebbles.material
+[0.539s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes
+[0.539s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/Emergency_kit.obj
+[0.539s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/fuel_trail.mtl
+[0.539s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/damaged_pipe.mtl
+[0.539s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/damaged_pipe.obj
+[0.539s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/Astronaut.obj
+[0.540s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/rocket.mtl
+[0.540s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/rocket.obj
+[0.540s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/Astronaut_final.mtl
+[0.540s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/Toolbox.mtl
+[0.540s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/gale_crater_patch2.stl
+[0.555s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/Toolbox.obj
+[0.556s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/rocket.stl
+[0.556s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/fuel_trail.obj
+[0.556s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/dome.obj
+[0.557s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/dome.mtl
+[0.557s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/repair_tool.obj
+[0.557s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/repair_tool.mtl
+[0.557s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/gale_crater_patch2/meshes/Emergency_kit.mtl
+[0.557s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/rocks
+[0.557s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/rocks/rock_medium.sdf
+[0.557s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/rocks/rock_large.sdf
+[0.557s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/rocks/rock_small.sdf
+[0.557s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/fuel_trail
+[0.557s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/fuel_trail/model.sdf
+[0.557s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/models/fuel_trail/model.config
+[0.557s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/ament_index/resource_index/package_run_dependencies/rover_description
+[0.557s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/ament_index/resource_index/parent_prefix_path/rover_description
+[0.557s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/environment/ament_prefix_path.sh
+[0.558s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/environment/ament_prefix_path.dsv
+[0.558s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/environment/path.sh
+[0.558s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/environment/path.dsv
+[0.558s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/local_setup.bash
+[0.558s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/local_setup.sh
+[0.558s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/local_setup.zsh
+[0.558s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/local_setup.dsv
+[0.558s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/package.dsv
+[0.558s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/ament_index/resource_index/packages/rover_description
+[0.558s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/cmake/rover_descriptionConfig.cmake
+[0.558s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/cmake/rover_descriptionConfig-version.cmake
+[0.558s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/package.xml
+[0.560s] Invoked command in '/home/remandey/my-programs/rovercore/build/rover_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/remandey/my-programs/rovercore/build/rover_description
