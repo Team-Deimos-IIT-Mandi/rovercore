@@ -98,7 +98,7 @@ ros2 launch rover_description full_autonomy.launch.py world:=mars
 
 This starts the rover in a Mars environment with `/odom`, camera feeds (`/cam/front/image_raw`, `/cam/left/image_raw`, `/cam/right/image_raw`), and `/cmd_vel` active.
 
-**Step 2 — Terminal 2: Launch the Arc Night Mission:**
+**Step 2 — Terminal 2: Launch the Arc Night Mission (Option A: Terminal Launch):**
 ```bash
 source install/setup.bash
 ros2 launch rover_description arc_night_mission.launch.py

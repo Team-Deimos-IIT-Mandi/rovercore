@@ -35,6 +35,8 @@ source install/setup.bash
 
 ### Step 3 — Launch the Arc Night Mission
 
+#### Option A: Terminal Launch
+
 Open a **second terminal**, source the workspace, and launch the Arc Night Mission:
 
 ```bash
