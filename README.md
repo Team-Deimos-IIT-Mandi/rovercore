@@ -53,6 +53,8 @@ The mission is designed to run without Nav2 autonomy — all navigation is odome
 
 ---
 **ONE ISSUE THAT THIS PACKAGE FACES IS THE FUEL TRAIL NODE. IN IT WE HAVE MASKED THE FUEL TRAIL FOR DETECTION-WHICH IS NOT ALWAYS WORKING WHEN WE ARE RUNNING IT ON A DIFFERENT GAZEBO- CURRENTLY THIS IS WORKING PROPERLY FOR IGNITION GAZEBO in Reman's Laptop- video attatched for reference**
+<video src="output.webm" width="100%" controls></video>
+
 ## Mission Flow
 
 The central finite state machine in `mission_manager.py` drives the mission through the following states:
