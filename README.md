@@ -33,7 +33,7 @@ python3 arc_night_mission/mission_manager.py
 # Terminal 2 (after DOME_EXIT state is published) — start the exit node
 python3 arc_night_mission/dome_exit.py
 
-# Subsequent nodes start automatically as the FSM advances
+# SStart the other nodes in the arc_night mission in other terminals---launch file bnanae pe system crash horha hain mera
 ```
 
 #### Option B: Web Dashboard
