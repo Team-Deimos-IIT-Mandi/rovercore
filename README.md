@@ -48,7 +48,7 @@ ros2 launch rover_description arc_night_mission.launch.py
 <img width="1799" height="882" alt="dashboard" src="https://github.com/user-attachments/assets/7e3a195e-2432-4db4-88d9-8abca886228c" />
 
 ```bash
-cd scripts/arc_night_mission/webapp
+cd rover_description/scripts/arc_night_mission/webapp
 python app.py
 ```
 
