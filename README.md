@@ -1,6 +1,6 @@
 # RoverCore World File — Mars Rover Autonomy Stack
 <br>
-#Contributors: Deepak Singla, Aarush Jain, Reman Dey
+# Contributors: Deepak Singla, Aarush Jain, Reman Dey
 <br>
 <br>
 <br>
