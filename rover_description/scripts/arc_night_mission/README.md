@@ -1,11 +1,55 @@
 # Arc Night Mission
+## Running the Full Mission
+
+### Step 1 — Launch the Rover Simulation
+
+```bash
+ros2 launch rover_description full_autonomy.launch.py world:=mars
+```
+
+Verify that `/odom`, `/gps/odom`, `/imu/filtered`, camera topics, and `/cmd_vel` are active:
+
+```bash
+ros2 topic list
+```
+
+### Step 2 — Source the Workspace
+
+```bash
+source install/setup.bash
+```
+
+### Step 3 — Launch the Arc Night Mission
+
+#### Option A: Manual Launch in Terminals
+
+```bash
+# Terminal 1 — start the FSM
+python3 arc_night_mission/mission_manager.py
+
+# Terminal 2 (after DOME_EXIT state is published) — start the exit node
+python3 arc_night_mission/dome_exit.py
+
+# Subsequent nodes start automatically as the FSM advances
+```
+
+#### Option B: Web Dashboard
+<img width="1799" height="882" alt="dashboard" src="https://github.com/user-attachments/assets/7e3a195e-2432-4db4-88d9-8abca886228c" />
+
+```bash
+cd arc_night_mission/webapp
+python app.py
+```
+
+Then go to **http://localhost:5000** or the printed IP address. From the dashboard, start each node via the UI, or start them all and monitor progress.
+
 
 This sub-package is the **main mission pipeline** for the Arc Night competition track. It orchestrates a sequence of autonomous behaviors — from exiting a dome structure to returning home — and provides a **web-based dashboard** for real-time monitoring and control.
 
 The mission is designed to run without Nav2 autonomy — all navigation is odometry-based with simple proportional controllers, and all perception is pure OpenCV vision processing.
 
 ---
-
+**ONE ISSUE THAT THIS PACKAGE FACES IS THE FUEL TRAIL NODE. IN IT WE HAVE MASKED THE FUEL TRAIL FOR DETECTION-WHICH IS NOT ALWAYS WORKING WHEN WE ARE RUNNING IT ON A DIFFERENT GAZEBO- CURRENTLY THIS IS WORKING PROPERLY FOR IGNITION GAZEBO in Reman's Laptop- video attatched for reference**
 ## Mission Flow
 
 The central finite state machine in `mission_manager.py` drives the mission through the following states:
@@ -534,45 +578,3 @@ Note: `BOOTING` is not in the bridge transitions — the auto-transition from `B
 
 ---
 
-## Running the Full Mission
-
-### Step 1 — Launch the Rover Simulation
-
-```bash
-ros2 launch rover_description full_autonomy.launch.py world:=mars
-```
-
-Verify that `/odom`, `/gps/odom`, `/imu/filtered`, camera topics, and `/cmd_vel` are active:
-
-```bash
-ros2 topic list
-```
-
-### Step 2 — Source the Workspace
-
-```bash
-source install/setup.bash
-```
-
-### Step 3 — Launch the Arc Night Mission
-
-#### Option A: Manual Launch in Terminals
-
-```bash
-# Terminal 1 — start the FSM
-python3 arc_night_mission/mission_manager.py
-
-# Terminal 2 (after DOME_EXIT state is published) — start the exit node
-python3 arc_night_mission/dome_exit.py
-
-# Subsequent nodes start automatically as the FSM advances
-```
-
-#### Option B: Web Dashboard
-
-```bash
-cd arc_night_mission/webapp
-python app.py
-```
-
-Then go to **http://localhost:5000** or the printed IP address. From the dashboard, start each node via the UI, or start them all and monitor progress.
