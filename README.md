@@ -1,15 +1,14 @@
-# RoverCore World File — Mars Rover Autonomy Stack
-<br>
-# Contributors:
-<br>
-Deepak Singla, 
-<br>
-Aarush Jain, 
-<br>
-Reman Dey
-<br>
-<br>
-<br>
+#  RoverCore World File
+
+---
+
+## Contributors
+
+*  **Deepak Singla**
+*  **Aarush Jain**
+*  **Reman Dey**
+
+---
 
 A ROS 2 (Humble) workspace for **Assem10**, a 4-wheel differential-drive Mars rover with simulation, hardware drivers, multi-sensor autonomy, a 6-DOF robotic arm.
 # Arc Night Mission
