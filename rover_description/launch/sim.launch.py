@@ -42,7 +42,7 @@ WORLDS = {
     }, # Use pkg_share worlds/mars.world.sdf
     'moon': {
         'world_name': 'moon', 'x': '0.0', 'y': '0.0', 'yaw': '0.0',
-        'z': '0.50', 'file': _srb('moon.sdf')
+        'z': '0.50', 'file': 'pkg_share'
     },
     'mars_array': {
         'world_name': 'mars_array', 'x': '0.0', 'y': '0.0', 'yaw': '0.0',
@@ -63,6 +63,8 @@ def launch_setup(context, *args, **kwargs):
     world_name = world_cfg['world_name']
     if world_arg == 'mars':
         world_file = os.path.join(pkg_share, 'worlds', 'mars.world.sdf')
+    elif world_arg == 'moon':
+        world_file = os.path.join(pkg_share, 'worlds', 'moon.world.sdf')
     else:
         world_file = world_cfg['file'] or os.path.join(pkg_share, 'worlds', 'empty.world')
     x_spawn    = world_cfg['x']
