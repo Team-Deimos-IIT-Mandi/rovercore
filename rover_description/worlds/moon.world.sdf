@@ -81,15 +81,6 @@
             </mesh>
           </geometry>
         </visual>
-
-        <collision name="dome_collision">
-          <geometry>
-            <box>
-              <size>3.0 3.0 2.0</size>
-            </box>
-          </geometry>
-        </collision>
-
       </link>
     </model>
   </world>
