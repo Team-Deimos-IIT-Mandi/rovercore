@@ -41,6 +41,7 @@ def generate_launch_description():
         launch_arguments={
             'use_sim_time': use_sim_time,
             'params_file': params_file,
+            'amcl': 'False',
             'use_composition': 'False',
             'use_respawn': 'False',
             'default_bt_xml_filename': bt_xml_path,
