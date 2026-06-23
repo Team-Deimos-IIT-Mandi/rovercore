@@ -1,0 +1,7 @@
+newmtl sensor_black
+Ka 0.02 0.02 0.02
+Kd 0.05 0.05 0.05
+Ks 0.15 0.15 0.15
+Ns 20.0
+d 1.0
+illum 2

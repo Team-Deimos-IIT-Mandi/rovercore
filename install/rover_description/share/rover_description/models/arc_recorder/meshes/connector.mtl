@@ -1,0 +1,7 @@
+newmtl connector_dark
+Ka 0.03 0.03 0.03
+Kd 0.08 0.08 0.09
+Ks 0.2 0.2 0.2
+Ns 30.0
+d 1.0
+illum 2

@@ -1,0 +1,47 @@
+mavros:
+  ros__parameters:
+    fcu_url: "udp://:14540@localhost:14557"
+    gcs_url: ""
+    target_system_id: 1
+    target_component_id: 1
+    fcu_protocol: "v2.0"
+
+    plugin_whitelist:
+      - battery
+      - command
+      - global_position
+      - imu
+      - local_position
+      - param
+      - rc_io
+      - setpoint_velocity
+      - state
+      - sys_status
+      - waypoint
+
+    conn:
+      heartbeat_rate: 1.0
+      heartbeat_mav_type: "ONBOARD_CONTROLLER"
+      timeout: 10.0
+      timesync_rate: 10.0
+      system_time_rate: 1.0
+
+    local_position:
+      frame_id: "map"
+      tf:
+        send: true
+        frame_id: "map"
+        child_frame_id: "drone/base_link"
+        listen: false
+
+    imu:
+      frame_id: "drone/imu_link"
+
+    global_position:
+      frame_id: "map"
+      child_frame_id: "drone/base_link"
+      rot_covariance: 99999.0
+
+    battery:
+      low_percentage: 0.2
+      critical_percentage: 0.1

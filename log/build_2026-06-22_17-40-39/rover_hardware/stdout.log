@@ -1,0 +1,33 @@
+[35m[1mConsolidate compiler generated dependencies of target rover_hardware[0m
+[100%] Built target rover_hardware
+-- Install configuration: ""
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/rover_hardware.xml
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/lib/librover_hardware.so
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/include
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/include/rover_hardware
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/include/rover_hardware/rover_can_interface.hpp
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/launch
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/launch/bringup.launch.py
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/config
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/config/controllers.yaml
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/rover_hardware.xml
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/ament_index/resource_index/package_run_dependencies/rover_hardware
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/ament_index/resource_index/parent_prefix_path/rover_hardware
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/environment/ament_prefix_path.sh
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/environment/path.sh
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/environment/path.dsv
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/local_setup.bash
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/local_setup.sh
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/local_setup.zsh
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/local_setup.dsv
+-- Installing: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/package.dsv
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/ament_index/resource_index/packages/rover_hardware
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/rover_hardware
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/cmake/export_rover_hardwareExport.cmake
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/cmake/export_rover_hardwareExport-noconfig.cmake
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/cmake/ament_cmake_export_targets-extras.cmake
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/cmake/rover_hardwareConfig.cmake
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/cmake/rover_hardwareConfig-version.cmake
+-- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/package.xml

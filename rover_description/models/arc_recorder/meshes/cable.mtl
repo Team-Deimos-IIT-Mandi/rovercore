@@ -1,0 +1,7 @@
+newmtl cable_gray
+Ka 0.15 0.15 0.15
+Kd 0.25 0.25 0.25
+Ks 0.3 0.3 0.3
+Ns 15
+d 1.0
+illum 2

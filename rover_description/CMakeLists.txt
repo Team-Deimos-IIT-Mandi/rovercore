@@ -18,12 +18,6 @@ install(
     scripts/aruco_detection.py
     scripts/spiral_search.py
     scripts/mission_initializer.py
-    scripts/arc_night_mission/mission_manager.py
-    scripts/arc_night_mission/dome_exit.py
-    scripts/arc_night_mission/astronaut_searcher.py
-    scripts/arc_night_mission/oxygen_tank_navigator.py
-    scripts/arc_night_mission/dome_return_navigator.py
-    scripts/arc_night_mission/fuel_trail_follower.py
     scripts/robot_description_publisher.py
     scripts/optical_flow_node.py
     scripts/imu_filter_node.py

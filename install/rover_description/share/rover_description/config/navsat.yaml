@@ -1,0 +1,55 @@
+# NavSat Transform — GPS lat/lon → map-frame XY
+#
+# ═══════════════════════════════════════════════════════════════════════════
+# BUGS FIXED (2026-06) — ALL THREE previous versions were wrong:
+#
+# BUG A — yaw_offset through history:
+#   Original: +1.5707963 (+π/2) → corrected_heading = 90+90 = 180° (West!)  ✗
+#   Previous fix (round 1): 0.0  → corrected_heading = 90+0  =  90° (North!) ✗
+#   THIS fix: -1.5707963 (-π/2) → corrected_heading = 90-90 =   0° (East!)  ✓
+#
+#   Root cause (proved by rotation matrix math):
+#     IMU joint rpy = (-1.5708, 0.019058, -1.5708)
+#     IMU sensor pose = (0 0 0 0 0 1.5708)
+#     Combined sensor orientation when rover faces East → pitch = 88.91°
+#     The 0.019-rad joint pitch prevents perfect gimbal lock, so
+#     yaw = atan2(R[1,0], R[0,0]) = atan2(0.019, 0) = +90° ← always
+#     navsat_transform needs to SUBTRACT this 90° offset: yaw_offset = -π/2
+#
+# BUG B — wait_for_datum: false (floating, non-reproducible origin)
+#   Fixed: datum now hard-wired to mars.world.sdf <spherical_coordinates>
+#
+# NOTE: use_odometry_yaw: true is set as belt-and-suspenders.
+#   This makes navsat_transform derive heading from /odometry/global (EKF global)
+#   instead of directly from /imu/filtered.  Since EKF global now uses
+#   imu0_relative=true, its yaw is correct (starts at 0=East, integrates gyro).
+#   yaw_offset is still set to -1.5707963 as the mathematically correct value;
+#   if use_odometry_yaw is ever turned off it will work immediately.
+# ═══════════════════════════════════════════════════════════════════════════
+
+navsat_transform_node:
+  ros__parameters:
+    use_sim_time: true
+    frequency: 10.0
+
+    # ── FIX A: corrected yaw_offset ────────────────────────────────────────
+    # IMU reports yaw=+90° when rover faces East (due to 0.019 pitch in joint).
+    # navsat formula:  corrected_heading = imu_yaw + yaw_offset
+    # We need corrected_heading = 0° → yaw_offset = -90° = -π/2 = -1.5707963
+    yaw_offset: -1.5707963
+
+    # Belt-and-suspenders: also derive heading from EKF global odometry.
+    # EKF global uses imu0_relative=true → yaw is always 0 at spawn → correct.
+    # This makes yaw_offset irrelevant in practice (kept for documentation).
+    use_odometry_yaw: true
+
+    magnetic_declination_radians: 0.0   # simulation — no magnetic declination
+
+    broadcast_cartesian_transform: false  # EKF Global owns map→odom TF
+
+    # ── FIX B: fixed datum matching mars.world.sdf <spherical_coordinates> ─
+    wait_for_datum: true
+    datum: [39.8942, 32.7845, 900.0]    # [lat_deg, lon_deg, alt_m]
+
+    zero_altitude: true          # 2D rover — ignore altitude differences
+    publish_filtered_gps: false
