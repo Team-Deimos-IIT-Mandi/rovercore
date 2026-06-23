@@ -1,0 +1,282 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sdf version="1.9">
+  <world name="mars_world">
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation> 
+      <latitude_deg>39.8942</latitude_deg>  
+      <longitude_deg>32.7845</longitude_deg> 
+      <elevation>900.0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+
+    <physics name="1ms" type="dart">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <dart>
+        <collision_detector>bullet</collision_detector>
+      </dart>
+    </physics>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+    <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact"/>
+    <plugin filename="gz-sim-navsat-system" name="gz::sim::systems::NavSat"/>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>0.5 0.5 0.5 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <scene>
+      <ambient>0.01 0.01 0.01 1</ambient>
+      <background>0.0 0.0 0.0 1</background>
+      <shadows>true</shadows>
+      <origin_visual>false</origin_visual>
+      <grid>false</grid>
+    </scene>
+
+    <include>
+      <name>ground</name>
+      <uri>model://gale_crater_patch2</uri>
+    </include>
+
+    <gui>
+      <camera name="user_camera">
+        <projection_type>orthographic</projection_type>
+        <pose>1.5 -1.25 0 0 1.578 0</pose>
+      </camera>
+    </gui>
+
+    <model name="astronaut1">
+      <static>true</static>
+
+      <!-- x y z roll pitch yaw -->
+      <pose>10.0 5.0 0.17 1.5708 0 0.2</pose>
+
+      <link name="link">
+
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <scale>0.4 0.4 0.4</scale>
+              <uri>../models/gale_crater_patch2/meshes/Astronaut.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>../models/gale_crater_patch2/meshes/Astronaut.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+      </link>
+    </model>
+    <model name="astronaut2">
+      <static>true</static>
+
+      <!-- x y z roll pitch yaw -->
+      <pose>15.0 10.0 0.17 1.5708 0 0.2</pose>
+
+      <link name="link">
+
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <scale>0.4 0.4 0.4</scale>
+              <uri>../models/gale_crater_patch2/meshes/Astronaut.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>../models/gale_crater_patch2/meshes/Astronaut.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+      </link>
+    </model>
+    <model name="astronaut3">
+      <static>true</static>
+
+      <!-- x y z roll pitch yaw -->
+      <pose>25.0 5.0 0.17 1.5708 0 0.2</pose>
+
+      <link name="link">
+
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <scale>0.4 0.4 0.4</scale>
+              <uri>../models/gale_crater_patch2/meshes/Astronaut.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>../models/gale_crater_patch2/meshes/Astronaut.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+      </link>
+    </model>
+    <model name="astronaut4">
+      <static>true</static>
+
+      <!-- x y z roll pitch yaw -->
+      <pose>20.0 -5.0 0.17 1.5708 0 0.2</pose>
+
+      <link name="link">
+
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <scale>0.4 0.4 0.4</scale>
+              <uri>../models/gale_crater_patch2/meshes/Astronaut.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>../models/gale_crater_patch2/meshes/Astronaut.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+      </link>
+    </model>
+    <model name="astronaut5">
+      <static>true</static>
+
+      <!-- x y z roll pitch yaw -->
+      <pose>15.0 -10.0 0.17 1.5708 0 0.2</pose>
+
+      <link name="link">
+
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <scale>0.4 0.4 0.4</scale>
+              <uri>../models/gale_crater_patch2/meshes/Astronaut.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>../models/gale_crater_patch2/meshes/Astronaut.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+      </link>
+    </model>
+    <model name="astronaut6">
+      <static>true</static>
+
+      <!-- x y z roll pitch yaw -->
+      <pose>5.0 -10.0 0.17 1.5708 0 0.2</pose>
+
+      <link name="link">
+
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <scale>0.4 0.4 0.4</scale>
+              <uri>../models/gale_crater_patch2/meshes/Astronaut.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>../models/gale_crater_patch2/meshes/Astronaut.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+      </link>
+    </model>
+    <model name="astronaut7">
+      <static>true</static>
+
+      <!-- x y z roll pitch yaw -->
+      <pose>0.0 -15.0 0.17 1.5708 0 0.2</pose>
+
+      <link name="link">
+
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <scale>0.4 0.4 0.4</scale>
+              <uri>../models/gale_crater_patch2/meshes/Astronaut.obj</uri>
+            </mesh>
+          </geometry>
+        </visual>
+
+        <collision name="collision">
+          <geometry>
+            <mesh>
+              <scale>0.001 0.001 0.001</scale>
+              <uri>../models/gale_crater_patch2/meshes/Astronaut.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+
+      </link>
+    </model>
+    <model name="mars_base_dome">
+      <static>true</static>
+
+      <pose>-5 3.5 -0.25 1.570795 0 -1.570795</pose>
+
+      <link name="dome_link">
+
+        <visual name="dome_visual">
+          <geometry>
+            <mesh>
+              <uri>../models/gale_crater_patch2/meshes/dome.obj</uri>
+
+              <!-- rover can fit -->
+              <scale>0.82 0.82 0.82</scale>
+
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

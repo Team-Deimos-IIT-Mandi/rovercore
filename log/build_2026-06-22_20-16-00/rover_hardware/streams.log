@@ -1,0 +1,36 @@
+[0.006s] Invoking command in '/home/remandey/my-programs/rovercore/build/rover_hardware': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/remandey/my-programs/rovercore/build/rover_hardware -- -j16 -l16
+[0.049s] [100%] Built target rover_hardware
+[0.057s] Invoked command in '/home/remandey/my-programs/rovercore/build/rover_hardware' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/remandey/my-programs/rovercore/build/rover_hardware -- -j16 -l16
+[0.058s] Invoking command in '/home/remandey/my-programs/rovercore/build/rover_hardware': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/remandey/my-programs/rovercore/build/rover_hardware
+[0.062s] -- Install configuration: ""
+[0.062s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/rover_hardware.xml
+[0.062s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/lib/librover_hardware.so
+[0.062s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/include
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/include/rover_hardware
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/include/rover_hardware/rover_can_interface.hpp
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/launch
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/launch/bringup.launch.py
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/config
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/config/controllers.yaml
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/rover_hardware.xml
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/ament_index/resource_index/package_run_dependencies/rover_hardware
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/ament_index/resource_index/parent_prefix_path/rover_hardware
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/environment/ament_prefix_path.sh
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/environment/ament_prefix_path.dsv
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/environment/path.sh
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/environment/path.dsv
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/local_setup.bash
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/local_setup.sh
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/local_setup.zsh
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/local_setup.dsv
+[0.063s] -- Installing: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/package.dsv
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/ament_index/resource_index/packages/rover_hardware
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/rover_hardware
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/cmake/export_rover_hardwareExport.cmake
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/cmake/export_rover_hardwareExport-noconfig.cmake
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/cmake/ament_cmake_export_targets-extras.cmake
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/cmake/ament_cmake_export_dependencies-extras.cmake
+[0.063s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/cmake/rover_hardwareConfig.cmake
+[0.064s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/cmake/rover_hardwareConfig-version.cmake
+[0.064s] -- Up-to-date: /home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/package.xml
+[0.066s] Invoked command in '/home/remandey/my-programs/rovercore/build/rover_hardware' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/remandey/my-programs/rovercore/build/rover_hardware

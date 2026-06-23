@@ -1,0 +1,530 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sdf version="1.9">
+  <world name="moon2">
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation> 
+      <latitude_deg>39.8942</latitude_deg>  
+      <longitude_deg>32.7845</longitude_deg> 
+      <elevation>900.0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+
+    <gravity>0 0 -9.8</gravity>
+
+    <physics name="lms" type="dart">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <dart>
+        <collision_detector>bullet</collision_detector>
+      </dart>
+    </physics>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+    <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact"/>
+    <plugin filename="gz-sim-navsat-system" name="gz::sim::systems::NavSat"/>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10000 0 0 0</pose>
+      <diffuse>1.0 1.0 1.0 1.0</diffuse>
+      <specular>0.2 0.2 0.2 1.0</specular>
+      <attenuation>
+        <range>100000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -1.0</direction>
+    </light>
+
+    <scene>
+      <ambient>0.01 0.01 0.01 1</ambient>
+      <background>0.0 0.0 0.0 1</background>
+      <shadows>true</shadows>
+      <origin_visual>false</origin_visual>
+      <grid>false</grid>
+    </scene>
+
+    <include>
+      <name>ground</name>
+      <uri>model://gale_crater_patch2</uri>
+    </include>
+
+    <model name="moon_airlock">
+      <static>true</static>
+      <pose>0 0 1.0 1.5708 0 -1.5708</pose>
+      <link name="airlock_link">
+        <visual name="airlock_visual">
+          <geometry>
+            <mesh>
+              <uri>../models/gale_crater_patch2/meshes/dome.obj</uri>
+              <scale>0.82 0.82 0.82</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="airlock_collision">
+          <geometry>
+            <box>
+              <size>3.0 3.0 2.0</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <include>
+      <name>arc_sensor_1</name>
+      <uri>model://arc_sensor</uri>
+      <pose>6 10 0.4 0 0 0</pose>
+    </include>
+
+    <model name="arc26_pipe_collaboration_mission">
+      <pose>-10.0 28.0 0 0 0 0</pose>
+      <static>true</static>
+      <link name="left_support">
+        <pose>0 0 0 0 0 0</pose>
+        <visual name="left_leg_outer_visual">
+          <pose>0 -0.075 0.35 -0.211 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>0.716</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.15 0.15 0.15 1</ambient>
+            <diffuse>0.2 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+        <collision name="left_leg_outer_collision">
+          <pose>0 -0.075 0.35 -0.211 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>0.716</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="left_leg_inner_visual">
+          <pose>0 0.075 0.35 0.211 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>0.716</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.15 0.15 0.15 1</ambient>
+            <diffuse>0.2 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+        <collision name="left_leg_inner_collision">
+          <pose>0 0.075 0.35 0.211 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>0.716</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="right_support">
+        <pose>3.0 0 0 0 0 0</pose>
+        <visual name="right_leg_outer_visual">
+          <pose>0 -0.075 0.35 -0.211 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>0.716</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.15 0.15 0.15 1</ambient>
+            <diffuse>0.2 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+        <collision name="right_leg_outer_collision">
+          <pose>0 -0.075 0.35 -0.211 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>0.716</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="right_leg_inner_visual">
+          <pose>0 0.075 0.35 0.211 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>0.716</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.15 0.15 0.15 1</ambient>
+            <diffuse>0.2 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+        <collision name="right_leg_inner_collision">
+          <pose>0 0.075 0.35 0.211 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>0.716</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="pipe_segment_0">
+        <pose>0.12 0 0.7 0 1.5708 0</pose>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.24</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.1 0.2 0.6 1</ambient>
+            <diffuse>0.15 0.3 0.8 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.24</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="coupling_1">
+        <pose>0.25 0 0.7 0 1.5708 0</pose>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.125</radius>
+              <length>0.02</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.9 0.55 0.1 1</ambient>
+            <diffuse>1.0 0.65 0.15 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.125</radius>
+              <length>0.02</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="pipe_segment_1">
+        <pose>0.775 0 0.7 0 1.5708 0</pose>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>1.03</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.6 0.1 0.1 1</ambient>
+            <diffuse>0.8 0.15 0.15 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>1.03</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="coupling_2">
+        <pose>1.3 0 0.7 0 1.5708 0</pose>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.125</radius>
+              <length>0.02</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.9 0.55 0.1 1</ambient>
+            <diffuse>1.0 0.65 0.15 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.125</radius>
+              <length>0.02</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="pipe_segment_2">
+        <pose>1.5 0 0.7 0 1.5708 0</pose>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.38</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.15 0.55 0.15 1</ambient>
+            <diffuse>0.2 0.75 0.2 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.38</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="coupling_3">
+        <pose>1.7 0 0.7 0 1.5708 0</pose>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.125</radius>
+              <length>0.02</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.9 0.55 0.1 1</ambient>
+            <diffuse>1.0 0.65 0.15 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.125</radius>
+              <length>0.02</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="pipe_segment_3">
+        <pose>2.225 0 0.7 0 1.5708 0</pose>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>1.03</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.6 0.1 0.1 1</ambient>
+            <diffuse>0.8 0.15 0.15 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>1.03</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="coupling_4">
+        <pose>2.75 0 0.7 0 1.5708 0</pose>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.125</radius>
+              <length>0.02</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.9 0.55 0.1 1</ambient>
+            <diffuse>1.0 0.65 0.15 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.125</radius>
+              <length>0.02</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="pipe_segment_4">
+        <pose>2.88 0 0.7 0 1.5708 0</pose>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.24</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.1 0.2 0.6 1</ambient>
+            <diffuse>0.15 0.3 0.8 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.1</radius>
+              <length>0.24</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+      <link name="clamp_bracket_detail">
+        <pose>-0.4 0 0.1175 0 0 0</pose>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.02 0.2 0.235</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.6 0.6 0.6 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.02 0.2 0.235</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name="arc26_solar_panel_collaboration_mission">
+      <pose>-16.0 26.0 0 0 0 0</pose>
+      <static>true</static>
+      <link name="pv_cell_array">
+        <pose>0.375 0 0.5 0 0 0</pose>
+        <visual name="cell_area_base_visual">
+          <geometry>
+            <box>
+              <size>0.75 0.03 1.0</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.10 0.25 1</ambient>
+            <diffuse>0.08 0.15 0.35 1</diffuse>
+            <specular>0.3 0.3 0.4 1</specular>
+          </material>
+        </visual>
+        <collision name="cell_area_collision">
+          <geometry>
+            <box>
+              <size>0.75 0.03 1.0</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="grid_line_v1">
+          <pose>-0.125 0.0165 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.01 0.005 1.0</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.9 0.9 0.9 1</diffuse>
+          </material>
+        </visual>
+        <visual name="grid_line_v2">
+          <pose>0.125 0.0165 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.01 0.005 1.0</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.9 0.9 0.9 1</diffuse>
+          </material>
+        </visual>
+        <visual name="grid_line_h1">
+          <pose>0 0.0165 -0.25 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.75 0.005 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.9 0.9 0.9 1</diffuse>
+          </material>
+        </visual>
+        <visual name="grid_line_h2">
+          <pose>0 0.0165 0 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.75 0.005 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.9 0.9 0.9 1</diffuse>
+          </material>
+        </visual>
+        <visual name="grid_line_h3">
+          <pose>0 0.0165 0.25 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.75 0.005 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.9 0.9 0.9 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <link name="branding_strip">
+        <pose>0.875 0 0.5 0 0 0</pose>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.25 0.03 1.0</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.08 0.08 0.08 1</ambient>
+            <diffuse>0.12 0.12 0.12 1</diffuse>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.25 0.03 1.0</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <gui>
+      <camera name="user_camera">
+        <projection_type>orthographic</projection_type>
+        <pose>1.5 -1.25 0 0 1.578 0</pose>
+      </camera>
+    </gui>
+  </world>
+</sdf>

@@ -1,0 +1,13 @@
+# IMU Calibration — Notch Filter for Motor Vibration
+#
+# Mag calibration (hard/soft iron) is NOT included here because sensor_msgs/Imu
+# doesn't carry magnetometer data. Will be added when porting to real hardware.
+#
+# TUNE: Run motors, record IMU accel with ros2 bag, FFT to find vibration peak → notch_frequency.
+
+imu_filter_node:
+  ros__parameters:
+    # Notch filter for motor vibration
+    notch_frequency: 45.0       # TUNE: Hz. Find via FFT of IMU accel while motors run.
+    notch_bandwidth: 5.0        # TUNE: Hz. Width of the notch.
+    notch_enabled: true

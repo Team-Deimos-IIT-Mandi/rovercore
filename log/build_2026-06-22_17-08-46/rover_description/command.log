@@ -1,0 +1,4 @@
+Invoking command in '/home/remandey/my-programs/rovercore/build/rover_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/remandey/my-programs/rovercore/build/rover_description -- -j16 -l16
+Invoked command in '/home/remandey/my-programs/rovercore/build/rover_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/remandey/my-programs/rovercore/build/rover_description -- -j16 -l16
+Invoking command in '/home/remandey/my-programs/rovercore/build/rover_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/remandey/my-programs/rovercore/build/rover_description
+Invoked command in '/home/remandey/my-programs/rovercore/build/rover_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/remandey/my-programs/rovercore/build/rover_description

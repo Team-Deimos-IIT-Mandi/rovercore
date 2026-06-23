@@ -1,0 +1,311 @@
+[0.071s] [34mcolcon[0m [1;30mDEBUG[0m [32mCommand line arguments: ['/usr/bin/colcon', 'build'][0m
+[0.071s] [34mcolcon[0m [1;30mDEBUG[0m [32mParsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=16, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x7350f6f3f820>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7350f6f3f130>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7350f6f3f130>>, mixin_verb=('build',))[0m
+[0.185s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(colcon_meta) check parameters
+[0.185s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) check parameters
+[0.185s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) check parameters
+[0.185s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) check parameters
+[0.185s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(colcon_meta) discover
+[0.185s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) discover
+[0.185s] [34mcolcon.colcon_core.package_discovery[0m [1;30mINFO[0m Crawling recursively for packages in '/home/remandey/my-programs/rovercore'
+[0.185s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.185s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ignore'
+[0.185s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ignore_ament_install'
+[0.185s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['colcon_pkg']
+[0.185s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'colcon_pkg'
+[0.185s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['colcon_meta']
+[0.185s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'colcon_meta'
+[0.185s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['ros']
+[0.185s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ros'
+[0.200s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['cmake', 'python']
+[0.200s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'cmake'
+[0.200s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'python'
+[0.200s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['python_setup_py']
+[0.200s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'python_setup_py'
+[0.200s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.200s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) by extension 'ignore'
+[0.200s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) ignored
+[0.200s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) by extension 'ignore'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) ignored
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) by extension 'ignore'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) ignored
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(maps) by extensions ['ignore', 'ignore_ament_install']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(maps) by extension 'ignore'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(maps) by extension 'ignore_ament_install'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(maps) by extensions ['colcon_pkg']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(maps) by extension 'colcon_pkg'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(maps) by extensions ['colcon_meta']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(maps) by extension 'colcon_meta'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(maps) by extensions ['ros']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(maps) by extension 'ros'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(maps) by extensions ['cmake', 'python']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(maps) by extension 'cmake'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(maps) by extension 'python'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(maps) by extensions ['python_setup_py']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(maps) by extension 'python_setup_py'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(meshes) by extensions ['ignore', 'ignore_ament_install']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(meshes) by extension 'ignore'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(meshes) by extension 'ignore_ament_install'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(meshes) by extensions ['colcon_pkg']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(meshes) by extension 'colcon_pkg'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(meshes) by extensions ['colcon_meta']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(meshes) by extension 'colcon_meta'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(meshes) by extensions ['ros']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(meshes) by extension 'ros'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(meshes) by extensions ['cmake', 'python']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(meshes) by extension 'cmake'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(meshes) by extension 'python'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(meshes) by extensions ['python_setup_py']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(meshes) by extension 'python_setup_py'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models) by extensions ['ignore', 'ignore_ament_install']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models) by extension 'ignore'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models) by extension 'ignore_ament_install'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models) by extensions ['colcon_pkg']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models) by extension 'colcon_pkg'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models) by extensions ['colcon_meta']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models) by extension 'colcon_meta'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models) by extensions ['ros']
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models) by extension 'ros'
+[0.201s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models) by extensions ['cmake', 'python']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models) by extension 'cmake'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models) by extension 'python'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models) by extensions ['python_setup_py']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models) by extension 'python_setup_py'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture) by extensions ['ignore', 'ignore_ament_install']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture) by extension 'ignore'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture) by extension 'ignore_ament_install'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture) by extensions ['colcon_pkg']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture) by extension 'colcon_pkg'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture) by extensions ['colcon_meta']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture) by extension 'colcon_meta'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture) by extensions ['ros']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture) by extension 'ros'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture) by extensions ['cmake', 'python']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture) by extension 'cmake'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture) by extension 'python'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture) by extensions ['python_setup_py']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture) by extension 'python_setup_py'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials) by extensions ['ignore', 'ignore_ament_install']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials) by extension 'ignore'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials) by extension 'ignore_ament_install'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials) by extensions ['colcon_pkg']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials) by extension 'colcon_pkg'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials) by extensions ['colcon_meta']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials) by extension 'colcon_meta'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials) by extensions ['ros']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials) by extension 'ros'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials) by extensions ['cmake', 'python']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials) by extension 'cmake'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials) by extension 'python'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials) by extensions ['python_setup_py']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials) by extension 'python_setup_py'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials/textures) by extensions ['ignore', 'ignore_ament_install']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials/textures) by extension 'ignore'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials/textures) by extension 'ignore_ament_install'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials/textures) by extensions ['colcon_pkg']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials/textures) by extension 'colcon_pkg'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials/textures) by extensions ['colcon_meta']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials/textures) by extension 'colcon_meta'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials/textures) by extensions ['ros']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials/textures) by extension 'ros'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials/textures) by extensions ['cmake', 'python']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials/textures) by extension 'cmake'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials/textures) by extension 'python'
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials/textures) by extensions ['python_setup_py']
+[0.202s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/materials/textures) by extension 'python_setup_py'
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/meshes) by extensions ['ignore', 'ignore_ament_install']
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/meshes) by extension 'ignore'
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/meshes) by extension 'ignore_ament_install'
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/meshes) by extensions ['colcon_pkg']
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/meshes) by extension 'colcon_pkg'
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/meshes) by extensions ['colcon_meta']
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/meshes) by extension 'colcon_meta'
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/meshes) by extensions ['ros']
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/meshes) by extension 'ros'
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/meshes) by extensions ['cmake', 'python']
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/meshes) by extension 'cmake'
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/meshes) by extension 'python'
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/meshes) by extensions ['python_setup_py']
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(models/cpr_agriculture/meshes) by extension 'python_setup_py'
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_description) by extensions ['ignore', 'ignore_ament_install']
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_description) by extension 'ignore'
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_description) by extension 'ignore_ament_install'
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_description) by extensions ['colcon_pkg']
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_description) by extension 'colcon_pkg'
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_description) by extensions ['colcon_meta']
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_description) by extension 'colcon_meta'
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_description) by extensions ['ros']
+[0.203s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_description) by extension 'ros'
+[0.205s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'rover_description' with type 'ros.ament_cmake' and name 'rover_description'[0m
+[0.205s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_hardware) by extensions ['ignore', 'ignore_ament_install']
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_hardware) by extension 'ignore'
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_hardware) by extension 'ignore_ament_install'
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_hardware) by extensions ['colcon_pkg']
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_hardware) by extension 'colcon_pkg'
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_hardware) by extensions ['colcon_meta']
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_hardware) by extension 'colcon_meta'
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_hardware) by extensions ['ros']
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(rover_hardware) by extension 'ros'
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'rover_hardware' with type 'ros.ament_cmake' and name 'rover_hardware'[0m
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(worlds) by extensions ['ignore', 'ignore_ament_install']
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(worlds) by extension 'ignore'
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(worlds) by extension 'ignore_ament_install'
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(worlds) by extensions ['colcon_pkg']
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(worlds) by extension 'colcon_pkg'
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(worlds) by extensions ['colcon_meta']
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(worlds) by extension 'colcon_meta'
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(worlds) by extensions ['ros']
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(worlds) by extension 'ros'
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(worlds) by extensions ['cmake', 'python']
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(worlds) by extension 'cmake'
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(worlds) by extension 'python'
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(worlds) by extensions ['python_setup_py']
+[0.206s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(worlds) by extension 'python_setup_py'
+[0.207s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) using defaults
+[0.207s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) discover
+[0.207s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) using defaults
+[0.207s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) discover
+[0.207s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) using defaults
+[0.216s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(prefix_path) check parameters
+[0.216s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(prefix_path) discover
+[0.217s] [34mcolcon.colcon_installed_package_information.package_discovery[0m [1;30mDEBUG[0m [32mFound 2 installed packages in /home/remandey/my-programs/rovercore/install[0m
+[0.218s] [34mcolcon.colcon_installed_package_information.package_discovery[0m [1;30mDEBUG[0m [32mFound 452 installed packages in /opt/ros/humble[0m
+[0.219s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(prefix_path) using defaults
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_description' build argument 'cmake_args' from command line to 'None'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_description' build argument 'cmake_target' from command line to 'None'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'rover_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/remandey/my-programs/rovercore/build/rover_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/remandey/my-programs/rovercore/install/rover_description', 'merge_install': False, 'path': '/home/remandey/my-programs/rovercore/rover_description', 'symlink_install': False, 'test_result_base': None}[0m
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_hardware' build argument 'cmake_args' from command line to 'None'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_hardware' build argument 'cmake_target' from command line to 'None'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_hardware' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_hardware' build argument 'cmake_clean_cache' from command line to 'False'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_hardware' build argument 'cmake_clean_first' from command line to 'False'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_hardware' build argument 'cmake_force_configure' from command line to 'False'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_hardware' build argument 'ament_cmake_args' from command line to 'None'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_hardware' build argument 'catkin_cmake_args' from command line to 'None'
+[0.243s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'rover_hardware' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.244s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'rover_hardware' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/remandey/my-programs/rovercore/build/rover_hardware', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/remandey/my-programs/rovercore/install/rover_hardware', 'merge_install': False, 'path': '/home/remandey/my-programs/rovercore/rover_hardware', 'symlink_install': False, 'test_result_base': None}[0m
+[0.244s] [34mcolcon.colcon_core.executor[0m [1;30mINFO[0m Executing jobs using 'parallel' executor
+[0.244s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mrun_until_complete[0m
+[0.244s] [34mcolcon.colcon_ros.task.ament_cmake.build[0m [1;30mINFO[0m Building ROS package in '/home/remandey/my-programs/rovercore/rover_description' with build type 'ament_cmake'
+[0.244s] [34mcolcon.colcon_cmake.task.cmake.build[0m [1;30mINFO[0m Building CMake package in '/home/remandey/my-programs/rovercore/rover_description'
+[0.245s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.246s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.246s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[0.248s] [34mcolcon.colcon_ros.task.ament_cmake.build[0m [1;30mINFO[0m Building ROS package in '/home/remandey/my-programs/rovercore/rover_hardware' with build type 'ament_cmake'
+[0.248s] [34mcolcon.colcon_cmake.task.cmake.build[0m [1;30mINFO[0m Building CMake package in '/home/remandey/my-programs/rovercore/rover_hardware'
+[0.248s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.248s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[0.252s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/remandey/my-programs/rovercore/build/rover_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/remandey/my-programs/rovercore/build/rover_description -- -j16 -l16[0m
+[0.254s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/remandey/my-programs/rovercore/build/rover_hardware': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/remandey/my-programs/rovercore/build/rover_hardware -- -j16 -l16[0m
+[0.278s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/remandey/my-programs/rovercore/build/rover_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/remandey/my-programs/rovercore/build/rover_description -- -j16 -l16[0m
+[0.283s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/remandey/my-programs/rovercore/build/rover_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/remandey/my-programs/rovercore/build/rover_description[0m
+[0.289s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(rover_description)
+[0.292s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_description' for CMake module files
+[0.293s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_description' for CMake config files
+[0.296s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/remandey/my-programs/rovercore/build/rover_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/remandey/my-programs/rovercore/build/rover_description[0m
+[0.296s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('rover_description', 'cmake_prefix_path')
+[0.296s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/hook/cmake_prefix_path.ps1'
+[0.296s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/hook/cmake_prefix_path.dsv'
+[0.297s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/hook/cmake_prefix_path.sh'
+[0.297s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_description/lib'
+[0.297s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_description/bin'
+[0.297s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_description/lib/pkgconfig/rover_description.pc'
+[0.297s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_description/lib/python3.10/site-packages'
+[0.297s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_description/bin'
+[0.298s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/package.ps1'
+[0.298s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/package.dsv'
+[0.298s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/package.sh'
+[0.299s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/package.bash'
+[0.299s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/package.zsh'
+[0.299s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/home/remandey/my-programs/rovercore/install/rover_description/share/colcon-core/packages/rover_description)
+[0.300s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(rover_description)
+[0.300s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_description' for CMake module files
+[0.300s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_description' for CMake config files
+[0.300s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('rover_description', 'cmake_prefix_path')
+[0.300s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/hook/cmake_prefix_path.ps1'
+[0.301s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/hook/cmake_prefix_path.dsv'
+[0.301s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/hook/cmake_prefix_path.sh'
+[0.301s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_description/lib'
+[0.301s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_description/bin'
+[0.301s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_description/lib/pkgconfig/rover_description.pc'
+[0.301s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_description/lib/python3.10/site-packages'
+[0.301s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_description/bin'
+[0.302s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/package.ps1'
+[0.302s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/package.dsv'
+[0.302s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/package.sh'
+[0.302s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/package.bash'
+[0.302s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_description/share/rover_description/package.zsh'
+[0.303s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/home/remandey/my-programs/rovercore/install/rover_description/share/colcon-core/packages/rover_description)
+[0.303s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/remandey/my-programs/rovercore/build/rover_hardware' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/remandey/my-programs/rovercore/build/rover_hardware -- -j16 -l16[0m
+[0.304s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/remandey/my-programs/rovercore/build/rover_hardware': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/remandey/my-programs/rovercore/build/rover_hardware[0m
+[0.310s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(rover_hardware)
+[0.310s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_hardware' for CMake module files
+[0.310s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/remandey/my-programs/rovercore/build/rover_hardware' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/remandey/my-programs/rovercore/build/rover_hardware[0m
+[0.310s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_hardware' for CMake config files
+[0.310s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('rover_hardware', 'cmake_prefix_path')
+[0.310s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/hook/cmake_prefix_path.ps1'
+[0.311s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/hook/cmake_prefix_path.dsv'
+[0.311s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/hook/cmake_prefix_path.sh'
+[0.311s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_hardware/lib'
+[0.311s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('rover_hardware', 'ld_library_path_lib')
+[0.311s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/hook/ld_library_path_lib.ps1'
+[0.311s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/hook/ld_library_path_lib.dsv'
+[0.311s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/hook/ld_library_path_lib.sh'
+[0.312s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_hardware/bin'
+[0.312s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_hardware/lib/pkgconfig/rover_hardware.pc'
+[0.312s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_hardware/lib/python3.10/site-packages'
+[0.312s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_hardware/bin'
+[0.312s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/package.ps1'
+[0.312s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/package.dsv'
+[0.313s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/package.sh'
+[0.313s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/package.bash'
+[0.313s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/package.zsh'
+[0.313s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/home/remandey/my-programs/rovercore/install/rover_hardware/share/colcon-core/packages/rover_hardware)
+[0.313s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(rover_hardware)
+[0.313s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_hardware' for CMake module files
+[0.314s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_hardware' for CMake config files
+[0.314s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('rover_hardware', 'cmake_prefix_path')
+[0.314s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/hook/cmake_prefix_path.ps1'
+[0.314s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/hook/cmake_prefix_path.dsv'
+[0.314s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/hook/cmake_prefix_path.sh'
+[0.314s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_hardware/lib'
+[0.314s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('rover_hardware', 'ld_library_path_lib')
+[0.315s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/hook/ld_library_path_lib.ps1'
+[0.315s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/hook/ld_library_path_lib.dsv'
+[0.315s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/hook/ld_library_path_lib.sh'
+[0.315s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_hardware/bin'
+[0.315s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_hardware/lib/pkgconfig/rover_hardware.pc'
+[0.315s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_hardware/lib/python3.10/site-packages'
+[0.316s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/remandey/my-programs/rovercore/install/rover_hardware/bin'
+[0.316s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/package.ps1'
+[0.316s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/package.dsv'
+[0.316s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/package.sh'
+[0.317s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/package.bash'
+[0.317s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/remandey/my-programs/rovercore/install/rover_hardware/share/rover_hardware/package.zsh'
+[0.317s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/home/remandey/my-programs/rovercore/install/rover_hardware/share/colcon-core/packages/rover_hardware)
+[0.317s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mclosing loop[0m
+[0.317s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mloop closed[0m
+[0.317s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mrun_until_complete finished with '0'[0m
+[0.317s] [34mcolcon.colcon_core.event_reactor[0m [1;30mDEBUG[0m [32mjoining thread[0m
+[0.321s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[0.321s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[0.321s] [34mcolcon.colcon_notification.desktop_notification[0m [1;30mINFO[0m Sending desktop notification using 'notify2'
+[0.330s] [34mcolcon.colcon_core.event_reactor[0m [1;30mDEBUG[0m [32mjoined thread[0m
+[0.330s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/home/remandey/my-programs/rovercore/install/local_setup.ps1'
+[0.331s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix util module '/home/remandey/my-programs/rovercore/install/_local_setup_util_ps1.py'
+[0.331s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/home/remandey/my-programs/rovercore/install/setup.ps1'
+[0.332s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/home/remandey/my-programs/rovercore/install/local_setup.sh'
+[0.332s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix util module '/home/remandey/my-programs/rovercore/install/_local_setup_util_sh.py'
+[0.333s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/home/remandey/my-programs/rovercore/install/setup.sh'
+[0.333s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/home/remandey/my-programs/rovercore/install/local_setup.bash'
+[0.333s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/home/remandey/my-programs/rovercore/install/setup.bash'
+[0.334s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/home/remandey/my-programs/rovercore/install/local_setup.zsh'
+[0.334s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/home/remandey/my-programs/rovercore/install/setup.zsh'
