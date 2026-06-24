@@ -1,52 +1,62 @@
+import os
+import sys
+
 import rclpy
-from rclpy.lifecycle import LifecycleNode, TransitionCallbackReturn
+import yasmin
+from yasmin import CbState, Blackboard, StateMachine
+from yasmin_ros import set_ros_loggers
+from yasmin_ros.basic_outcomes import SUCCEED, ABORT, CANCEL
+from yasmin_viewer import YasminViewerPub
 
-class RoverSensorNode(LifecycleNode):
-    def __init__(self):
-        # Initializes the node in the 'UNCONFIGURED' state
-        super().__init__('rover_sensor_node')
-        self.timer = None
-        self.get_logger().info("Sensor Node Born. State: UNCONFIGURED")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from mission_sequence import SEQUENCE, WAYPOINTS
+from nav_state import create_nav_sm
+from task_callbacks import TASK_CALLBACKS
 
-    def on_configure(self, state):
-        """Called when transitioning Unconfigured -> Inactive."""
-        self.get_logger().info("Configuring sensors and allocating memory...")
-        # Put your hardware initializations here (e.g., opening a camera port)
-        
-        # Setting up a timer, but NOT starting it yet
-        self.timer = self.create_timer(1.0, self.timer_callback)
-        return TransitionCallbackReturn.SUCCESS
 
-    def on_activate(self, state):
-        """Called when transitioning Inactive -> Active."""
-        self.get_logger().info("🟢 Sensor Node ACTIVE. Beginning task execution...")
-        # Active state means the node is allowed to process and publish data
-        return TransitionCallbackReturn.SUCCESS
+def main() -> None:
+    rclpy.init()
+    set_ros_loggers()
+    yasmin.YASMIN_LOG_INFO("ARC Autonomous Mission")
 
-    def on_deactivate(self, state):
-        """Called when transitioning Active -> Inactive."""
-        self.get_logger().info("🟡 Sensor Node INACTIVE. Powering down sensor to save battery...")
-        # Stop processing data, but don't destroy the configuration
-        return TransitionCallbackReturn.SUCCESS
+    sm = StateMachine(outcomes=[SUCCEED, ABORT, CANCEL], handle_sigint=True)
 
-    def on_cleanup(self, state):
-        """Called when transitioning Inactive -> Unconfigured."""
-        self.get_logger().info("🧹 Cleaning up resources and freeing memory...")
-        if self.timer:
-            self.timer.cancel()
-        return TransitionCallbackReturn.SUCCESS
+    for i, step in enumerate(SEQUENCE):
+        is_last = i == len(SEQUENCE) - 1
+        next_target = SUCCEED if is_last else SEQUENCE[i + 1]
 
-    def timer_callback(self):
-        # Guard clause: Lifecycle nodes should only run logic if fully ACTIVE
-        if self.lifecycle_state.label != 'active':
-            return
-        self.get_logger().info("Reading sensor data stream... [X: 0.23, Y: 0.89]")
+        if step in WAYPOINTS:
+            x, y = WAYPOINTS[step]
+            sm.add_state(
+                step,
+                create_nav_sm(x, y),
+                transitions={
+                    SUCCEED: next_target,
+                    ABORT: ABORT,
+                    CANCEL: CANCEL,
+                },
+            )
+        else:
+            sm.add_state(
+                step,
+                CbState([SUCCEED], TASK_CALLBACKS[step]),
+                transitions={SUCCEED: next_target},
+            )
 
-def main(args=None):
-    rclpy.init(args=args)
-    node = RoverSensorNode()
-    rclpy.spin(node)
-    rclpy.shutdown()
+    YasminViewerPub(sm, "ARC_AUTONOMOUS_MISSION")
 
-if __name__ == '__main__':
+    blackboard = Blackboard()
+    blackboard["waypoints"] = WAYPOINTS
+
+    try:
+        outcome = sm(blackboard)
+        yasmin.YASMIN_LOG_INFO(f"Mission outcome: {outcome}")
+    except Exception as e:
+        yasmin.YASMIN_LOG_WARN(f"Mission exception: {e}")
+
+    if rclpy.ok():
+        rclpy.shutdown()
+
+
+if __name__ == "__main__":
     main()
