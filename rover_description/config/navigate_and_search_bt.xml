@@ -5,7 +5,7 @@
 
   Strategy (6 outer retries):
     1. Replan + follow path (inner retry on each step)
-    2. On outer failure → clear both costmaps → spin 90° → wait 5s → back up 0.3m
+    2. On outer failure → clear both costmaps → spin 180° → wait 2s → back up 1.0m
 -->
 <root main_tree_to_execute="MainTree">
   <BehaviorTree ID="MainTree">
@@ -14,8 +14,8 @@
       <!-- ── Normal navigation pipeline ── -->
       <PipelineSequence name="NavigateWithReplanning">
 
-        <!-- Replan at 1 Hz; retry once on planner failure by clearing global costmap -->
-        <RateController hz="1.0">
+        <!-- Replan at 3 Hz; retry once on planner failure by clearing global costmap -->
+        <RateController hz="3.0">
           <RecoveryNode number_of_retries="1" name="ComputePathRecovery">
             <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
             <ClearEntireCostmap name="ClearGlobalCostmap-OnPlanFail"
@@ -44,11 +44,11 @@
           <ClearEntireCostmap name="ClearGlobalCostmap-Recovery"
                               service_name="global_costmap/clear_entirely_global_costmap"/>
           <!-- 2. Spin in place to re-observe surroundings -->
-          <Spin spin_dist="1.57"/>
+          <Spin spin_dist="3.14"/>
           <!-- 3. Wait for transient obstacles to clear -->
-          <Wait wait_duration="5.0"/>
+          <Wait wait_duration="2.0"/>
           <!-- 4. Back up to escape local minima -->
-          <BackUp backup_dist="0.30" backup_speed="0.15"/>
+          <BackUp backup_dist="1.0" backup_speed="0.5"/>
         </SequenceStar>
 
       </ReactiveFallback>

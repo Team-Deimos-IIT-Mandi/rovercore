@@ -5,8 +5,8 @@
 mission:
   # --- Waypoint navigation ---
   waypoint_acceptance_radius: 2.0     # metres — declare waypoint reached within this distance
-  waypoint_approach_speed: 0.5        # m/s max during final approach to waypoint
-  waypoint_cruise_speed: 1.0          # m/s max during open-field transit
+  waypoint_approach_speed: 1.5        # m/s max during final approach to waypoint
+  waypoint_cruise_speed: 3.0          # m/s max during open-field transit
   nav_goal_timeout: 120.0             # seconds before NavigateToPose is aborted + retried
 
   # --- GPS / ArUco handoff ---

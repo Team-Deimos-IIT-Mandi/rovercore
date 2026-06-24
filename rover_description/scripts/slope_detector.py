@@ -196,13 +196,13 @@ class SlopeDetectorNode(Node):
           slope ≥ 20°       → 0.10 m/s
         """
         if self.slope_deg < 10.0:
-            target_vel = 0.50
+            target_vel = 3.0
             band = "flat"
         elif self.slope_deg < 20.0:
-            target_vel = 0.25
+            target_vel = 1.5
             band = "moderate"
         else:
-            target_vel = 0.10
+            target_vel = 0.5
             band = "steep"
 
         # Only call the service when the band changes to avoid flooding
