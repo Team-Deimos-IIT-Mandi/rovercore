@@ -7,7 +7,7 @@ Panels:
         - /Global Options1
         - /RobotModel1
       Splitter Ratio: 0.5
-    Tree Height: 600
+    Tree Height: 443
   - Class: rviz_common/Views
     Expanded:
       - /Current View1
@@ -22,7 +22,7 @@ Visualization Manager:
       Color: 160; 160; 164
       Enabled: true
       Line Style:
-        Line Width: 0.03
+        Line Width: 0.029999999329447746
         Value: Lines
       Name: Grid
       Normal Cell Count: 0
@@ -48,10 +48,100 @@ Visualization Manager:
       Enabled: true
       Links:
         All Links Enabled: true
+        CAM_FL:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        CAM_FR:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        CAM_FRONT:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        CAM_LEFT:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        CAM_REAR:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        CAM_RIGHT:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        CAM_SCIENCE:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
-        Link Tree Style: ""
+        FLOW_CAM:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        GPS:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        IMU:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        LB:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        LF:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Link Tree Style: Links in Alphabetic Order
+        OPTICAL:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        RB:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        RF:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        chassis_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Mass Properties:
+        Inertia: false
+        Mass: false
       Name: RobotModel
       TF Prefix: ""
       Update Interval: 0
@@ -67,6 +157,8 @@ Visualization Manager:
       Show Arrows: false
       Show Axes: true
       Show Names: false
+      Tree:
+        {}
       Update Interval: 0
       Value: false
     - Alpha: 1
@@ -84,12 +176,14 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
+      Max Intensity: 4096
       Min Color: 0; 0; 0
+      Min Intensity: 0
       Name: LaserScan
       Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.05
+      Size (m): 0.05000000074505806
       Style: Points
       Topic:
         Depth: 5
@@ -110,12 +204,19 @@ Visualization Manager:
       Topic:
         Depth: 1
         Durability Policy: Transient Local
+        Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /map
+      Update Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /map_updates
       Use Timestamp: false
       Value: true
-    - Alpha: 0.3
+    - Alpha: 0.30000001192092896
       Class: rviz_default_plugins/Map
       Color Scheme: costmap
       Draw Behind: false
@@ -124,12 +225,19 @@ Visualization Manager:
       Topic:
         Depth: 1
         Durability Policy: Transient Local
+        Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /global_costmap/costmap
+      Update Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /global_costmap/costmap_updates
       Use Timestamp: false
       Value: true
-    - Alpha: 0.7
+    - Alpha: 0.699999988079071
       Class: rviz_default_plugins/Map
       Color Scheme: costmap
       Draw Behind: false
@@ -155,14 +263,21 @@ Visualization Manager:
       Class: rviz_default_plugins/Path
       Color: 255; 0; 0
       Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
       Line Style: Lines
-      Line Width: 0.03
+      Line Width: 0.029999999329447746
       Name: Global Path
       Offset:
         X: 0
         Y: 0
-        Z: 0.1
+        Z: 0.10000000149011612
+      Pose Color: 255; 85; 255
       Pose Style: None
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -176,14 +291,21 @@ Visualization Manager:
       Class: rviz_default_plugins/Path
       Color: 0; 12; 255
       Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
       Line Style: Lines
-      Line Width: 0.03
+      Line Width: 0.029999999329447746
       Name: Local Plan
       Offset:
         X: 0
         Y: 0
-        Z: 0.1
+        Z: 0.10000000149011612
+      Pose Color: 255; 85; 255
       Pose Style: None
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -204,13 +326,12 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /waypoints_marker
       Value: true
-    # ── Camera feeds ──────────────────────────────────────────────────────────
     - Class: rviz_default_plugins/Image
-      Enabled: true
+      Enabled: false
       Max Value: 1
       Median window: 5
       Min Value: 0
-      Name: "FRONT RGB"
+      Name: FRONT RGB
       Normalize Range: true
       Topic:
         Depth: 5
@@ -218,13 +339,13 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /cam/front/image_raw
-      Value: true
+      Value: false
     - Class: rviz_default_plugins/Image
-      Enabled: true
+      Enabled: false
       Max Value: 1
       Median window: 5
       Min Value: 0
-      Name: "OPTICAL Depth"
+      Name: OPTICAL Depth
       Normalize Range: true
       Topic:
         Depth: 5
@@ -232,13 +353,13 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /rgbd_camera/image
-      Value: true
+      Value: false
     - Class: rviz_default_plugins/Image
-      Enabled: true
+      Enabled: false
       Max Value: 1
       Median window: 5
       Min Value: 0
-      Name: "Front-Left"
+      Name: Front-Left
       Normalize Range: true
       Topic:
         Depth: 5
@@ -246,13 +367,13 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /cam/front_left/image_raw
-      Value: true
+      Value: false
     - Class: rviz_default_plugins/Image
-      Enabled: true
+      Enabled: false
       Max Value: 1
       Median window: 5
       Min Value: 0
-      Name: "Front-Right"
+      Name: Front-Right
       Normalize Range: true
       Topic:
         Depth: 5
@@ -260,13 +381,13 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /cam/front_right/image_raw
-      Value: true
+      Value: false
     - Class: rviz_default_plugins/Image
-      Enabled: true
+      Enabled: false
       Max Value: 1
       Median window: 5
       Min Value: 0
-      Name: "Left"
+      Name: Left
       Normalize Range: true
       Topic:
         Depth: 5
@@ -274,13 +395,13 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /cam/left/image_raw
-      Value: true
+      Value: false
     - Class: rviz_default_plugins/Image
-      Enabled: true
+      Enabled: false
       Max Value: 1
       Median window: 5
       Min Value: 0
-      Name: "Right"
+      Name: Right
       Normalize Range: true
       Topic:
         Depth: 5
@@ -288,13 +409,13 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /cam/right/image_raw
-      Value: true
+      Value: false
     - Class: rviz_default_plugins/Image
-      Enabled: true
+      Enabled: false
       Max Value: 1
       Median window: 5
       Min Value: 0
-      Name: "Rear"
+      Name: Rear
       Normalize Range: true
       Topic:
         Depth: 5
@@ -302,13 +423,13 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /cam/rear/image_raw
-      Value: true
+      Value: false
     - Class: rviz_default_plugins/Image
-      Enabled: true
+      Enabled: false
       Max Value: 1
       Median window: 5
       Min Value: 0
-      Name: "Science"
+      Name: Science
       Normalize Range: true
       Topic:
         Depth: 5
@@ -316,11 +437,11 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /cam/science/image_raw
-      Value: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: odom
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -332,7 +453,7 @@ Visualization Manager:
     - Class: rviz_default_plugins/SetInitialPose
       Covariance x: 0.25
       Covariance y: 0.25
-      Covariance yaw: 0.07
+      Covariance yaw: 0.07000000029802322
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -363,7 +484,7 @@ Visualization Manager:
       Class: rviz_default_plugins/ThirdPersonFollower
       Distance: 10
       Enable Stereo Rendering:
-        Stereo Eye Separation: 0.06
+        Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
@@ -372,75 +493,40 @@ Visualization Manager:
         Y: 0
         Z: 0
       Focal Shape Fixed Size: true
-      Focal Shape Size: 0.05
+      Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
-      Near Clip Distance: 0.01
-      Pitch: 0.7
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 0.7600000500679016
       Target Frame: base_link
       Value: ThirdPersonFollower (rviz_default_plugins)
-      Yaw: 0
+      Yaw: 0.7700003981590271
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1080
+  FRONT RGB:
+    collapsed: false
+  Front-Left:
+    collapsed: false
+  Front-Right:
+    collapsed: false
+  Height: 1016
   Hide Left Dock: false
   Hide Right Dock: true
-  Selection:
+  Left:
+    collapsed: false
+  OPTICAL Depth:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd0000000100000000000001cb0000039efc020000000afb0000000e0053006300690065006e00630065000000003d0000003f0000002800fffffffb0000001200460052004f004e00540020005200470042000000003d000000450000002800fffffffb0000001a004f00500054004900430041004c002000440065007000740068000000003d0000004b0000002800fffffffb0000000a00520069006700680074000000003d000000540000002800fffffffb000000080052006500610072000000003d0000005b0000002800fffffffb00000008004c006500660074000000003d000000660000002800fffffffb0000001600460072006f006e0074002d00520069006700680074000000003d000000760000002800fffffffb0000001400460072006f006e0074002d004c006500660074000000003d000000870000002800fffffffb000000100044006900730070006c006100790073010000003d000001f8000000c900fffffffb0000000a00560069006500770073010000023b000001a0000000a400ffffff000005690000039e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Rear:
+    collapsed: false
+  Right:
+    collapsed: false
+  Science:
     collapsed: false
   Views:
-    collapsed: true
-  Width: 1920
-  X: 0
-  Y: 0
-  # Camera image panels — horizontal strip at bottom, FRONT RGB centred (2× width)
-  # Order L→R: Front-Left | Left | Rear | [FRONT RGB wide] | Science | Right | Front-Right | OPTICAL Depth
-  "FRONT RGB":
     collapsed: false
-    Height: 320
-    Width: 300
-    X: 805
-    Y: 760
-  "Front-Left":
-    collapsed: false
-    Height: 320
-    Width: 170
-    X: 280
-    Y: 760
-  "Left":
-    collapsed: false
-    Height: 320
-    Width: 170
-    X: 455
-    Y: 760
-  "Rear":
-    collapsed: false
-    Height: 320
-    Width: 170
-    X: 630
-    Y: 760
-  "Science":
-    collapsed: false
-    Height: 320
-    Width: 170
-    X: 1110
-    Y: 760
-  "Right":
-    collapsed: false
-    Height: 320
-    Width: 170
-    X: 1285
-    Y: 760
-  "Front-Right":
-    collapsed: false
-    Height: 320
-    Width: 170
-    X: 1460
-    Y: 760
-  "OPTICAL Depth":
-    collapsed: false
-    Height: 320
-    Width: 170
-    X: 1635
-    Y: 760
+  Width: 1850
+  X: 70
+  Y: 27
