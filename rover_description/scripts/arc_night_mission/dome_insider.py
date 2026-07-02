@@ -1,21 +1,24 @@
 #!/usr/bin/env python3
 """
 Dome insider helper node to autonomously enter a dome structure.
-Uses the depth camera to center the rover between the dome entrance walls.
+Uses a hybrid approach:
+1. When 2 ArUco markers are seen, it uses visual servoing on their midpoint to aim at the gate center.
+2. If < 2 markers are seen (e.g., getting close to the gate and losing sight of one), 
+   it INSTANTLY falls back to Depth Servoing, using the physical walls to perfectly squeeze through without colliding!
+3. Depth camera threshold stops the rover precisely when near the back wall.
 """
 
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import QoSProfile, DurabilityPolicy, HistoryPolicy
 from sensor_msgs.msg import Image
-from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String
 from std_srvs.srv import Trigger
 from cv_bridge import CvBridge
 import cv2
-import math
 import numpy as np
+import time
 
 class DomeInsiderNode(Node):
     def __init__(self):
@@ -31,8 +34,8 @@ class DomeInsiderNode(Node):
         
         # Subscribers
         self.state_sub = self.create_subscription(String, 'rover/mission_state', self.global_state_callback, qos_profile)
+        self.sub_rgb = self.create_subscription(Image, '/cam/front/image_raw', self.image_callback, 10)
         self.sub_depth = self.create_subscription(Image, '/rgbd_camera/depth_image', self.depth_callback, 10)
-        self.sub_odom = self.create_subscription(Odometry, '/odom', self.odom_callback, 10)
         
         # Publishers
         self.cmd_pub = self.create_publisher(Twist, '/cmd_vel', 10)
@@ -41,44 +44,76 @@ class DomeInsiderNode(Node):
         # Service Client
         self.fsm_client = self.create_client(Trigger, 'mission/complete_dome_entry')
         
-        self.global_mission_state = "BOOTING"
+        # Internal State
+        self.global_mission_state = "DOME_ENTRY"
         self.is_finished_reported = False
         
-        self.current_odom_x = 0.0
-        self.current_odom_y = 0.0
-        self.start_odom_x = None
-        self.start_odom_y = None
+        self.aruco_error = None
+        self.aruco_last_seen_time = 0.0
         
-        # Distance to push inside the dome
-        self.target_push_distance = 4.0 
+        # ArUco Tracker
+        self.aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_ARUCO_ORIGINAL)
+        self.aruco_params = cv2.aruco.DetectorParameters()
+        self.detector = cv2.aruco.ArucoDetector(self.aruco_dict, self.aruco_params)
         
-        self.get_logger().info("DEPTH-BASED DOME INSIDER NODE STARTED. Waiting for DOME_ENTRY state...")
+        # Goal Stop distance inside dome
+        self.target_stop_depth = 1.5  # Stop 1.5m from the back wall
+        
+        self.get_logger().info("SMART AVOIDANCE DOME INSIDER NODE STARTED. Executing immediately in DOME_ENTRY state!")
 
     def global_state_callback(self, msg):
         self.global_mission_state = msg.data
 
-    def odom_callback(self, msg):
-        if self.global_mission_state != 'DOME_ENTRY':
+    def image_callback(self, msg):
+        if self.global_mission_state != 'DOME_ENTRY' or self.is_finished_reported:
             return
 
-        self.current_odom_x = msg.pose.pose.position.x
-        self.current_odom_y = msg.pose.pose.position.y
-        
-        if self.start_odom_x is None:
-            self.start_odom_x = self.current_odom_x
-            self.start_odom_y = self.current_odom_y
+        try:
+            cv_image = self.bridge.imgmsg_to_cv2(msg, "bgr8")
+        except Exception:
+            return
+
+        gray = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY)
+        corners, ids, _ = self.detector.detectMarkers(gray)
+
+        h, w = cv_image.shape[:2]
+        center_x = w / 2.0
+
+        if ids is not None and len(ids) >= 2:
+            # Find the center X of all detected markers
+            all_x = []
+            for corner in corners:
+                c_x = np.mean(corner[0][:, 0])
+                all_x.append(c_x)
+                
+            midpoint_x = np.mean(all_x)
+            
+            # Calculate pixel error for centering
+            self.aruco_error = center_x - midpoint_x
+            self.aruco_last_seen_time = time.time()
+            
+            # Draw on image
+            cv2.circle(cv_image, (int(midpoint_x), int(h//2)), 10, (0, 255, 0), -1)
+            cv2.line(cv_image, (int(center_x), 0), (int(center_x), h), (255, 0, 0), 2)
+            cv2.aruco.drawDetectedMarkers(cv_image, corners, ids)
+            cv2.putText(cv_image, f"ARUCO SERVOING (2 MARKERS)", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+        else:
+            if ids is not None and len(ids) == 1:
+                cv2.putText(cv_image, "1 MARKER (FALLBACK TO DEPTH)", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 165, 255), 2)
+                cv2.aruco.drawDetectedMarkers(cv_image, corners, ids)
+            else:
+                cv2.putText(cv_image, "NO MARKERS (FALLBACK TO DEPTH)", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+
+        cv2.imshow("RGB_ENTRY_DEBUG", cv_image)
+        cv2.waitKey(1)
 
     def depth_callback(self, msg):
         if self.global_mission_state != 'DOME_ENTRY' or self.is_finished_reported:
             return
 
-        if self.start_odom_x is None:
-            return # Wait for odometry to lock in
-
         try:
             cv_depth = self.bridge.imgmsg_to_cv2(msg, desired_encoding='passthrough')
         except Exception as e:
-            self.get_logger().error(f"Depth conversion error: {e}")
             return
 
         height, width = cv_depth.shape
@@ -90,73 +125,74 @@ class DomeInsiderNode(Node):
             mask = np.isfinite(region) & (region > 0.4)
             valid = region[mask]
             if len(valid) == 0:
-                return 10.0  # Safe default if no obstacles in range
+                return 10.0
             return np.percentile(valid, 20)
 
         left_depth = get_safe_depth(left_region)
         center_depth = get_safe_depth(center_region)
         right_depth = get_safe_depth(right_region)
 
-        # Check Odometry to see if we reached target depth
-        dist = math.sqrt((self.current_odom_x - self.start_odom_x)**2 + (self.current_odom_y - self.start_odom_y)**2)
-        
         twist = Twist()
         
-        if dist >= self.target_push_distance:
-            # We are done!
+        # Stop condition: Center depth is less than the threshold (we reached the back wall)
+        if center_depth < self.target_stop_depth and left_depth < 2.5 and right_depth < 2.5:
             twist.linear.x = 0.0
             twist.angular.z = 0.0
             self.cmd_pub.publish(twist)
-            self.get_logger().info("SUCCESSFULLY ENTERED THE DOME!")
+            self.get_logger().info("SUCCESSFULLY ENTERED THE DOME AND REACHED THE BACK WALL!")
             self.notify_mission_control_complete()
         else:
             # Emergency Stop if too close to a wall head-on
             if center_depth < 0.6:
                 twist.linear.x = 0.0
                 twist.angular.z = 0.0
+                mode_text = "EMERGENCY STOP"
             else:
                 # Drive forward
-                twist.linear.x = 0.6
+                twist.linear.x = 0.5
                 
-                # Proportional control for centering between the left and right walls of the gate
-                diff = left_depth - right_depth
-                twist.angular.z = max(min(0.3 * diff, 0.5), -0.5)
+                # Check if we should use ArUco or Depth for centering
+                time_since_aruco = time.time() - self.aruco_last_seen_time
+                
+                # ONLY use ArUco if we have seen BOTH markers in the last 0.5 seconds
+                if self.aruco_error is not None and time_since_aruco < 0.5:
+                    # ArUco Servoing Mode (High Priority)
+                    twist.angular.z = max(min(0.002 * self.aruco_error, 0.5), -0.5)
+                    mode_text = "ARUCO SERVO"
+                else:
+                    # Depth Servoing Mode (Collision Avoidance / Squeeze through)
+                    # This automatically repels the rover from the closer wall!
+                    diff = left_depth - right_depth
+                    twist.angular.z = max(min(0.3 * diff, 0.5), -0.5)
+                    mode_text = "DEPTH SERVO (AVOIDING WALLS)"
                 
             self.cmd_pub.publish(twist)
 
         # Publish Debug image
-        self.publish_debug_windows(cv_depth, left_depth, center_depth, right_depth)
+        self.publish_debug_windows(cv_depth, left_depth, center_depth, right_depth, mode_text)
 
-    def publish_debug_windows(self, cv_depth, left_depth, center_depth, right_depth):
+    def publish_debug_windows(self, cv_depth, left_depth, center_depth, right_depth, mode_text):
         try:
-            # Normalize depth for visualization (cap at 10 meters for colormap visibility)
             depth_clipped = np.clip(cv_depth, 0, 10.0)
             depth_norm = cv2.normalize(depth_clipped, None, 0, 255, cv2.NORM_MINMAX, dtype=cv2.CV_8U)
             depth_color = cv2.applyColorMap(depth_norm, cv2.COLORMAP_JET)
 
-            # Draw lines for the center 1/3 region
             h, w = depth_color.shape[:2]
             cv2.line(depth_color, (w//3, 0), (w//3, h), (255, 255, 255), 2)
             cv2.line(depth_color, (2*w//3, 0), (2*w//3, h), (255, 255, 255), 2)
 
-            # Status Overlays
-            cv2.putText(depth_color, "STATE: DEPTH SERVOING (ENTRY)", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
+            cv2.putText(depth_color, f"MODE: {mode_text}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
             cv2.putText(depth_color, f"L:{left_depth:.1f} C:{center_depth:.1f} R:{right_depth:.1f}", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
             
-            # Show distance left
-            if self.start_odom_x is not None:
-                dist = math.sqrt((self.current_odom_x - self.start_odom_x)**2 + (self.current_odom_y - self.start_odom_y)**2)
-                cv2.putText(depth_color, f"DIST: {dist:.1f}/{self.target_push_distance:.1f}m", (10, 90), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-
             try:
                 debug_msg = self.bridge.cv2_to_imgmsg(depth_color, encoding="bgr8")
                 self.debug_pub.publish(debug_msg)
-            except Exception as e:
+            except Exception:
                 pass
             
             cv2.imshow("DEPTH_ENTRY_DEBUG", depth_color)
             cv2.waitKey(1)
-        except cv2.error as e:
+        except cv2.error:
             pass
 
     def notify_mission_control_complete(self):
@@ -174,7 +210,7 @@ class DomeInsiderNode(Node):
             res = future.result()
             if res.success:
                 self.get_logger().info("Central FSM acknowledged dome entry complete.")
-        except Exception as e:
+        except Exception:
             pass
 
 def main(args=None):

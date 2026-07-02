@@ -148,6 +148,6 @@ def generate_launch_description():
         # slope_detector,
         # mission_initializer,
         # spiral_search,
-        aruco_detection,
+        # aruco_detection,
         cmd_vel_relay,
     ])
