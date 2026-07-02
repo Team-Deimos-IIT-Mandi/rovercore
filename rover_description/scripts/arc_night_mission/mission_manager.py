@@ -30,6 +30,8 @@ class MissionManager(Node):
             # 'ALIGN_AND_MOVE', 
             # 'astronaut', 
             'FUEL_TRAIL_FOLLOW', 
+            'ARUCO_SEARCH',
+            'DOME_ENTRY',
             'SEQUENCE_COMPLETE', 
             'EMERGENCY_STOP'
         }
@@ -49,6 +51,8 @@ class MissionManager(Node):
         self.complete_fuel_trail_srv = self.create_service(Trigger, 'mission/complete_fuel_trail', self.complete_fuel_trail_callback)
         self.complete_oxygen_tank_srv = self.create_service(Trigger, 'mission/complete_oxygen_tank_nav', self.complete_oxygen_tank_callback)
         self.complete_dome_return_srv = self.create_service(Trigger, 'mission/complete_dome_return', self.complete_dome_return_callback)
+        self.complete_aruco_search_srv = self.create_service(Trigger, 'mission/complete_aruco_search', self.complete_aruco_search_callback)
+        self.complete_dome_entry_srv = self.create_service(Trigger, 'mission/complete_dome_entry', self.complete_dome_entry_callback)
         # self.complete_move_srv = self.create_service(Trigger, 'mission/complete_alignment_move', self.complete_alignment_callback)
         # self.complete_final_turn_srv = self.create_service(Trigger, 'mission/complete_final_turn', self.complete_final_turn_callback)
         self.estop_srv = self.create_service(Trigger, 'mission/emergency_stop', self.emergency_stop_callback)
@@ -111,10 +115,30 @@ class MissionManager(Node):
 
     def complete_dome_return_callback(self, request, response):
         if self.current_state == 'DOME_RETURN':
-            self.get_logger().info("Dome Return Navigator finished. Sequence complete.")
+            self.get_logger().info("Dome Return Navigator finished. Moving to ARUCO_SEARCH.")
+            self.change_state('ARUCO_SEARCH')
+            response.success = True
+            response.message = "Global state shifted from 'DOME_RETURN' to 'ARUCO_SEARCH'."
+        else:
+            response.success = False
+        return response
+
+    def complete_aruco_search_callback(self, request, response):
+        if self.current_state == 'ARUCO_SEARCH':
+            self.get_logger().info("ArUco Search finished. Moving to DOME_ENTRY.")
+            self.change_state('DOME_ENTRY')
+            response.success = True
+            response.message = "Global state shifted from 'ARUCO_SEARCH' to 'DOME_ENTRY'."
+        else:
+            response.success = False
+        return response
+
+    def complete_dome_entry_callback(self, request, response):
+        if self.current_state == 'DOME_ENTRY':
+            self.get_logger().info("Dome Entry finished. Sequence complete.")
             self.change_state('SEQUENCE_COMPLETE')
             response.success = True
-            response.message = "Global state shifted from 'DOME_RETURN' to 'SEQUENCE_COMPLETE'."
+            response.message = "Global state shifted from 'DOME_ENTRY' to 'SEQUENCE_COMPLETE'."
         else:
             response.success = False
         return response

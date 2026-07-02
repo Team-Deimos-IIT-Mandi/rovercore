@@ -3,7 +3,8 @@ import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import PoseStamped
 from sensor_msgs.msg import Image
-from std_msgs.msg import Bool
+from std_msgs.msg import Bool, String
+from std_srvs.srv import Trigger
 from cv_bridge import CvBridge
 import cv2
 import numpy as np
@@ -18,12 +19,19 @@ class ArUcoDetectionNode(Node):
         # 1. Configuration Parameters
         self.detection_window = [] # Store last few detections
         self.global_goal_sent = False
-        self.mission_started = False
         self.goal_sent = False
-        self.start_sub = self.create_subscription(Bool, '/start_search', self.start_cb, 10)
+        
+        qos_profile = rclpy.qos.QoSProfile(
+            depth=1,
+            durability=rclpy.qos.DurabilityPolicy.TRANSIENT_LOCAL,
+            history=rclpy.qos.HistoryPolicy.KEEP_LAST
+        )
+        self.state_sub = self.create_subscription(String, 'rover/mission_state', self.global_state_callback, qos_profile)
+        self.fsm_client = self.create_client(Trigger, 'mission/complete_aruco_search')
+        self.global_mission_state = 'BOOTING'
 
         # Camera topic and frame parameters — override at launch to support multiple cameras
-        self.declare_parameter('camera_topic', '/rgbd_camera/image')
+        self.declare_parameter('camera_topic', '/cam/front/image_raw')
         self.declare_parameter('camera_frame', 'camera_link')
 
         # Focal length parameters.
@@ -76,7 +84,7 @@ class ArUcoDetectionNode(Node):
         self.marker_found = False  # Defaults to TRUE so it WAITS for a signal to start publishing
 
         # 4. ArUco Detector Initialization (Modern API)
-        self.aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
+        self.aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_ARUCO_ORIGINAL)
         self.aruco_params = cv2.aruco.DetectorParameters()
         self.aruco_params.minMarkerPerimeterRate = 0.12
         self.aruco_params.polygonalApproxAccuracyRate = 0.015
@@ -97,10 +105,8 @@ class ArUcoDetectionNode(Node):
             f"frame={self.camera_frame} | f={f:.4f} (width={image_width}, hfov={camera_hfov:.4f} rad)"
         )
 
-    def start_cb(self, msg):
-        if msg.data:
-            self.mission_started = True
-            self.get_logger().info("Search signal received. Starting operation!")
+    def global_state_callback(self, msg):
+        self.global_mission_state = msg.data
 
     def sync_callback(self, msg):
         """Updates the local lock based on what other cameras have found."""
@@ -109,12 +115,6 @@ class ArUcoDetectionNode(Node):
             self.get_logger().info("Global Goal Lock Received. Silencing this node.")
 
     def image_callback(self, msg):
-
-        if not self.mission_started:
-            return
-
-        if self.global_goal_sent:
-            return
 
         try:
             cv_image = self.bridge.imgmsg_to_cv2(msg, "bgr8")
@@ -126,6 +126,7 @@ class ArUcoDetectionNode(Node):
         corners, ids, _ = self.detector.detectMarkers(gray)
 
         if ids is not None and len(ids) > 0:
+            cv2.aruco.drawDetectedMarkers(cv_image, corners, ids)
             self.detection_window.append(True)
             if len(self.detection_window) > self.required_consecutive_frames:
                 self.detection_window.pop(0)
@@ -142,24 +143,28 @@ class ArUcoDetectionNode(Node):
                 )
                 dist = np.linalg.norm(tvec)
 
-                if dist < self.dist_threshold and dist>0.5:
-                    self.get_logger().info(f"Marker {ids[i]} found within range ({dist:.2f}m). Locking goal!")
-
-                    # Only stop spiral and lock once we are close enough to be accurate
-                    self.global_goal_sent = True
-                    self.sync_pub.publish(Bool(data=True))
-                    self.ar_signal_pub.publish(Bool(data=True))
-
                 # Visualization for Rviz/Debug
-                    cv2.aruco.drawDetectedMarkers(cv_image, corners)
-                    cv2.drawFrameAxes(cv_image, self.matrix_coefficients, self.distortion_coefficients, rvec, tvec, 0.1)
+                cv2.drawFrameAxes(cv_image, self.matrix_coefficients, self.distortion_coefficients, rvec, tvec, 0.1)
 
-                    # Mode P Logic: Publish goal if AR is NOT active (search complete)
-                    self.process_and_publish_goal(tvec.flatten(), rvec.flatten())
-                else:
-                    self.get_logger().warn(f"Marker detected but too far ({dist:.2f}m). Continuing search...")
+                if self.global_mission_state == 'ARUCO_SEARCH' and not self.global_goal_sent:
+                    if dist < self.dist_threshold and dist>0.5:
+                        self.get_logger().info(f"Marker {ids[i]} found within range ({dist:.2f}m). Locking goal!")
+
+                        # Only stop spiral and lock once we are close enough to be accurate
+                        self.global_goal_sent = True
+                        self.sync_pub.publish(Bool(data=True))
+                        self.ar_signal_pub.publish(Bool(data=True))
+                        
+                        self.notify_mission_control_complete()
+
+                        # Mode P Logic: Publish goal if AR is NOT active (search complete)
+                        self.process_and_publish_goal(tvec.flatten(), rvec.flatten())
+                    else:
+                        self.get_logger().warn(f"Marker detected but too far ({dist:.2f}m). Continuing search...")
 
         self.debug_img_pub.publish(self.bridge.cv2_to_imgmsg(cv_image, "bgr8"))
+        cv2.imshow("Aruco Detection Debug", cv_image)
+        cv2.waitKey(1)
 
     def process_and_publish_goal(self, tvec, rvec):
         camera_pose = PoseStamped()
@@ -196,6 +201,25 @@ class ArUcoDetectionNode(Node):
 
         except Exception as e:
             self.get_logger().warn(f"TF Lookup Failed: {e}")
+
+    def notify_mission_control_complete(self):
+        if not self.fsm_client.service_is_ready():
+            self.get_logger().info("Waiting for Mission Manager aruco-search service...")
+            return
+
+        req = Trigger.Request()
+        future = self.fsm_client.call_async(req)
+        future.add_done_callback(self.fsm_response_callback)
+
+    def fsm_response_callback(self, future):
+        try:
+            res = future.result()
+            if res.success:
+                self.get_logger().info("SUCCESS: Central FSM acknowledged ArUco search complete.")
+            else:
+                self.get_logger().error(f"FSM rejected ArUco search completion: {res.message}")
+        except Exception as e:
+            self.get_logger().error(f"Service communication failed: {e}")
 
 def main(args=None):
     rclpy.init(args=args)
