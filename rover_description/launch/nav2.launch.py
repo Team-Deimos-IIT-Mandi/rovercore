@@ -63,7 +63,7 @@ def generate_launch_description():
         output='screen',
         parameters=[{'use_sim_time': use_sim_time}],
         remappings=[
-            ('image_rect', '/rgbd_camera/image'),
+            ('image_rect', '/rgbd_camera/depth_image'),
             ('camera_info', '/rgbd_camera/camera_info'),
             ('points', '/rgbd_camera/points'),
         ],

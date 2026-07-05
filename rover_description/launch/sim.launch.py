@@ -15,6 +15,7 @@ from launch_ros.parameter_descriptions import ParameterValue
 #   key        = launch arg value
 #   world_name = SDF <world name="..."> (used in bridge topic paths)
 #   file       = absolute path to .world / .sdf
+#   x/y/yaw     = rover spawn pose
 #   z_spawn    = rover spawn height above terrain
 # ---------------------------------------------------------------------------
 _PKG      = 'rover_description'
@@ -31,11 +32,26 @@ def _srb(name):
     )
 
 WORLDS = {
-    'depot':      {'world_name': 'depot',      'z': '0.50', 'file': None},   # resolved at runtime from pkg_share
-    'mars':       {'world_name': 'mars',       'z': '0.50', 'file': _srb('mars.sdf')},
-    'moon':       {'world_name': 'moon',       'z': '0.50', 'file': _srb('moon.sdf')},
-    'mars_array': {'world_name': 'mars_array', 'z': '0.50', 'file': _srb('mars_array.sdf')},
-    'moon_array': {'world_name': 'moon_array', 'z': '0.50', 'file': _srb('moon_array.sdf')},
+    'depot': {
+        'world_name': 'depot', 'x': '0.0', 'y': '0.0', 'yaw': '0.0',
+        'z': '0.50', 'file': None
+    },   # resolved at runtime from pkg_share
+    'mars': {
+        'world_name': 'mars_world', 'x': '-5.0', 'y': '3.5', 'yaw': '1.57',
+        'z': '0.20', 'file': 'pkg_share'
+    }, # Use pkg_share worlds/mars.world.sdf
+    'moon': {
+        'world_name': 'moon', 'x': '0.0', 'y': '0.0', 'yaw': '0.0',
+        'z': '0.50', 'file': _srb('moon.sdf')
+    },
+    'mars_array': {
+        'world_name': 'mars_array', 'x': '0.0', 'y': '0.0', 'yaw': '0.0',
+        'z': '0.50', 'file': _srb('mars_array.sdf')
+    },
+    'moon_array': {
+        'world_name': 'moon_array', 'x': '0.0', 'y': '0.0', 'yaw': '0.0',
+        'z': '0.50', 'file': _srb('moon_array.sdf')
+    },
 }
 
 
@@ -45,8 +61,14 @@ def launch_setup(context, *args, **kwargs):
 
     world_cfg  = WORLDS.get(world_arg, WORLDS['depot'])
     world_name = world_cfg['world_name']
-    world_file = world_cfg['file'] or os.path.join(pkg_share, 'worlds', 'empty.world')
+    if world_arg == 'mars':
+        world_file = os.path.join(pkg_share, 'worlds', 'mars.world.sdf')
+    else:
+        world_file = world_cfg['file'] or os.path.join(pkg_share, 'worlds', 'empty.world')
+    x_spawn    = world_cfg['x']
+    y_spawn    = world_cfg['y']
     z_spawn    = world_cfg['z']
+    yaw_spawn  = world_cfg['yaw']
 
     urdf_file       = os.path.join(pkg_share, 'urdf', 'Assem10.urdf')
     rviz_config_file = os.path.join(pkg_share, 'rviz', 'nav2_config.rviz')
@@ -66,6 +88,7 @@ def launch_setup(context, *args, **kwargs):
     )
     gz_resource_path = os.pathsep.join(filter(os.path.isdir, [
         os.path.dirname(pkg_share),   # rover meshes / models
+        os.path.join(pkg_share, 'models'), # rover_description models (gale_crater_patch2, etc)
         srb_assets_cache,             # martian_surface*, martian_rock*, lunar_rock*
     ]))
 
@@ -100,7 +123,9 @@ def launch_setup(context, *args, **kwargs):
         package='ros_gz_sim',
         executable='create',
         arguments=['-topic', '/robot_description',
-                   '-name', 'Rover', '-z', z_spawn],
+                   '-name', 'Rover',
+                   '-x', x_spawn, '-y', y_spawn, '-z', z_spawn,
+                   '-Y', yaw_spawn],
         output='screen',
     )
 
@@ -118,65 +143,59 @@ def launch_setup(context, *args, **kwargs):
         executable='parameter_bridge',
         arguments=[
             # Clock
-            '/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
+            '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
             # Drive
-            '/model/Rover/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist',
-            '/model/Rover/odom@nav_msgs/msg/Odometry[ignition.msgs.Odometry',
+            '/model/Rover/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
+            '/model/Rover/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry',
             # Joints / sensors using world-scoped paths
-            f'{wp("joint_state")}@sensor_msgs/msg/JointState[ignition.msgs.Model',
-            f'{wp("link/IMU/sensor/imu_sensor/imu")}@sensor_msgs/msg/Imu[ignition.msgs.IMU',
-            f'{wp("link/GPS/sensor/navsat_sensor/navsat")}@sensor_msgs/msg/NavSatFix[ignition.msgs.NavSat',
-            '/scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
-            f'{wp("link/FLOW_CAM/sensor/flow_camera/image")}@sensor_msgs/msg/Image[ignition.msgs.Image',
-            f'{wp("link/FLOW_CAM/sensor/range_sensor/scan")}@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
+            f'{wp("joint_state")}@sensor_msgs/msg/JointState[gz.msgs.Model',
+            '/imu/data@sensor_msgs/msg/Imu[gz.msgs.IMU',
+            '/gps/fix_raw@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat',
+            '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
+            '/flow_cam/image@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/range/height@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
             # RGBD depth camera
-            '/rgbd_camera/image@sensor_msgs/msg/Image[ignition.msgs.Image',
-            '/rgbd_camera/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
+            '/rgbd_camera/image@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/rgbd_camera/depth_image@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/rgbd_camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
             # RGB cameras (publish directly to their <topic> names)
-            '/cam/front/image_raw@sensor_msgs/msg/Image[ignition.msgs.Image',
-            '/cam/front/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
-            '/cam/front_left/image_raw@sensor_msgs/msg/Image[ignition.msgs.Image',
-            '/cam/front_left/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
-            '/cam/front_right/image_raw@sensor_msgs/msg/Image[ignition.msgs.Image',
-            '/cam/front_right/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
-            '/cam/left/image_raw@sensor_msgs/msg/Image[ignition.msgs.Image',
-            '/cam/left/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
-            '/cam/right/image_raw@sensor_msgs/msg/Image[ignition.msgs.Image',
-            '/cam/right/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
-            '/cam/rear/image_raw@sensor_msgs/msg/Image[ignition.msgs.Image',
-            '/cam/rear/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
-            '/cam/science/image_raw@sensor_msgs/msg/Image[ignition.msgs.Image',
-            '/cam/science/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo',
+            '/cam/front/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/cam/front/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
+            '/cam/front_left/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/cam/front_left/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
+            '/cam/front_right/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/cam/front_right/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
+            '/cam/left/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/cam/left/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
+            '/cam/right/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/cam/right/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
+            '/cam/rear/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/cam/rear/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
+            '/cam/science/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/cam/science/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo',
         ],
         remappings=[
             ('/model/Rover/cmd_vel',   '/cmd_vel'),
             ('/model/Rover/odom',      '/odom'),
             (wp('joint_state'),                              '/joint_states_raw'),
-            (wp('link/IMU/sensor/imu_sensor/imu'),           '/imu/data'),
-            (wp('link/GPS/sensor/navsat_sensor/navsat'),     '/gps/fix'),
-            (wp('link/FLOW_CAM/sensor/flow_camera/image'),   '/flow_cam/image'),
-            (wp('link/FLOW_CAM/sensor/range_sensor/scan'),   '/range/height'),
         ],
         output='screen',
     )
 
-    node_flow_cam_tf = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        arguments=['--frame-id', 'FLOW_CAM',
-                   '--child-frame-id', 'Assem10/FLOW_CAM/flow_camera'],
-        parameters=[{'use_sim_time': True}],
-    )
-
-    cam_tf_nodes = [
+    sensor_tf_nodes = [
         Node(
             package='tf2_ros',
             executable='static_transform_publisher',
             arguments=['--frame-id', link,
-                       '--child-frame-id', f'Assem10/{link}/{sensor}'],
+                       '--child-frame-id', f'Rover/base_link/{sensor}'],
             parameters=[{'use_sim_time': True}],
         )
         for link, sensor in [
+            ('OPTICAL',     'rgbd_camera'),
+            ('IMU',         'imu_sensor'),
+            ('GPS',         'navsat_sensor'),
+            ('FLOW_CAM',    'flow_camera'),
+            ('FLOW_CAM',    'range_sensor'),
             ('CAM_FRONT',   'cam_front'),
             ('CAM_FL',      'cam_fl'),
             ('CAM_FR',      'cam_fr'),
@@ -187,14 +206,24 @@ def launch_setup(context, *args, **kwargs):
         ]
     ]
 
+    # GPS covariance injector — Gazebo NavSat bridge outputs zero covariance;
+    # this node injects sensible defaults before navsat_transform_node sees it.
+    node_gps_cov = Node(
+        package='rover_description',
+        executable='gps_fix_covariance_node.py',
+        name='gps_fix_covariance_node',
+        parameters=[{'use_sim_time': True}],
+        output='screen',
+    )
+
     return [
-        SetEnvironmentVariable('IGN_GAZEBO_RESOURCE_PATH', gz_resource_path),
+        SetEnvironmentVariable('GZ_SIM_RESOURCE_PATH', gz_resource_path),
         node_rsp,
         node_restamper,
         gazebo_launch,
         node_bridge,
-        node_flow_cam_tf,
-        *cam_tf_nodes,
+        node_gps_cov,
+        *sensor_tf_nodes,
         TimerAction(period=3.0, actions=[node_spawn]),
         TimerAction(period=5.0, actions=[node_rviz]),
     ]

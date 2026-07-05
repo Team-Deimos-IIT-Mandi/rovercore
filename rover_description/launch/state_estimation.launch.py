@@ -77,7 +77,7 @@ def generate_launch_description():
         remappings=[
             ('imu', '/imu/filtered'),
             ('gps/fix', '/gps/fix'),
-            ('odometry/filtered', '/odometry/local'),
+            ('odometry/filtered', '/odometry/global'),
             ('odometry/gps', '/gps/odom'),
         ]
     )
@@ -164,7 +164,7 @@ def generate_launch_description():
         imu_filter_sim,
         flow_derotation_sim,
         nonholonomic,
-        slip_detector,
+        #slip_detector,
         gps_gating,
         zupt,
     ])

@@ -25,8 +25,8 @@ class StampedTeleop(Node):
         self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)
         
         self.settings = termios.tcgetattr(sys.stdin)
-        self.linear_vel = 1.5
-        self.angular_vel = 0.5
+        self.linear_vel = 10.0#1.5
+        self.angular_vel = 1.0#0.5
         
         self.get_logger().info(msg)
 

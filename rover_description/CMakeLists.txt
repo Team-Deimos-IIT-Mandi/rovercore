@@ -18,6 +18,13 @@ install(
     scripts/aruco_detection.py
     scripts/spiral_search.py
     scripts/mission_initializer.py
+    scripts/arc_night_mission/mission_manager.py
+    scripts/arc_night_mission/dome_exit.py
+    scripts/arc_night_mission/dome_insider.py
+    scripts/arc_night_mission/astronaut_searcher.py
+    scripts/arc_night_mission/oxygen_tank_navigator.py
+    scripts/arc_night_mission/dome_return_navigator.py
+    scripts/arc_night_mission/fuel_trail_follower.py
     scripts/robot_description_publisher.py
     scripts/optical_flow_node.py
     scripts/imu_filter_node.py
@@ -25,6 +32,7 @@ install(
     scripts/nonholonomic_node.py
     scripts/slip_detector_node.py
     scripts/gps_gating_node.py
+    scripts/gps_fix_covariance_node.py
     scripts/zupt_node.py
     scripts/gps_driver_node.py
     scripts/icm20948_driver_node.py

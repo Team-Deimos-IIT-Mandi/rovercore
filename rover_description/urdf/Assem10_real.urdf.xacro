@@ -15,6 +15,12 @@
        ros2_control_node will use the *last* matching block it finds in the merged model. -->
   <ros2_control name="RoverRealSystem" type="system">
     <hardware>
+      <plugin name="gazebo_ros_gps" filename="libgazebo_ros_gps_sensor.so">
+  <ros>
+    <namespace>/rover</namespace>
+    <remapping>~/out:=gps/fix</remapping>
+  </ros>
+</plugin>
       <plugin>rover_hardware/RoverSerialInterface</plugin>
       <param name="serial_port">/dev/ttyTHS0</param>
     </hardware>

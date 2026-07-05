@@ -16,22 +16,22 @@
     </physics>
 
     <!-- Required system plugins (same as empty.world) -->
-    <plugin filename="ignition-gazebo-physics-system"
-            name="ignition::gazebo::systems::Physics"/>
-    <plugin filename="ignition-gazebo-user-commands-system"
-            name="ignition::gazebo::systems::UserCommands"/>
-    <plugin filename="ignition-gazebo-scene-broadcaster-system"
-            name="ignition::gazebo::systems::SceneBroadcaster"/>
-    <plugin filename="ignition-gazebo-imu-system"
-            name="ignition::gazebo::systems::Imu"/>
-    <plugin filename="ignition-gazebo-navsat-system"
-            name="ignition::gazebo::systems::NavSat"/>
-    <plugin filename="ignition-gazebo-sensors-system"
-            name="ignition::gazebo::systems::Sensors">
+    <plugin filename="gz-sim-physics-system"
+            name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system"
+            name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system"
+            name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-imu-system"
+            name="gz::sim::systems::Imu"/>
+    <plugin filename="gz-sim-navsat-system"
+            name="gz::sim::systems::NavSat"/>
+    <plugin filename="gz-sim-sensors-system"
+            name="gz::sim::systems::Sensors">
       <render_engine>ogre2</render_engine>
     </plugin>
-    <plugin filename="ignition-gazebo-contact-system"
-            name="ignition::gazebo::systems::Contact"/>
+    <plugin filename="gz-sim-contact-system"
+            name="gz::sim::systems::Contact"/>
 
     <!-- Reddish Mars-like sky and ambient -->
     <scene>

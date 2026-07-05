@@ -9,7 +9,6 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import JointState
 
-
 class JointStateRestamper(Node):
     def __init__(self):
         super().__init__('joint_state_restamper')

@@ -1,435 +1,244 @@
 <?xml version="1.0" encoding="utf-8"?>
-<robot
-  name="Assem10">
-  <!-- This is the true, ROS-oriented base frame (X-forward, Z-up) -->
+<robot name="Assem10">
   <link name="base_link" />
 
-  <!-- This joint rotates your entire CAD assembly to fix the nose-dive -->
   <joint name="base_to_chassis_joint" type="fixed">
     <origin xyz="0 0 0.43083" rpy="0 -1.5708 0" />
     <parent link="base_link" />
     <child link="chassis_link" />
   </joint>
-  <link
-    name="chassis_link">
+  
+  <link name="chassis_link">
     <inertial>
-      <origin
-        xyz="-0.160930995517805 0.0567423417730914 -0.00782758720815043"
-        rpy="0 0 0" />
-      <mass
-        value="9.90010001726695" />
-      <inertia
-        ixx="0.0700249747187285"
-        ixy="2.77044119297997E-07"
-        ixz="9.64699999229296E-05"
-        iyy="0.0306181387356148"
-        iyz="-4.05669516072176E-07"
-        izz="0.0533139186451046" />
+      <origin xyz="-0.160930995517805 0.0567423417730914 -0.00782758720815043" rpy="0 0 0" />
+      <mass value="9.90010001726695" />
+      <inertia ixx="0.0700249747187285" ixy="2.77044119297997E-07" ixz="9.64699999229296E-05" iyy="0.0306181387356148" iyz="-4.05669516072176E-07" izz="0.0533139186451046" />
     </inertial>
     <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/base_link.STL" />
+        <mesh filename="package://rover_description/meshes/base_link.STL" />
       </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.776470588235294 0.756862745098039 0.737254901960784 1" />
+      <material name="">
+        <color rgba="0.776470588235294 0.756862745098039 0.737254901960784 1" />
       </material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />f
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/base_link.STL" />
+        <mesh filename="package://rover_description/meshes/base_link.STL" />
       </geometry>
     </collision>
   </link>
-  <link
-    name="RF">
+
+  <link name="RF">
     <inertial>
-      <origin
-        xyz="-0.070127125179043 5.89168811093721E-06 -1.21221895692525E-05"
-        rpy="0 0 0" />
-      <mass
-        value="3.57448453557898" />
-      <inertia
-        ixx="0.0295859622143953"
-        ixy="-3.45032340310931E-10"
-        ixz="4.65651313211761E-10"
-        iyy="0.0205584479844293"
-        iyz="2.28253922016119E-06"
-        izz="0.0205548004805363" />
+      <origin xyz="-0.070127125179043 5.89168811093721E-06 -1.21221895692525E-05" rpy="0 0 0" />
+      <mass value="3.57448453557898" />
+      <inertia ixx="0.0295859622143953" ixy="-3.45032340310931E-10" ixz="4.65651313211761E-10" iyy="0.0205584479844293" iyz="2.28253922016119E-06" izz="0.0205548004805363" />
     </inertial>
     <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/RF.STL" />
+        <mesh filename="package://rover_description/meshes/RF.STL" />
       </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.752941176470588 0 0 1" />
+      <material name="">
+        <color rgba="0.752941176470588 0 0 1" />
       </material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 1.5708 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/RF.STL" />
+        <cylinder radius="0.14" length="0.08" />
       </geometry>
     </collision>
   </link>
-  <joint
-    name="RF_joint"
-    type="continuous">
-    <origin
-      xyz="-0.29083 -0.30404 -0.25109"
-      rpy="-1.5708 0 -1.5708" />
-    <parent
-      link="chassis_link" />
-    <child
-      link="RF" />
-    <axis
-      xyz="-1 0 0" />
-    <limit
-      effort="100"
-      velocity="10" />
+  <joint name="RF_joint" type="continuous">
+    <origin xyz="-0.29083 -0.30404 -0.25109" rpy="-1.5708 0 -1.5708" />
+    <parent link="chassis_link" />
+    <child link="RF" />
+    <axis xyz="-1 0 0" />
+    <limit effort="100" velocity="10" />
   </joint>
-  <link
-    name="LF">
+
+  <link name="LF">
     <inertial>
-      <origin
-        xyz="0.0702271724870632 -1.04460431388231E-05 -8.51704052695634E-06"
-        rpy="0 0 0" />
-      <mass
-        value="3.57448131006854" />
-      <inertia
-        ixx="0.0295859622143955"
-        ixy="-5.08954755758024E-10"
-        ixz="-2.77206581178434E-10"
-        iyy="0.0205560592467253"
-        iyz="-2.86650441261477E-06"
-        izz="0.0205571892182404" />
+      <origin xyz="0.0702271724870632 -1.04460431388231E-05 -8.51704052695634E-06" rpy="0 0 0" />
+      <mass value="3.57448131006854" />
+      <inertia ixx="0.0295859622143955" ixy="-5.08954755758024E-10" ixz="-2.77206581178434E-10" iyy="0.0205560592467253" iyz="-2.86650441261477E-06" izz="0.0205571892182404" />
     </inertial>
     <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/LF.STL" />
+        <mesh filename="package://rover_description/meshes/LF.STL" />
       </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.752941176470588 0 0 1" />
+      <material name="">
+        <color rgba="0.752941176470588 0 0 1" />
       </material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 1.5708 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/LF.STL" />
+        <cylinder radius="0.14" length="0.08" />
       </geometry>
     </collision>
   </link>
-  <joint
-    name="LF_joint"
-    type="continuous">
-    <origin
-      xyz="-0.290826080497761 0.316247207262208 -0.251089525412"
-      rpy="-1.5707963267949 0 -1.5707963267949" />
-    <parent
-      link="chassis_link" />
-    <child
-      link="LF" />
-    <axis
-      xyz="-1 0 0" />
-    <limit
-      effort="100"
-      velocity="10" />
+  <joint name="LF_joint" type="continuous">
+    <origin xyz="-0.290826080497761 0.316247207262208 -0.251089525412" rpy="-1.5707963267949 0 -1.5707963267949" />
+    <parent link="chassis_link" />
+    <child link="LF" />
+    <axis xyz="-1 0 0" />
+    <limit effort="100" velocity="10" />
   </joint>
-  <link
-    name="LB">
+
+  <link name="LB">
     <inertial>
-      <origin
-        xyz="0.0702271251790433 1.20538068726916E-05 -6.03035724583423E-06"
-        rpy="0 0 0" />
-      <mass
-        value="3.574484535579" />
-      <inertia
-        ixx="0.0295859622143955"
-        ixy="4.61662707464414E-10"
-        ixz="-3.50351239944112E-10"
-        iyy="0.0205548533242689"
-        iyz="2.32377721637767E-06"
-        izz="0.0205583951406968" />
+      <origin xyz="0.0702271251790433 1.20538068726916E-05 -6.03035724583423E-06" rpy="0 0 0" />
+      <mass value="3.574484535579" />
+      <inertia ixx="0.0295859622143955" ixy="4.61662707464414E-10" ixz="-3.50351239944112E-10" iyy="0.0205548533242689" iyz="2.32377721637767E-06" izz="0.0205583951406968" />
     </inertial>
     <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/LB.STL" />
+        <mesh filename="package://rover_description/meshes/LB.STL" />
       </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.752941176470588 0 0 1" />
+      <material name="">
+        <color rgba="0.752941176470588 0 0 1" />
       </material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 1.5708 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/LB.STL" />
+        <cylinder radius="0.14" length="0.08" />
       </geometry>
     </collision>
   </link>
-  <joint
-    name="LB_joint"
-    type="continuous">
-    <origin
-      xyz="-0.29083 0.31625 0.34891"
-      rpy="-1.5708 0 -1.5708" />
-    <parent
-      link="chassis_link" />
-    <child
-      link="LB" />
-    <axis
-      xyz="-1 0 0" />
-    <limit
-      effort="100"
-      velocity="10" />
+  <joint name="LB_joint" type="continuous">
+    <origin xyz="-0.29083 0.31625 0.34891" rpy="-1.5708 0 -1.5708" />
+    <parent link="chassis_link" />
+    <child link="LB" />
+    <axis xyz="-1 0 0" />
+    <limit effort="100" velocity="10" />
   </joint>
-  <link
-    name="RB">
+
+  <link name="RB">
     <inertial>
-      <origin
-        xyz="-0.0702271724870632 1.23412855801974E-05 -5.41779169571655E-06"
-        rpy="0 0 0" />
-      <mass
-        value="3.57448131006854" />
-      <inertia
-        ixx="0.0295859622143954"
-        ixy="-5.64502264178318E-10"
-        ixz="1.31208309299921E-10"
-        iyy="0.0205546643219842"
-        iyz="2.16675039901438E-06"
-        izz="0.0205585841429814" />
+      <origin xyz="-0.0702271724870632 1.23412855801974E-05 -5.41779169571655E-06" rpy="0 0 0" />
+      <mass value="3.57448131006854" />
+      <inertia ixx="0.0295859622143954" ixy="-5.64502264178318E-10" ixz="1.31208309299921E-10" iyy="0.0205546643219842" iyz="2.16675039901438E-06" izz="0.0205585841429814" />
     </inertial>
     <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/RB.STL" />
+        <mesh filename="package://rover_description/meshes/RB.STL" />
       </geometry>
-      <material
-        name="">
-        <color
-          rgba="0.752941176470588 0 0 1" />
+      <material name="">
+        <color rgba="0.752941176470588 0 0 1" />
       </material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 1.5708 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/RB.STL" />
+        <cylinder radius="0.14" length="0.08" />
       </geometry>
     </collision>
   </link>
-  <joint
-    name="RB_joint"
-    type="continuous">
-    <origin
-      xyz="-0.29083 -0.30414 0.34891"
-      rpy="-1.5708 0 -1.5708" />
-    <parent
-      link="chassis_link" />
-    <child
-      link="RB" />
-    <axis
-      xyz="-1 0 0" />
-    <limit
-      effort="100"
-      velocity="10" />
+  <joint name="RB_joint" type="continuous">
+    <origin xyz="-0.29083 -0.30414 0.34891" rpy="-1.5708 0 -1.5708" />
+    <parent link="chassis_link" />
+    <child link="RB" />
+    <axis xyz="-1 0 0" />
+    <limit effort="100" velocity="10" />
   </joint>
-  <link
-    name="IMU">
+
+  <link name="IMU">
     <inertial>
-      <origin
-        xyz="0.00134193003921145 0.00154722539149073 -0.00169171674705683"
-        rpy="0 0 0" />
-      <mass
-        value="0.01" />
-      <inertia
-        ixx="1e-05"
-        ixy="0"
-        ixz="0"
-        iyy="1e-05"
-        iyz="0"
-        izz="1e-05" />
+      <origin xyz="0.00134193003921145 0.00154722539149073 -0.00169171674705683" rpy="0 0 0" />
+      <mass value="0.01" />
+      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05" />
     </inertial>
     <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/IMU.STL" />
+        <mesh filename="package://rover_description/meshes/IMU.STL" />
       </geometry>
-      <material
-        name="">
-        <color rgba="0.0 0.4 0.8 1" />
-      </material>
+      <material name=""><color rgba="0.0 0.4 0.8 1" /></material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/IMU.STL" />
+        <mesh filename="package://rover_description/meshes/IMU.STL" />
       </geometry>
     </collision>
   </link>
-  <joint
-    name="IMU_joint"
-    type="fixed">
-    <origin
-      xyz="0.023111 0.0074304 0.026248"
-      rpy="-1.5708 0.019058 -1.5708" />
-    <parent
-      link="chassis_link" />
-    <child
-      link="IMU" />
-    <axis
-      xyz="0 0 0" />
+  <joint name="IMU_joint" type="fixed">
+    <origin xyz="0.023111 0.0074304 0.026248" rpy="-1.5708 0.019058 -1.5708" />
+    <parent link="chassis_link" />
+    <child link="IMU" />
+    <axis xyz="0 0 0" />
   </joint>
-  <link
-    name="OPTICAL">
+
+  <link name="OPTICAL">
     <inertial>
-      <origin
-        xyz="-1.73472347597681E-18 1.38777878078145E-17 -0.00318525013167438"
-        rpy="0 0 0" />
-      <mass
-        value="0.01" />
-      <inertia
-        ixx="1e-05"
-        ixy="0"
-        ixz="0"
-        iyy="1e-05"
-        iyz="0"
-        izz="1e-05" />
+      <origin xyz="-1.73472347597681E-18 1.38777878078145E-17 -0.00318525013167438" rpy="0 0 0" />
+      <mass value="0.01" />
+      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05" />
     </inertial>
     <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/OPTICAL.STL" />
+        <mesh filename="package://rover_description/meshes/OPTICAL.STL" />
       </geometry>
-      <material
-        name="">
-        <color rgba="0.0 0.4 0.8 1" />
-      </material>
+      <material name=""><color rgba="0.0 0.4 0.8 1" /></material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/OPTICAL.STL" />
+        <mesh filename="package://rover_description/meshes/OPTICAL.STL" />
       </geometry>
     </collision>
   </link>
-  <joint
-    name="OPTICAL_joint"
-    type="fixed">
-    <origin
-      xyz="-0.091551 0.0046556 0.087323"
-      rpy="-1.5708 0 -1.5708" />
-    <parent
-      link="chassis_link" />
-    <child
-      link="OPTICAL" />
-    <axis
-      xyz="0 0 0" />
+  <joint name="OPTICAL_joint" type="fixed">
+    <origin xyz="0.28 0.0046556 0.18" rpy="-1.5708 0 -1.5708" />
+    <parent link="chassis_link" />
+    <child link="OPTICAL" />
+    <axis xyz="0 0 0" />
   </joint>
-  <link
-    name="GPS">
+
+  <link name="camera_depth_optical_frame"/>
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="OPTICAL"/>
+    <child link="camera_depth_optical_frame"/>
+    <origin xyz="0 0 0" rpy="-1.5708 0 0"/>
+  </joint>
+
+  <link name="GPS">
     <inertial>
-      <origin
-        xyz="0 1.38777878078145E-17 -0.0295024951902178"
-        rpy="0 0 0" />
-      <mass
-        value="0.0146410874338426" />
-      <inertia
-        ixx="3.17358826692755E-05"
-        ixy="-1.16645391067021E-21"
-        ixz="3.22446708881848E-20"
-        iyy="3.17358826692755E-05"
-        iyz="1.78096689542018E-20"
-        izz="1.93641269939486E-06" />
+      <origin xyz="0 1.38777878078145E-17 -0.0295024951902178" rpy="0 0 0" />
+      <mass value="0.0146410874338426" />
+      <inertia ixx="3.17358826692755E-05" ixy="-1.16645391067021E-21" ixz="3.22446708881848E-20" iyy="3.17358826692755E-05" iyz="1.78096689542018E-20" izz="1.93641269939486E-06" />
     </inertial>
     <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/GPS.STL" />
+        <mesh filename="package://rover_description/meshes/GPS.STL" />
       </geometry>
-      <material
-        name="">
-        <color rgba="0.0 0.4 0.8 1" />
-      </material>
+      <material name=""><color rgba="0.0 0.4 0.8 1" /></material>
     </visual>
     <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://rover_description/meshes/GPS.STL" />
+        <mesh filename="package://rover_description/meshes/GPS.STL" />
       </geometry>
     </collision>
   </link>
-  <joint
-    name="GPS_joint"
-    type="fixed">
-    <origin
-      xyz="0.19045 0.20596 0.09541"
-      rpy="-1.5708 0 -1.5708" />
-    <parent
-      link="chassis_link" />
-    <child
-      link="GPS" />
-    <axis
-      xyz="0 0 0" />
+  <joint name="GPS_joint" type="fixed">
+    <origin xyz="0.19045 0.20596 0.09541" rpy="-1.5708 0 -1.5708" />
+    <parent link="chassis_link" />
+    <child link="GPS" />
+    <axis xyz="0 0 0" />
   </joint>
+
   <link name="FLOW_CAM">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -444,36 +253,22 @@
     <axis xyz="0 0 0"/>
   </joint>
 
-  <!-- ==================== RGB CAMERAS (7x) ==================== -->
-  <!-- rpy derivation: camera looks along +Y of sensor frame in gz-sim.
-       base_to_chassis_joint rpy="0 -1.5708 0" rotates chassis relative to base_link.
-       Forward (+X base) = rpy "-1.5708 0 -1.5708"  (same as OPTICAL)
-       Left   (+Y base) = rpy "0 0 0"
-       Rear   (-X base) = rpy "1.5708 0 0"
-       Right  (-Y base) = rpy "0 0 3.1416"
-       FL 45° (+X+Y)/√2 = rpy "-0.7854 0 0"
-       FR 45° (+X-Y)/√2 = rpy "-0.7854 0 3.1416"
-       Down   (-Z base) = rpy "0 0 1.5708"  -->
-
   <link name="CAM_FRONT">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <mass value="0.05"/>
       <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
     </inertial>
-    <!-- Housing -->
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry><box size="0.07 0.04 0.05"/></geometry>
       <material name="cam_housing"><color rgba="0.15 0.15 0.15 1"/></material>
     </visual>
-    <!-- Lens (cylinder axis = +Y = viewing direction; rpy="-1.5708 0 0" rotates Z→Y) -->
     <visual>
-      <origin xyz="0 0.028 0" rpy="-1.5708 0 0"/>
+      <origin xyz="0.028 0 0" rpy="0 1.5708 0"/>
       <geometry><cylinder radius="0.014" length="0.016"/></geometry>
       <material name="cam_lens"><color rgba="0.05 0.05 0.25 1"/></material>
     </visual>
-    <!-- Color accent stripe (white = CAM_FRONT) -->
     <visual>
       <origin xyz="0 -0.021 0" rpy="0 0 0"/>
       <geometry><box size="0.07 0.002 0.014"/></geometry>
@@ -502,11 +297,10 @@
       <material name="cam_housing"/>
     </visual>
     <visual>
-      <origin xyz="0 0.028 0" rpy="-1.5708 0 0"/>
+      <origin xyz="0.028 0 0" rpy="0 1.5708 0"/>
       <geometry><cylinder radius="0.014" length="0.016"/></geometry>
       <material name="cam_lens"/>
     </visual>
-    <!-- Cyan = front-left -->
     <visual>
       <origin xyz="0 -0.021 0" rpy="0 0 0"/>
       <geometry><box size="0.07 0.002 0.014"/></geometry>
@@ -535,11 +329,10 @@
       <material name="cam_housing"/>
     </visual>
     <visual>
-      <origin xyz="0 0.028 0" rpy="-1.5708 0 0"/>
+      <origin xyz="0.028 0 0" rpy="0 1.5708 0"/>
       <geometry><cylinder radius="0.014" length="0.016"/></geometry>
       <material name="cam_lens"/>
     </visual>
-    <!-- Orange = front-right -->
     <visual>
       <origin xyz="0 -0.021 0" rpy="0 0 0"/>
       <geometry><box size="0.07 0.002 0.014"/></geometry>
@@ -568,11 +361,10 @@
       <material name="cam_housing"/>
     </visual>
     <visual>
-      <origin xyz="0 0.028 0" rpy="-1.5708 0 0"/>
+      <origin xyz="0.028 0 0" rpy="0 1.5708 0"/>
       <geometry><cylinder radius="0.014" length="0.016"/></geometry>
       <material name="cam_lens"/>
     </visual>
-    <!-- Green = left -->
     <visual>
       <origin xyz="0 -0.021 0" rpy="0 0 0"/>
       <geometry><box size="0.07 0.002 0.014"/></geometry>
@@ -601,11 +393,10 @@
       <material name="cam_housing"/>
     </visual>
     <visual>
-      <origin xyz="0 0.028 0" rpy="-1.5708 0 0"/>
+      <origin xyz="0.028 0 0" rpy="0 1.5708 0"/>
       <geometry><cylinder radius="0.014" length="0.016"/></geometry>
       <material name="cam_lens"/>
     </visual>
-    <!-- Purple = right -->
     <visual>
       <origin xyz="0 -0.021 0" rpy="0 0 0"/>
       <geometry><box size="0.07 0.002 0.014"/></geometry>
@@ -634,11 +425,10 @@
       <material name="cam_housing"/>
     </visual>
     <visual>
-      <origin xyz="0 0.028 0" rpy="-1.5708 0 0"/>
+      <origin xyz="0.028 0 0" rpy="0 1.5708 0"/>
       <geometry><cylinder radius="0.014" length="0.016"/></geometry>
       <material name="cam_lens"/>
     </visual>
-    <!-- Red = rear -->
     <visual>
       <origin xyz="0 -0.021 0" rpy="0 0 0"/>
       <geometry><box size="0.07 0.002 0.014"/></geometry>
@@ -667,11 +457,10 @@
       <material name="cam_housing"/>
     </visual>
     <visual>
-      <origin xyz="0 0.028 0" rpy="-1.5708 0 0"/>
+      <origin xyz="0.028 0 0" rpy="0 1.5708 0"/>
       <geometry><cylinder radius="0.014" length="0.016"/></geometry>
       <material name="cam_lens"/>
     </visual>
-    <!-- Yellow = science/downward -->
     <visual>
       <origin xyz="0 -0.021 0" rpy="0 0 0"/>
       <geometry><box size="0.07 0.002 0.014"/></geometry>
@@ -695,30 +484,45 @@
   <gazebo reference="LF">
     <mu1>1.0</mu1>
     <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <max_vel>0.01</max_vel>
     <material>Gazebo/Red</material>
   </gazebo>
   
   <gazebo reference="RF">
     <mu1>1.0</mu1>
     <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <max_vel>0.01</max_vel>
     <material>Gazebo/Red</material>
   </gazebo>
   
   <gazebo reference="LB">
     <mu1>1.0</mu1>
     <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <max_vel>0.01</max_vel>
     <material>Gazebo/Red</material>
   </gazebo>
   
   <gazebo reference="RB">
     <mu1>1.0</mu1>
     <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <max_vel>0.01</max_vel>
     <material>Gazebo/Red</material>
   </gazebo>
 
-  <!-- Diff drive via Ignition's built-in plugin (no gz_ros2_control needed) -->
   <gazebo>
-    <plugin filename="ignition-gazebo-diff-drive-system" name="ignition::gazebo::systems::DiffDrive">
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
       <left_joint>LF_joint</left_joint>
       <left_joint>LB_joint</left_joint>
       <right_joint>RF_joint</right_joint>
@@ -732,15 +536,13 @@
       <odom_publish_frequency>50</odom_publish_frequency>
       <topic>/model/Rover/cmd_vel</topic>
       <odom_topic>/model/Rover/odom</odom_topic>
-      <!-- <tf_topic>tf</tf_topic> -->
       <frame_id>odom</frame_id>
       <child_frame_id>base_link</child_frame_id>
     </plugin>
   </gazebo>
 
-  <!-- Joint state publisher for wheel positions -->
   <gazebo>
-    <plugin filename="ignition-gazebo-joint-state-publisher-system" name="ignition::gazebo::systems::JointStatePublisher">
+    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
       <joint_name>LF_joint</joint_name>
       <joint_name>LB_joint</joint_name>
       <joint_name>RF_joint</joint_name>
@@ -748,13 +550,17 @@
     </plugin>
   </gazebo>
 
-  <!-- IMU sensor on the IMU link -->
   <gazebo reference="IMU">
     <sensor name="imu_sensor" type="imu">
+      <pose>0 0 0 0 0 1.55173833</pose>
       <always_on>true</always_on>
       <update_rate>200</update_rate>
       <topic>imu/data</topic>
       <imu>
+        <orientation_reference_frame>
+          <localization>CUSTOM</localization>
+          <custom_rpy parent_frame="world">0 0 0</custom_rpy>
+        </orientation_reference_frame>
         <angular_velocity>
           <x><noise type="gaussian"><mean>0.0</mean><stddev>0.0002</stddev></noise></x>
           <y><noise type="gaussian"><mean>0.0</mean><stddev>0.0002</stddev></noise></y>
@@ -769,18 +575,18 @@
     </sensor>
   </gazebo>
 
-  <!-- GPS (NavSat) sensor on the GPS link -->
   <gazebo reference="GPS">
     <sensor name="navsat_sensor" type="navsat">
       <always_on>true</always_on>
       <update_rate>10</update_rate>
-      <topic>gps/fix</topic>
+      <topic>gps/fix_raw</topic>
     </sensor>
   </gazebo>
 
-  <!-- RGBD Camera on the OPTICAL link -->
   <gazebo reference="OPTICAL">
     <sensor name="rgbd_camera" type="rgbd_camera">
+      <gz_frame_id>camera_depth_optical_frame</gz_frame_id>
+      <pose>0 0 0 0 0 1.5708</pose>
       <always_on>true</always_on>
       <update_rate>15</update_rate>
       <topic>rgbd_camera</topic>
@@ -797,6 +603,7 @@
         </clip>
       </camera>
       <depth_camera>
+        <output>depths</output>
         <clip>
           <near>0.1</near>
           <far>10</far>
@@ -805,9 +612,9 @@
     </sensor>
   </gazebo>
 
-  <!-- CAM_FRONT: RGB forward HD — primary navigation + ArUco detection feed -->
   <gazebo reference="CAM_FRONT">
     <sensor name="cam_front" type="camera">
+      <pose>0 0 0 0 0 1.5708</pose>
       <always_on>true</always_on>
       <update_rate>30</update_rate>
       <topic>cam/front/image_raw</topic>
@@ -817,11 +624,30 @@
         <clip><near>0.1</near><far>100</far></clip>
       </camera>
     </sensor>
+    
+    <light type="spot" name="front_headlight">
+      <pose>0 0.05 0 0 0 1.5708</pose>
+      <cast_shadows>false</cast_shadows>
+      <diffuse>0.9 0.9 0.8 1</diffuse>
+      <specular>0.5 0.5 0.5 1</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.1</constant>
+        <linear>0.05</linear>
+        <quadratic>0.01</quadratic>
+      </attenuation>
+      <direction>1 0 0</direction>
+      <spot>
+        <inner_angle>0.5</inner_angle>
+        <outer_angle>1.0</outer_angle>
+        <falloff>1.0</falloff>
+      </spot>
+    </light>
   </gazebo>
 
-  <!-- CAM_FL: RGB front-left 45° -->
   <gazebo reference="CAM_FL">
     <sensor name="cam_fl" type="camera">
+      <pose>0 0 0 0 0 1.5708</pose>
       <always_on>true</always_on>
       <update_rate>15</update_rate>
       <topic>cam/front_left/image_raw</topic>
@@ -833,9 +659,9 @@
     </sensor>
   </gazebo>
 
-  <!-- CAM_FR: RGB front-right 45° -->
   <gazebo reference="CAM_FR">
     <sensor name="cam_fr" type="camera">
+      <pose>0 0 0 0 0 1.5708</pose>
       <always_on>true</always_on>
       <update_rate>15</update_rate>
       <topic>cam/front_right/image_raw</topic>
@@ -847,9 +673,9 @@
     </sensor>
   </gazebo>
 
-  <!-- CAM_LEFT: RGB left side -->
   <gazebo reference="CAM_LEFT">
     <sensor name="cam_left" type="camera">
+      <pose>0 0 0 0 0 1.5708</pose>
       <always_on>true</always_on>
       <update_rate>15</update_rate>
       <topic>cam/left/image_raw</topic>
@@ -861,9 +687,9 @@
     </sensor>
   </gazebo>
 
-  <!-- CAM_RIGHT: RGB right side -->
   <gazebo reference="CAM_RIGHT">
     <sensor name="cam_right" type="camera">
+      <pose>0 0 0 0 0 1.5708</pose>
       <always_on>true</always_on>
       <update_rate>15</update_rate>
       <topic>cam/right/image_raw</topic>
@@ -875,9 +701,9 @@
     </sensor>
   </gazebo>
 
-  <!-- CAM_REAR: RGB rear -->
   <gazebo reference="CAM_REAR">
     <sensor name="cam_rear" type="camera">
+      <pose>0 0 0 0 0 1.5708</pose>
       <always_on>true</always_on>
       <update_rate>15</update_rate>
       <topic>cam/rear/image_raw</topic>
@@ -889,9 +715,9 @@
     </sensor>
   </gazebo>
 
-  <!-- CAM_SCIENCE: RGB downward — science sample inspection -->
   <gazebo reference="CAM_SCIENCE">
     <sensor name="cam_science" type="camera">
+      <pose>0 0 0 0 0 1.5708</pose>
       <always_on>true</always_on>
       <update_rate>30</update_rate>
       <topic>cam/science/image_raw</topic>
@@ -903,9 +729,9 @@
     </sensor>
   </gazebo>
 
-  <!-- Downward optical flow camera on FLOW_CAM link (simulates PMW3901) -->
   <gazebo reference="FLOW_CAM">
     <sensor name="flow_camera" type="camera">
+      <pose>0 0 0 0 0 1.5708</pose>
       <always_on>true</always_on>
       <update_rate>15</update_rate>
       <topic>flow_cam/image</topic>
@@ -924,13 +750,12 @@
     </sensor>
   </gazebo>
 
-  <!-- Downward rangefinder on FLOW_CAM link (simulates MTF-01 ToF) -->
   <gazebo reference="FLOW_CAM">
     <sensor name="range_sensor" type="gpu_lidar">
+      <pose>0 0 0 0 0 1.5708</pose>
       <always_on>true</always_on>
       <update_rate>15</update_rate>
       <topic>range/height</topic>
-      <pose>0 0 0 0 0 0</pose>
       <lidar>
         <scan>
           <horizontal>
