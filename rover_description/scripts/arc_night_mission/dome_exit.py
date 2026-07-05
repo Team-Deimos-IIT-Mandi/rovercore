@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Dome exit helper node to autonomously exit from a dome structure.
 Processes depth feeds to find the max distance (the exit), aligns to it, 
@@ -72,6 +73,8 @@ class AirlockExitNode(Node):
         # Emergency Kit Search Variables
         self.largest_kit_area = 0
         self.best_kit_yaw = None
+        self.kit_cx_error = None
+        self.last_kit_distance = 100.0
         self.sub_rgb = self.create_subscription(Image, '/rgbd_camera/image', self.rgb_callback, 10)
         self.latest_cv_depth = None
         
@@ -166,7 +169,7 @@ class AirlockExitNode(Node):
         self.check_tripwire(msg, "RIGHT")
 
     def rgb_callback(self, msg):
-        if self.global_mission_state != 'DOME_EXIT' or self.internal_state != 4:
+        if self.global_mission_state != 'DOME_EXIT' or self.internal_state not in [4, 5]:
             return
         cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
         hsv = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
@@ -177,15 +180,22 @@ class AirlockExitNode(Node):
         mask = cv2.inRange(hsv, lower_white, upper_white)
         
         contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        
+        self.kit_cx_error = None  # Reset every frame to detect tracking loss
+        best_area = 0
+        best_cx = None
+        best_rect = None
+        best_kit_depth = None
+        
         if contours:
-            best_area = 0
             for contour in contours:
                 area = cv2.contourArea(contour)
-                if area > 500:
+                if area > 100:
                     x, y, w, h = cv2.boundingRect(contour)
                     aspect_ratio = float(w) / h if h > 0 else 0
                     
-                    if 1.5 <= aspect_ratio <= 2.5:
+                    # Relaxed filters: kit can appear in various shapes and distances
+                    if 0.3 <= aspect_ratio <= 5.0:
                         if self.latest_cv_depth is not None:
                             h_depth, w_depth = self.latest_cv_depth.shape
                             x1, y1 = max(0, x), max(0, y)
@@ -196,13 +206,40 @@ class AirlockExitNode(Node):
                             
                             if len(valid_depths) > 0:
                                 median_depth = np.median(valid_depths)
-                                if 0.5 <= median_depth <= 3.0:
+                                self.get_logger().info(f"KIT CANDIDATE: area={area:.0f}, ar={aspect_ratio:.2f}, depth={median_depth:.2f}m, state={self.internal_state}", throttle_duration_sec=1.0)
+                                if 0.3 <= median_depth <= 10.0:
                                     if area > best_area:
                                         best_area = area
+                                        best_cx = x + w/2
+                                        best_rect = (x, y, w, h)
+                                        best_kit_depth = median_depth
                                         
-            if best_area > self.largest_kit_area:
-                self.largest_kit_area = best_area
-                self.best_kit_yaw = self.current_yaw
+            if best_area > 0:
+                # Draw visualization
+                x, y, w, h = best_rect
+                cv2.rectangle(cv_image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+                cv2.circle(cv_image, (int(best_cx), int(y + h/2)), 5, (0, 0, 255), -1)
+                
+                if self.internal_state == 4 and best_area > self.largest_kit_area:
+                    self.largest_kit_area = best_area
+                    self.best_kit_yaw = self.current_yaw
+                elif self.internal_state == 5 and best_cx is not None:
+                    img_width = cv_image.shape[1]
+                    self.kit_cx_error = best_cx - (img_width / 2)
+                    self.last_kit_distance = best_kit_depth
+                    
+        # Debug Windows
+        try:
+            cv2.namedWindow("KIT_MASK", cv2.WINDOW_NORMAL)
+            cv2.resizeWindow("KIT_MASK", 400, 300)
+            cv2.imshow("KIT_MASK", mask)
+            
+            cv2.namedWindow("KIT_DETECTION", cv2.WINDOW_NORMAL)
+            cv2.resizeWindow("KIT_DETECTION", 400, 300)
+            cv2.imshow("KIT_DETECTION", cv_image)
+            cv2.waitKey(1)
+        except cv2.error:
+            pass
 
     def depth_callback(self, msg):
         if self.global_mission_state != 'DOME_EXIT':
@@ -322,28 +359,40 @@ class AirlockExitNode(Node):
             twist.angular.z = 0.2
             self.cmd_pub.publish(twist)
 
-            if self.yaw_swept >= 2 * math.pi:
-                if self.best_kit_yaw is not None:
-                    self.get_logger().info(f"KIT FOUND! Aligning to yaw {self.best_kit_yaw:.2f}")
-                    self.internal_state = 5
-                else:
-                    self.get_logger().info("KIT NOT FOUND! Moving away from dome and trying again...")
-                    self.start_odom_x = self.current_odom_x
-                    self.start_odom_y = self.current_odom_y
-                    self.internal_state = 7
+            if self.best_kit_yaw is not None:
+                self.get_logger().info(f"KIT FOUND! Aligning to yaw {self.best_kit_yaw:.2f}")
+                self.internal_state = 5
+            elif self.yaw_swept >= 2 * math.pi:
+                self.get_logger().info("KIT NOT FOUND! Moving away from dome and trying again...")
+                self.start_odom_x = self.current_odom_x
+                self.start_odom_y = self.current_odom_y
+                self.internal_state = 7
 
         # --- Internal State 5: Approach Kit ---
         elif self.internal_state == 5:
-            yaw_error = self.best_kit_yaw - self.current_yaw
-            yaw_error = math.atan2(math.sin(yaw_error), math.cos(yaw_error))
-            
-            if abs(yaw_error) > 0.1:
-                twist.angular.z = max(min(1.0 * yaw_error, 0.5), -0.5)
-            else:
+            if getattr(self, 'kit_cx_error', None) is not None:
+                # Active visual servoing to keep kit centered
+                twist.angular.z = max(min(-0.002 * self.kit_cx_error, 0.5), -0.5)
                 twist.linear.x = 0.5
-                if center_depth > 0 and center_depth < 1.5:
-                    self.get_logger().info("ARRIVED AT EMERGENCY KIT!")
+                
+                # Check actual tracked depth
+                if self.last_kit_distance < 0.8:
+                    self.get_logger().info("ARRIVED AT EMERGENCY KIT! (Depth threshold met)")
                     self.internal_state = 6
+            else:
+                # We lost track of the kit. If we were already close, it went under the camera FOV!
+                if self.last_kit_distance < 1.6:
+                    self.get_logger().info("ARRIVED AT EMERGENCY KIT! (Kit went under camera FOV)")
+                    self.internal_state = 6
+                else:
+                    # Fallback to saved yaw if tracking lost and we are far away
+                    yaw_error = self.best_kit_yaw - self.current_yaw
+                    yaw_error = math.atan2(math.sin(yaw_error), math.cos(yaw_error))
+                    
+                    if abs(yaw_error) > 0.1:
+                        twist.angular.z = max(min(1.0 * yaw_error, 0.5), -0.5)
+                    else:
+                        twist.linear.x = 0.3
                     
             self.cmd_pub.publish(twist)
 

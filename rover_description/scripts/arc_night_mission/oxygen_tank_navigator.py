@@ -113,7 +113,7 @@ class OxygenTankNavigator(Node):
         )
 
     def imu_callback(self, msg):
-        self.current_yaw = self.quaternion_to_yaw(msg.orientation)-math.pi/2
+        self.current_yaw = self.quaternion_to_yaw(msg.orientation)
 
     def notify_mission_control_complete(self):
         self.is_finished_reported = True

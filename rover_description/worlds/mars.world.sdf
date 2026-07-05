@@ -126,19 +126,18 @@
           <geometry>
             <mesh>
               <uri>../models/gale_crater_patch2/meshes/dome.obj</uri>
-
               <!-- rover can fit -->
               <scale>0.82 0.82 0.82</scale>
-
             </mesh>
           </geometry>
         </visual>
 
         <collision name="dome_collision">
           <geometry>
-            <box>
-              <size>3.0 3.0 2.0</size>
-            </box>
+            <mesh>
+              <uri>../models/gale_crater_patch2/meshes/dome.obj</uri>
+              <scale>0.82 0.82 0.82</scale>
+            </mesh>
           </geometry>
         </collision>
 

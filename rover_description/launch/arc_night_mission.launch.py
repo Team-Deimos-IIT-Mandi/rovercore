@@ -46,4 +46,18 @@ def generate_launch_description():
             output='screen',
             parameters=[{'use_sim_time': True}],
         ),
+        Node(
+            package='rover_description',
+            executable='aruco_detection.py',
+            name='aruco_detection',
+            output='screen',
+            parameters=[{'use_sim_time': True}],
+        ),
+        Node(
+            package='rover_description',
+            executable='dome_insider.py',
+            name='dome_insider_node',
+            output='screen',
+            parameters=[{'use_sim_time': True}],
+        ),
     ])

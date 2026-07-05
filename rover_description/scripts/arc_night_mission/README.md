@@ -158,7 +158,7 @@ Drives the rover to a fixed odometry target using a proportional heading control
 
 ```python
 # Extract yaw from IMU quaternion
-yaw = quaternion_to_yaw(msg.orientation) - math.pi / 2
+yaw = quaternion_to_yaw(msg.orientation)
 
 # Compute heading error
 dx = TARGET_X - curr_x

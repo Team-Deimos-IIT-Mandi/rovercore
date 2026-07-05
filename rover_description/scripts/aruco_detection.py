@@ -82,6 +82,7 @@ class ArUcoDetectionNode(Node):
         self.bridge = CvBridge()
         # self.ar_active = True
         self.marker_found = False  # Defaults to TRUE so it WAITS for a signal to start publishing
+        self.is_finished_reported = False
 
         # 4. ArUco Detector Initialization (Modern API)
         self.aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_ARUCO_ORIGINAL)
@@ -115,6 +116,8 @@ class ArUcoDetectionNode(Node):
             self.get_logger().info("Global Goal Lock Received. Silencing this node.")
 
     def image_callback(self, msg):
+        if self.global_mission_state != 'ARUCO_SEARCH':
+            return
 
         try:
             cv_image = self.bridge.imgmsg_to_cv2(msg, "bgr8")
@@ -155,7 +158,8 @@ class ArUcoDetectionNode(Node):
                         self.sync_pub.publish(Bool(data=True))
                         self.ar_signal_pub.publish(Bool(data=True))
                         
-                        self.notify_mission_control_complete()
+                        if not self.is_finished_reported:
+                            self.notify_mission_control_complete()
 
                         # Mode P Logic: Publish goal if AR is NOT active (search complete)
                         self.process_and_publish_goal(tvec.flatten(), rvec.flatten())
@@ -203,8 +207,11 @@ class ArUcoDetectionNode(Node):
             self.get_logger().warn(f"TF Lookup Failed: {e}")
 
     def notify_mission_control_complete(self):
+        self.is_finished_reported = True
+
         if not self.fsm_client.service_is_ready():
             self.get_logger().info("Waiting for Mission Manager aruco-search service...")
+            self.is_finished_reported = False
             return
 
         req = Trigger.Request()
@@ -218,8 +225,10 @@ class ArUcoDetectionNode(Node):
                 self.get_logger().info("SUCCESS: Central FSM acknowledged ArUco search complete.")
             else:
                 self.get_logger().error(f"FSM rejected ArUco search completion: {res.message}")
+                self.is_finished_reported = False
         except Exception as e:
             self.get_logger().error(f"Service communication failed: {e}")
+            self.is_finished_reported = False
 
 def main(args=None):
     rclpy.init(args=args)

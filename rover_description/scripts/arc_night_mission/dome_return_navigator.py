@@ -19,8 +19,8 @@ from sensor_msgs.msg import Imu
 
 
 # Defaults to the mars_base_dome pose in mars.world.sdf.
-TARGET_X = -5.0
-TARGET_Y = 3.5
+TARGET_X = -2.83659
+TARGET_Y = -3.3936759
 ARRIVAL_TOLERANCE = 0.8
 
 
@@ -113,7 +113,7 @@ class DomeReturnNavigator(Node):
         )
 
     def imu_callback(self, msg):
-        self.current_yaw = self.quaternion_to_yaw(msg.orientation)-math.pi/2
+        self.current_yaw = self.quaternion_to_yaw(msg.orientation)
 
     def notify_mission_control_complete(self):
         self.is_finished_reported = True

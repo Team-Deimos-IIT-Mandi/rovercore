@@ -37,7 +37,7 @@ WORLDS = {
         'z': '0.50', 'file': None
     },   # resolved at runtime from pkg_share
     'mars': {
-        'world_name': 'mars_world', 'x': '-5.0', 'y': '0.8', 'yaw': '-1.57',
+        'world_name': 'mars_world', 'x': '-5.0', 'y': '3.5', 'yaw': '1.57',
         'z': '0.20', 'file': 'pkg_share'
     }, # Use pkg_share worlds/mars.world.sdf
     'moon': {

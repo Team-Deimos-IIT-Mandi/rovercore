@@ -45,7 +45,7 @@ class DomeInsiderNode(Node):
         self.fsm_client = self.create_client(Trigger, 'mission/complete_dome_entry')
         
         # Internal State
-        self.global_mission_state = "DOME_ENTRY"
+        self.global_mission_state = 'BOOTING'
         self.is_finished_reported = False
         
         self.aruco_error = None
@@ -59,7 +59,7 @@ class DomeInsiderNode(Node):
         # Goal Stop distance inside dome
         self.target_stop_depth = 1.5  # Stop 1.5m from the back wall
         
-        self.get_logger().info("SMART AVOIDANCE DOME INSIDER NODE STARTED. Executing immediately in DOME_ENTRY state!")
+        self.get_logger().info("SMART AVOIDANCE DOME INSIDER NODE STARTED. Waiting for DOME_ENTRY state.")
 
     def global_state_callback(self, msg):
         self.global_mission_state = msg.data
@@ -196,22 +196,28 @@ class DomeInsiderNode(Node):
             pass
 
     def notify_mission_control_complete(self):
-        if not self.is_finished_reported:
-            self.is_finished_reported = True
-            if not self.fsm_client.service_is_ready():
-                self.get_logger().warn("FSM Service not ready.")
-                return
-            req = Trigger.Request()
-            future = self.fsm_client.call_async(req)
-            future.add_done_callback(self.fsm_response_callback)
+        self.is_finished_reported = True
+
+        if not self.fsm_client.service_is_ready():
+            self.get_logger().info("Waiting for Mission Manager dome-entry service...")
+            self.is_finished_reported = False
+            return
+
+        req = Trigger.Request()
+        future = self.fsm_client.call_async(req)
+        future.add_done_callback(self.fsm_response_callback)
 
     def fsm_response_callback(self, future):
         try:
             res = future.result()
             if res.success:
-                self.get_logger().info("Central FSM acknowledged dome entry complete.")
-        except Exception:
-            pass
+                self.get_logger().info("SUCCESS: Central FSM acknowledged dome entry complete.")
+            else:
+                self.get_logger().error(f"FSM rejected dome entry completion: {res.message}")
+                self.is_finished_reported = False
+        except Exception as e:
+            self.get_logger().error(f"Service communication failed: {e}")
+            self.is_finished_reported = False
 
 def main(args=None):
     rclpy.init(args=args)
